@@ -15,16 +15,13 @@ import oshi.hardware.CentralProcessor;
 import oshi.hardware.GlobalMemory;
 import oshi.hardware.HWDiskStore;
 import oshi.hardware.HardwareAbstractionLayer;
+import oshi.software.os.OSProcess;
 import oshi.software.os.OperatingSystem;
+import oshi.software.os.OperatingSystem.ProcessSort;
 
 public class MovePlusOshi {
 
     public static void main(String[] args) {
-
-        //Pega dados de CPU
-        CentralProcessor cpu = new SystemInfo().getHardware().getProcessor();
-
-        //Instância o objeto para pegar outras informações sobre o Hardware e Sistema
         SystemInfo si = new SystemInfo();
 
         //Pro
@@ -38,6 +35,10 @@ public class MovePlusOshi {
 
         //Pega dados do Disco
         List<HWDiskStore> dadosDisco = hal.getDiskStores();
+        
+        List<OSProcess> process = os.getProcesses();
+        
+        CentralProcessor cpu = hal.getProcessor();
 
         //Exibe os dados coletados
         System.out.println("Dados de CPU: " + cpu);
@@ -45,5 +46,19 @@ public class MovePlusOshi {
         System.out.println("Memória RAM: " + memoria);
         System.out.println("Disco: " + dadosDisco);
         System.out.println("Tese " + hal.getProcessor());
+        System.out.println("\n"+process);
+        
+         long [] oldTricks = cpu.getSystemCpuLoadTicks();
+        
+        try{
+            while(true){
+                Double stats = cpu.getSystemCpuLoadBetweenTicks(oldTricks);
+                System.out.println(100d *stats);
+                Thread.sleep(800);
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        
     }
 }
