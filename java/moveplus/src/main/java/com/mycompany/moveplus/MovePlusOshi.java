@@ -11,54 +11,61 @@ package com.mycompany.moveplus;
  */
 import java.util.List;
 import oshi.SystemInfo;
+import static oshi.driver.linux.proc.DiskStats.getDiskStats;
 import oshi.hardware.CentralProcessor;
 import oshi.hardware.GlobalMemory;
 import oshi.hardware.HWDiskStore;
 import oshi.hardware.HardwareAbstractionLayer;
 import oshi.software.os.OSProcess;
 import oshi.software.os.OperatingSystem;
-import oshi.software.os.OperatingSystem.ProcessSort;
 
 public class MovePlusOshi {
 
     public static void main(String[] args) {
         SystemInfo si = new SystemInfo();
-
-        //Pro
         HardwareAbstractionLayer hal = si.getHardware();
-
-        //Pega dados da memória
-        GlobalMemory memoria = hal.getMemory();
-
-        //Pega dados do sistema operacional
-        OperatingSystem os = si.getOperatingSystem();
-
-        //Pega dados do Disco
         List<HWDiskStore> dadosDisco = hal.getDiskStores();
-        
-        List<OSProcess> process = os.getProcesses();
-        
+        GlobalMemory memoria = hal.getMemory();
         CentralProcessor cpu = hal.getProcessor();
+        OperatingSystem os = si.getOperatingSystem();
+        List<OSProcess> procs = os.getProcesses();
+
+        long[] oldTricks = cpu.getSystemCpuLoadTicks();
 
         //Exibe os dados coletados
         System.out.println("Dados de CPU: " + cpu);
         System.out.println("Sistema Operacional: " + os);
         System.out.println("Memória RAM: " + memoria);
         System.out.println("Disco: " + dadosDisco);
-        System.out.println("Tese " + hal.getProcessor());
-        System.out.println("\n"+process);
-        
-         long [] oldTricks = cpu.getSystemCpuLoadTicks();
-        
-        try{
-            while(true){
+        System.out.println("Teste " + hal.getProcessor());
+        System.out.println("Processo" + procs);
+
+        GlobalMemory memory = si.getHardware().getMemory();
+        long maxRam = memory.getTotal();
+        long availableRam = memory.getAvailable();
+        long usedRam = maxRam - availableRam;
+        double percentageUsed = Math.ceil((usedRam / maxRam) * 100);
+
+        System.out.println("MaxRam: " + maxRam + " Avaiable: " + availableRam + "Usada" + usedRam + " Porcentagem:" + percentageUsed);
+
+        for (OSProcess process : os.getProcesses(20, OperatingSystem.ProcessSort.MEMORY)) {
+            long ramMemory = process.getResidentSetSize() / 1024;
+            double cpuUsage = process.getProcessCpuLoadBetweenTicks(process);
+            long diskUsage = process.getBytesRead() / process.getBytesWritten();
+
+            System.out.println("   ---   ID   --- Nome         RAM             CPU");
+            System.out.println(process.getProcessID() + " - " + process.getName() + " - " + ramMemory + " - " + cpuUsage + " - " + process.getBytesRead());
+        }
+
+        try {
+            while (true) {
                 Double stats = cpu.getSystemCpuLoadBetweenTicks(oldTricks);
-                System.out.println(100d *stats);
-                Thread.sleep(800);
+                System.out.println(String.format("CPU Usage - %.2f", (100d * stats)));
+                Thread.sleep(1200);
             }
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        
+
     }
 }
