@@ -41,13 +41,13 @@ public class TelaLogin extends javax.swing.JFrame {
         String login = user.getLogin();
         String password = user.getPassword();
 
-        if (login == login_definido && password == senha_definido) {
+        if (login.equals(login_definido) && password.equals(senha_definido)) {
 
             atualizarDados(lblAuthentication,sucesso);
             
         }
         
-        if(login != login_definido || password != senha_definido){
+        else{
         atualizarDados(lblAuthentication,erro);
         }
     }
@@ -137,7 +137,7 @@ public class TelaLogin extends javax.swing.JFrame {
                 .addComponent(lblLogin1)
                 .addGap(28, 28, 28)
                 .addComponent(btnEntrar)
-                .addGap(18, 18, 18)
+                .addGap(18, 18, Short.MAX_VALUE)
                 .addComponent(lblAuthentication, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(33, 33, 33))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

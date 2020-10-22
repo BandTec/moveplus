@@ -40,21 +40,29 @@ public class MovePlusOshi {
         System.out.println("Teste " + hal.getProcessor());
         System.out.println("Processo" + procs);
 
-        GlobalMemory memory = si.getHardware().getMemory();
-        long maxRam = memory.getTotal();
-        long availableRam = memory.getAvailable();
-        long usedRam = maxRam - availableRam;
-        double percentageUsed = Math.ceil((usedRam / maxRam) * 100);
+        System.out.format("%4s %10s %8s %8s %7s", "ID", "Nome", "RAM", "CPU", "Bytes");
+    
+//Coloco num loop para que ele me atualize 10x 
 
-        System.out.println("MaxRam: " + maxRam + " Avaiable: " + availableRam + "Usada" + usedRam + " Porcentagem:" + percentageUsed);
+        for(int i = 0; i < 10; i++)
+       {   
+//Crio outro loop, iniciando minha variável process, e limitando ela a pegar 
+//somente X processos e ordena-los por MEMÓRIA  
+     
+            for(OSProcess process: os.getProcesses(2, OperatingSystem.ProcessSort.MEMORY))
+             {   
+//Aqui vamos criar nossas variáveis de leitura        
+                long ramMemory = process.getResidentSetSize() / 1024;             //RAM, no Linux RE
+                double cpuUsage = process.getProcessCpuLoadBetweenTicks(process); //CPU    
+                int processID = process.getProcessID();                           //ID do processo
+                String processName = process.getName();                           //Nome do processo    
+                long bytesRead = process.getBytesRead();                          //Bytes de Leitura do Disco    
 
-        for (OSProcess process : os.getProcesses(20, OperatingSystem.ProcessSort.MEMORY)) {
-            long ramMemory = process.getResidentSetSize() / 1024;
-            double cpuUsage = process.getProcessCpuLoadBetweenTicks(process);
-            long diskUsage = process.getBytesRead() / process.getBytesWritten();
-
-            System.out.println("   ---   ID   --- Nome         RAM             CPU");
-            System.out.println(process.getProcessID() + " - " + process.getName() + " - " + ramMemory + " - " + cpuUsage + " - " + process.getBytesRead());
+//Imprimindo os dados em formatação estilo "matriz"/tabela        
+                System.out.format("\n %-8d %-8s %-8d %-8f %-10d", processID, processName, ramMemory, cpuUsage, bytesRead);
+             } 
+//Dando um delay nas execuções do for     
+        //    Util.sleep(1000);
         }
 
         try {
