@@ -1,0 +1,415 @@
+* {
+  margin: 0;
+  padding: 0;
+  outline: 0;
+  font-family: "Nunito Sans", sans-serif;
+}
+
+body {
+  background-image: url("../img/Background-login.png");
+  background-repeat: no-repeat;
+}
+
+.container-flex {
+  max-width: 1300px;
+  margin: auto;
+  display: flex;
+  min-height: 100vh;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+
+.container-flex > .flex {
+  flex: 1;
+  margin: 5px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.flex > div {
+  min-width: 250px;
+  flex: 1;
+  margin: 5px;
+  flex-flow: wrap;
+}
+
+.container-flex > footer {
+  height: auto;
+  margin: 5px;
+}
+
+.txt {
+  flex-direction: column !important;
+  display: flex;
+  padding: 40px 20px;
+  box-sizing: border-box;
+}
+
+.txt > div {
+  flex: 1;
+  margin-top: 30px;
+}
+
+.txt h1 {
+  font-size: 40px;
+  color: white;
+  margin-top: 40px;
+}
+
+.txt p {
+  color: white;
+  font-size: 28px;
+  line-height: 40px;
+  letter-spacing: 1px;
+  font-weight: 400;
+  margin-top: 25px;
+}
+
+.login-content {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.login-content > div {
+  width: 80%;
+  background-color: white;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  box-shadow: 2px 3px 10px #3d3d3d4d;
+  border-radius: 15px;
+}
+
+.logo-link {
+  justify-content: space-between !important;
+  display: flex;
+  width: 80%;
+  padding: 0 50px;
+}
+
+.logo {
+  width: 100px;
+  margin: 30px 0 0 0;
+}
+
+.logo img {
+  width: 100%;
+}
+
+.arrow {
+  width: 100px;
+  position: absolute;
+  top: 0;
+  cursor: pointer;
+}
+
+.link-cad {
+  align-items: center;
+  margin-top: 30px;
+  display: flex;
+}
+
+.link-cad a {
+  font-size: 18px;
+  text-decoration: none;
+  color: #48bfe3;
+  cursor: pointer;
+}
+
+.form {
+  flex-direction: column !important;
+  display: flex;
+  padding: 50px;
+  width: 80%;
+  border-radius: 10px;
+}
+
+.form > div > h3 {
+  font-size: 40px;
+  color: #3d3d3d;
+  margin: 0 0 20px 0;
+}
+
+.form > div > p {
+  margin: 10px 0;
+  font-size: 18px;
+}
+
+input {
+  margin: 10px 0;
+  padding: 20px 15px;
+  border-radius: 5px;
+  box-sizing: border-box;
+  border: solid 1px #3d3d3d1e;
+  box-shadow: 2px 3px 10px #3d3d3d17;
+}
+
+.form a {
+  list-style: none;
+  text-decoration: none;
+  color: #48bfe3;
+  margin: 20px 0;
+  cursor: pointer;
+}
+
+.styleBtn {
+  width: 100%;
+  height: 59px;
+  box-sizing: border-box;
+  padding: 20px 15px;
+  border-radius: 5px;
+  background-color: #3d3d3dcc;
+  cursor: pointer;
+  position: relative;
+}
+
+.form button {
+  width: 100%;
+  height: 100%;
+  color: white;
+  text-transform: uppercase;
+  border: none;
+  font-size: 14px;
+  border-radius: 5px;
+  font-weight: 800;
+  background-color: transparent;
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.animacao {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  border-radius: 5px;
+}
+
+.copy {
+  display: flex;
+  flex-direction: column;
+  margin: 5px;
+  padding: 5px;
+  min-width: 100px;
+}
+
+.copy > div {
+  justify-content: space-between;
+  display: flex;
+  align-items: center;
+  margin: 50px 0;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 1420px) {
+  .copy > div {
+    margin: 20px 0;
+  }
+
+  .contentFooter > div > h4 {
+    margin: 5px 0;
+  }
+}
+
+.contentFooter > div > h4 {
+  font-size: 18px;
+  color: #3d3d3dda;
+  letter-spacing: 1px;
+}
+
+.copy::before {
+  content: "";
+  display: inline-block;
+  width: 100%;
+  height: 1px;
+  background: #3d3d3d36;
+}
+
+@media (max-width: 1024px) {
+  .login-content > div {
+    width: 100%;
+    margin-top: 20px;
+  }
+
+  .txt > div {
+    margin-top: 0;
+  }
+
+  .container-flex > .flex {
+    flex-direction: column;
+  }
+}
+
+.ativo {
+  display: none;
+}
+
+.animation-form {
+  animation: show 2s forwards;
+}
+
+@keyframes show {
+  from {
+    opacity: 0;
+    transform: translate3d(-30px, 0, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.colorBtn {
+  background-color: #3d3d3d;
+  animation: teste 1.5s forwards;
+}
+
+@keyframes teste {
+  from {
+    width: 0px;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+.testezin {
+  animation: aaa 1.5s forwards;
+}
+
+@keyframes aaa {
+  from {
+    opacity: 0;
+    transform: translate3d(-30px, 0, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.form-group {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.form-control {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.form-control:focus {
+  box-shadow: none;
+}
+
+label {
+  position: absolute;
+  left: 20px;
+  top: 28px;
+  color: #3d3d3d65;
+  transition: all 0.3s;
+}
+
+.form-control:focus ~ label {
+  left: 10px;
+  top: 0px;
+  background: white;
+  padding: 0 5px;
+  color: #3d3d3d;
+}
+
+.form-control:focus {
+  border: solid 1px #3d3d3dc9;
+}
+
+.activeInput {
+  left: 10px;
+  top: 0px;
+  background: white;
+  padding: 0 5px;
+  color: #3d3d3d;
+}
+
+.none {
+  display: none;
+}
+
+.animation {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.spinner {
+  -webkit-animation: rotator 1.4s linear infinite;
+  animation: rotator 1.4s linear infinite;
+  display: none;
+  height: 492px;
+  padding: 40px 0;
+}
+
+@keyframes rotator {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(270deg);
+    transform: rotate(270deg);
+  }
+}
+.path {
+  stroke-dasharray: 187;
+  stroke-dashoffset: 0;
+  -webkit-transform-origin: center;
+  transform-origin: center;
+  -webkit-animation: dash 1.4s ease-in-out infinite,
+    colors 5.6s ease-in-out infinite;
+  animation: dash 1.4s ease-in-out infinite, colors 5.6s ease-in-out infinite;
+}
+
+@keyframes colors {
+  0% {
+    stroke: #80ffdb;
+  }
+  25% {
+    stroke: #48bfe3;
+  }
+  50% {
+    stroke: #64dfdf;
+  }
+  75% {
+    stroke: #56cfe1;
+  }
+  100% {
+    stroke: #48bfe3;
+  }
+}
+
+@keyframes dash {
+  0% {
+    stroke-dashoffset: 187;
+  }
+  50% {
+    stroke-dashoffset: 46.75;
+    -webkit-transform: rotate(135deg);
+    transform: rotate(135deg);
+  }
+  100% {
+    stroke-dashoffset: 187;
+    -webkit-transform: rotate(450deg);
+    transform: rotate(450deg);
+  }
+}

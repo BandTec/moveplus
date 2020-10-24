@@ -1,0 +1,40 @@
+@media(min-width: 600px) and (max-width: 900px){
+    nav > ul{
+        width: 350px;
+    }
+
+    nav > ul > .logo{
+        margin-left: 40px;
+    }
+
+    nav > ul > li > a > img{
+        display: block;
+        margin: 0 40px 0 40px;
+    }
+    .container-flex > .flex-station > .graph > div {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+      }
+      
+      .container-flex > .flex-station > .graph > div > div {
+        height: 400px;
+        margin: 25px 0;
+      }
+      
+      .container-flex > .flex-station > .graph > div > div > div {
+        border: solid 1px #3d3d3d38;
+        border-radius: 5px;
+        margin: 10px 0 20px 0;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        box-sizing: border-box;
+      }
+      
+      .line-chart {
+        animation: fadeIn 600ms cubic-bezier(.57,.25,.65,1) 1 forwards;
+        opacity: 0;
+        width: 100%;
+      }
+}

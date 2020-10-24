@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard MovePlus</title>
+    <link rel="sortcut icon" href="../Login/img/favicon.png" type="image/x-icon" />
+    <link href="https://use.fontawesome.com/releases/v5.0.1/css/all.css" rel="stylesheet">
+    <link rel="stylesheet" href="./css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/tablet.css">
+    <link rel="stylesheet" href="./css/desktop.css">
+</head>
+<body>
+    <header>
+        <nav>
+        <div class="esconder">
+            <div class="icon-menuHamburguer">
+                <img src="./img/icon-menu-hamburgue.png" alt="">
+            </div>
+            <div class="profile-notification">
+                <div class="popup" onclick="myFunction()">
+                    <span class="popuptext" id="myPopup">
+                        <h3>
+                            Notificações
+                        </h3>
+                        <p>
+                            Sem novas Notificações
+                        </p>
+                    </span>
+                    <img src="./img/icon-notification2.png" alt="" style="margin: 5px 10px 0 0; width: 37px;">
+                </div>
+                <img src="./img/perfil (2).png" alt="" class="img-profile">
+                <i class="fas fa-angle-down"></i>
+            </div>
+        </div>
+            <ul class="menu-hidden" id="menuHidden">
+                <div class="logo">
+                    <img src="./img/logo-movePlus.png" alt="">
+                </div>
+                <div class="link">
+                    <a href="../Login/viewEstation.html">Ver estações</a>
+                </div>
+                <li class="item-active">
+                    <a href="#">
+                        <img src="./img/icon-dashboard.png" alt="">
+                        Dashboard
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#">
+                        <img src="./img/icon-machina.png" alt="">
+                        Nova Maquina
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#">
+                        <img src="./img/user-icon.png" alt="">
+                        Perfil
+                    </a>
+                </li>
+
+                <li class="btn-logout" onclick="logout()">
+                    <a>
+                        <img src="./img/icon-logout.png" alt="">
+                        Logout
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main style="background: linear-gradient(to right, #48bfe3, #72efdd); background-repeat: no-repeat; height: 320px; border-radius: 0 0 5px 5px;">
+        <section class="container-flex">
+            <div class="flex-station">
+                <div class="viewStation">
+                    <div class="station">
+                        <p>Estação Trianom Masp</p>
+                    </div>
+                    <div class="profile-notification perfil-desk">
+                    <div class="popover">
+                        <img src="./img/icon-notification.png" alt="" class="active-pop">
+                        <div class="pop">
+                            <div class="popuptext">
+                                <div style="padding: 20px 30px; box-sizing: border-box;">
+                                <h3>
+                                    Notificações
+                                </h3>
+                                <p>
+                                    Sem novas Notificações
+                                </p>
+                                </div>
+                            </div> 
+                        </div>
+                    </div>
+                    <div class="profile">
+                        <img src="./img/perfil (2).png" alt="" class="img-profile">
+
+                        <h3 class="muda" id="user">Fernando Laurito</h3>
+
+                        <i class="fas fa-angle-down" id="info-profile"></i>
+
+                        <i class="fas fa-angle-up" id="up-profile" style="color: #3d3d3dc5; display:none;"></i>
+                        <div class="profile-active">
+                            
+                            <ul>
+                                <li>
+                                    <a href="#">
+                                        <img src="./img/perfil (2).png" alt="" class="img-profile logout-perfil">
+                                        Perfil
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="#" onclick="logout()">
+                                        <img src="./img/icon-logout.png" alt="" class="logout-perfil" style="border-radius: 0; box-shadow: none; border: none !important;">
+                                        Logout
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+            <div class="flex-station">
+                <div class="viewMachines">
+                    <h3>Dashboard</h3>
+                    <p>Olá, bem vindo de volta !</p>
+                    </div>
+                    <div class="cards-dash">
+                        <div class="card">
+                            <div>
+                                <div class="icon-card">
+                                    <img src="./img/icon-maquina-cartao.png" alt="">
+                                </div>
+                                <div class="text-card">
+                                    <h3>Total de maquinas</h3>
+                                    <p>10</p>
+                                </div>
+                            </div>  
+                        </div>
+                        <div class="card">
+                            <div>
+                                <div class="icon-card">
+                                    <img src="./img/icon-maquina-cartao.png" alt="">
+                                </div>
+                                <div class="text-card">
+                                    <h3>Maquinas Ativas</h3>
+                                    <p>9</p>
+                                </div>
+                            </div>  
+                        </div>
+                        <div class="card">
+                            <div>
+                                <div class="icon-card">
+                                    <img src="./img/icon-maquina-cartao.png" alt="">
+                                </div>
+                                <div class="text-card">
+                                    <h3>Maquinas inativas</h3>
+                                    <p>1</p>
+                                </div>
+                            </div>  
+                        </div>
+                    </div>
+                    <div class="viewMachines graph">
+                    <p class="darkP">Selecione abaixo a <span>maquina</span> que voce deseja visualizar !</p>
+
+                    <select name="estações" id="estacao">
+                        <option value="leste">Maquina setor Leste</option>
+                        <option value="sul">Maquina setor sul</option>
+                        <option value="suldeste">Maquina setor sudeste</option>
+                    </select>
+
+                    <p class="darkP">Terminal Funcionando.</p>
+
+                        <div>
+                            <div>
+                                <p class="info-machine"><span>CPU</span></p>
+                                <div>
+                                    <canvas id="graphCpu" class="line-chart-cpu" style="height: 100%; width: 100%;">
+
+                                    </canvas>
+                                </div>    
+                            </div>
+
+                            <div>
+                                <p class="info-machine"><span>Memória RAM</span></p>
+                                <div>
+                                    <canvas id="graphRam" class="line-chart-ram" style="height: 100%; width: 100%;">
+
+                                    </canvas>
+                                </div>    
+                            </div>
+
+                            <div>
+                                <p class="info-machine"><span>Disco 0 (c:)</span></p>
+                                <div>
+                                    <canvas class="line-chart-disco" id="graphDisco" style="height: 100%; width: 100%;">
+
+                                    </canvas>
+                                </div>    
+                            </div>
+                        </div>
+
+                    </div>
+                    <footer>
+                        <div class="copy">
+                            <h3>© MovePlus 2020</h3>
+                            <p>Todos os direitos reservados.</p>
+                        </div>
+                     </footer>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+<script src="../script.js"></script>
+<script src="./auth.js"></script>
+<script type="text/javascript">
+    // <![CDATA[
+    var ttChatLoaderS = document.createElement('script');
+    document.tomticketChatLoaderScriptVersion = 2;
+    ttChatLoaderS.src = 'https://moveplus.tomticket.com/scripts-chat/chat.min.js'
+    + '?id=EP50568'
+    + '&account=3236352P24102020060047'
+    + '&autoOpen=0'
+    + '&hideWhenOffline=0'
+    + '&d=moveplus'
+    + '&ts=' + new Date().getTime()
+    + '&ref=' + encodeURIComponent(document.URL);
+    document.body.appendChild(ttChatLoaderS);
+    //]]>
+    </script>  
+</html>
+
+<script>
+
+function menuActive() {
+    const btnMenu = document.querySelector(".icon-menuHamburguer img");
+    const ulMenu = document.getElementById('menuHidden');
+
+    function openMenu(){
+        ulMenu.classList.toggle("menu-hidden");
+    }
+
+    btnMenu.addEventListener("click", openMenu);
+};
+
+menuActive();
+
+function myFunction() {
+  var popup = document.getElementById("myPopup");
+  popup.classList.toggle("show");
+}
+
+const popover = document.querySelector('.pop');
+const activePop = document.querySelector('.active-pop');
+
+function activePopover(){
+    popover.classList.toggle("popBlock");
+}
+
+activePop.addEventListener("click", activePopover);
+
+
+function profile(){
+    const profileActive = document.querySelector(".profile-active");
+    const infoProfile = document.querySelector("#info-profile");
+    const profile = document.querySelector(".profile");
+    const profileTxt = document.querySelector(".muda");
+    const upProfile = document.querySelector("#up-profile");
+
+    function activeProfile(){
+        profileActive.classList.toggle("popBlock");
+        profile.classList.toggle("profile-teste");
+        profileTxt.classList.toggle("profileTxta");
+        infoProfile.classList.toggle("none"); 
+        upProfile.classList.toggle("popBlock");
+    }
+
+    infoProfile.addEventListener("click", activeProfile);
+    upProfile.addEventListener("click", activeProfile);
+}
+profile();
+
+const user = JSON.parse(sessionStorage.user);
+console.log(user);
+const identityUser = document.querySelector("#user");
+
+identityUser.innerHTML = user.email;
+
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+<script src="graph.js"></script>
+<script src="graphRam.js"></script>
+<script src="graphDisco.js"></script>
+<!-- <script src="graphDisco.js"></script> -->
+<!-- <script>
+    var cpu = document.getElementsByClassName("line-chart-cpu");
+    var data = new Date();
+    var hora = data.getHours();
+    var min  = data.getMinutes();
+    var seg = data.getSeconds();
+
+    let horaAtual = `${hora}:${min}:${seg}`;
+    
+    function rand() {
+        return Math.random() * 101;
+    }
+
+    var chartGraph = new Chart(cpu, {
+        type: 'line',
+        options: {
+        layout: {
+            padding: {
+                left: 20,
+                right: 20,
+                top: 20,
+                bottom: 20
+            }
+        },
+            title: {
+                display: true,
+                text: 'Intel(R)Core(TM)i7-8565U CPU @ 1.80GHz',
+                left: 0
+            },
+        
+    },
+        data:{
+            labels: [horaAtual, horaAtual],
+            datasets: [{
+                label: 'Uso',
+                data: [
+                    rand(),
+                    rand(),
+                    rand(),
+                    rand()
+                ],
+                borderWidth: 3,
+                borderColor: '#48bfe3',
+                backgroundColor: 'transparent',
+            },]
+        },
+        
+    });
+
+    var ram = document.getElementsByClassName("line-chart-ram");
+    var chartGraph = new Chart(ram, {
+        type: 'line',
+        options: {
+        layout: {
+            padding: {
+                left: 30,
+                right: 30,
+                top: 30,
+                bottom: 30
+            }
+        },
+        title: {
+                display: true,
+                text: '8,0 GB',
+                left: 0
+            },
+    },
+        data:{
+            labels: [horaAtual, horaAtual],
+            datasets: [{
+                label: 'Uso',
+                data: [
+                    rand(),
+                    rand(),
+                    rand(),
+                    rand()
+                ],
+                borderWidth: 3,
+                borderColor: '#72efdd',
+                backgroundColor: 'transparent',
+            },]
+        },
+        
+    });
+
+    var disco = document.getElementsByClassName("line-chart-disco");
+    var chartGraph = new Chart(disco, {
+        type: 'line',
+        options: {
+        layout: {
+            padding: {
+                left: 30,
+                right: 30,
+                top: 30,
+                bottom: 30
+            }
+        },
+        title: {
+                display: true,
+                text: 'Kingston 400GB',
+                left: 0
+        },
+        
+    },
+        data:{
+            labels: [horaAtual, horaAtual],
+            datasets: [{
+                label: 'Uso',
+                data: [
+                    rand(),
+                    rand(),
+                    rand(),
+                    rand()
+                ],
+                borderWidth: 3,
+                borderColor: '#3d3d3d',
+                backgroundColor: 'transparent',
+            },]
+        },
+        
+    });
+</script> -->

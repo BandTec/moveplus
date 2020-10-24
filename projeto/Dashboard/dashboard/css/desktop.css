@@ -1,0 +1,345 @@
+@media (min-width: 900px) {
+  nav {
+    height: 100vh;
+    width: 300px;
+    box-shadow: 2px 3px 10px #3d3d3d2c;
+    border-radius: 0 15px 15px 0;
+    position: fixed;
+  }
+
+  nav > div {
+    display: none;
+  }
+
+  nav > div > .icon-menuHamburguer {
+    display: none;
+  }
+
+  nav > div > .profile-notification {
+    display: none;
+  }
+
+  nav > ul {
+    width: 100%;
+    height: 100vh;
+    margin: 0;
+    box-shadow: none;
+    position: relative;
+  }
+
+  nav > ul > .logo {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin: 0 0 40px 0;
+    padding: 0;
+  }
+
+  nav > ul > .link {
+    width: 95%;
+    margin: 0 2.5% 60px;
+  }
+
+  nav > ul > .logo img {
+    width: 200px;
+  }
+
+  nav > ul > li > a > img {
+    display: block;
+    margin: 0 30px 0 30px;
+  }
+
+  .menu-hidden {
+    left: 0;
+  }
+
+  main {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100vh;
+    width: calc(100% - 300px);
+    display: flex;
+  }
+
+  .container-flex {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+  }
+
+  .container-flex > .flex-station {
+    width: 100%;
+  }
+
+  .container-flex > .flex-station > .viewStation {
+    margin: 0 60px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .container-flex > .flex-station > .viewStation > .station {
+    min-width: 200px;
+  }
+
+  .container-flex > .flex-station > .viewStation::after {
+    width: 100%;
+    display: none;
+  }
+
+  .container-flex > .flex-station > .viewMachines::before {
+    content: "";
+    width: 100%;
+    height: 1px;
+    background-color: #3d3d3d21;
+  }
+
+  .container-flex > .flex-station > .viewStation > .perfil-desk {
+    display: flex;
+    align-items: center;
+  }
+
+  .container-flex > .flex-station > .viewStation > .perfil-desk > h3 {
+    font-size: 18px;
+    font-weight: 500;
+    margin: 0 0 0 15px;
+    color: white;
+    cursor: pointer;
+    text-shadow: 2px 3px 5px #3d3d3d48;
+  }
+
+  .container-flex > .flex-station > .viewStation > .perfil-desk img {
+    width: 40px;
+    box-shadow: 2px 3px 5px #3d3d3d6b;
+    cursor: pointer;
+    border: solid 1px #3d3d3d36 !important;
+    border-radius: 50%;
+  }
+
+  .container-flex > .flex-station > .viewMachines > h3 {
+    margin-top: 20px;
+    text-shadow: 2px 3px 5px #3d3d3d2d;
+  }
+
+  .container-flex > .flex-station > .graph::before {
+    display: none;
+  }
+
+  .container-flex > .flex-station > .cards-dash {
+    flex-direction: row;
+  }
+
+  .container-flex > .flex-station > .cards-dash > .card {
+    flex: 1 !important;
+    margin: 0;
+  }
+
+  .container-flex > .flex-station > .viewMachines {
+    margin: 10px 60px;
+    padding: 10px 20px;
+  }
+
+  .container-flex > .flex-station > .cards-dash {
+    margin: 10px 60px;
+    padding: 0 20px;
+    flex-wrap: wrap;
+  }
+
+  .container-flex > .flex-station > .cards-dash > .card {
+    margin: 5px;
+  }
+
+  select {
+    width: 350px;
+  }
+
+  .container-flex > .flex-station > .graph > div {
+    flex-direction: column;
+  }
+
+  .container-flex > .flex-station > .graph > div > div {
+    flex: 1;
+  }
+
+  .container-flex > .flex-station > .graph > div > div > div {
+    margin-right: 20px;
+  }
+
+  .line-chart {
+    animation: fadeIn 600ms cubic-bezier(0.57, 0.25, 0.65, 1) 1 forwards;
+    opacity: 0;
+    width: 100%;
+  }
+
+  i {
+    color: white;
+    cursor: pointer;
+    text-shadow: 2px 3px 5px #3d3d3d2d;
+  }
+
+  footer {
+    margin: 50px 40px 0 25px;
+    width: auto;
+  }
+
+  footer::before {
+    content: "";
+    margin: -20px 60px;
+    height: 1px;
+    background-color: #3d3d3d2f;
+  }
+
+  footer > .copy {
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+  footer > .copy > h3 {
+    margin-left: 35px;
+  }
+
+  footer > .copy > p {
+    margin-right: 70px;
+    margin-top: 0;
+  }
+
+  .container-flex > .flex-station > .graph > div > div {
+    height: 400px;
+    margin: 20px 0;
+    padding: 20px;
+  }
+
+  .line-chart {
+    animation: fadeIn 600ms cubic-bezier(0.57, 0.25, 0.65, 1) 1 forwards;
+    opacity: 0;
+    width: 100%;
+  }
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  position: relative;
+  height: 52px;
+  border-radius: 5px;
+  margin-left: 20px;
+}
+
+.profile img {
+  margin-left: 15px;
+}
+
+.profile-teste {
+  background-color: white;
+  box-shadow: 2px 4px 6px #3d3d3d23;
+}
+
+.profileTxta {
+  color: #3d3d3dc5 !important;
+}
+
+.profile h3 {
+  margin: 0 10px 0 20px;
+  color: white;
+  font-weight: 500;
+  font-size: 18px;
+  text-shadow: 2px 3px 5px #3d3d3d23;
+}
+
+.profile-active {
+  background-color: white;
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+  position: absolute;
+  top: 60px;
+  box-shadow: 2px 5px 6px #3d3d3d13;
+  left: 0;
+  animation: opacity 0.5s forwards;
+  transition: 1s;
+  margin-top: 5px;
+  display: none;
+}
+
+.profile-active ul {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+.profile-active ul li {
+  list-style: none;
+  padding: 15px 0;
+  margin: 5px 0;
+}
+
+.profile-active ul li a {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  color: #3d3d3dc5;
+  font-size: 18px;
+  text-decoration: none;
+}
+
+.logout-perfil {
+  margin-right: 30px !important;
+}
+
+.profile i {
+  margin-right: 20px;
+}
+
+.popover {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.pop {
+  background-color: white;
+  width: 400px;
+  height: 250px;
+  border-radius: 5px;
+  position: absolute;
+  top: 56px;
+  box-shadow: 2px 5px 6px #3d3d3d13;
+  left: -355px;
+  animation: opacity 0.5s forwards;
+  transition: 1s;
+  display: none;
+  margin-top: 5px;
+}
+
+.popBlock {
+  display: block !important;
+}
+
+.none {
+  display: none;
+}
+
+@keyframes opacity {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@media (max-width: 1400px) {
+  nav > ul > li > a {
+    padding: 15px;
+  }
+  nav > ul > .link {
+    margin: 0 2.5% 30px;
+  }
+}

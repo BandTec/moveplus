@@ -1,0 +1,176 @@
+* {
+  margin: 0;
+  padding: 0;
+  outline: 0;
+  font-family: "Nunito Sans", sans-serif;
+}
+
+body {
+  background-image: url("../img/Background-login.png");
+  background-repeat: no-repeat;
+}
+
+.flex {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px 20px 0 20px;
+}
+
+.container-flex {
+  max-width: 1300px;
+  margin: auto;
+  display: flex;
+  height: 100vh;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+
+.container-flex > .txt {
+  flex: 1;
+  margin: 5px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.container-flex > footer {
+  height: auto;
+  margin: 5px;
+}
+
+.login-content {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.login-content > div {
+  width: 60%;
+  background-color: rgba(255, 255, 255, 0.836);
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  box-shadow: 2px 3px 10px #3d3d3d4d;
+  border-radius: 15px;
+}
+
+.txt-terminais {
+  margin: 150px 0 100px 0;
+}
+
+.txt-terminais h3 {
+  font-size: 40px;
+  color: white;
+  margin-top: 40px;
+}
+
+.select-station {
+  width: 80%;
+  justify-content: space-between;
+  display: flex;
+  flex-flow: wrap;
+}
+
+.select-station select {
+  padding: 20px 15px;
+  border-radius: 5px;
+  box-sizing: border-box;
+  height: 59px;
+  box-shadow: 2px 3px 10px #3d3d3d54;
+  border: none;
+  margin: 20px 0;
+  width: 48%;
+  min-width: 200px;
+  cursor: pointer;
+  position: relative;
+}
+
+.item {
+  margin-top: 20px;
+  font-weight: 300;
+  font-size: 18px;
+}
+
+.logo-link {
+  justify-content: space-between !important;
+  display: flex;
+  width: 80%;
+}
+
+.logo {
+  width: 100px;
+  margin: 30px 0 0 0;
+}
+
+.logo img {
+  width: 100%;
+}
+
+.arrow {
+  width: 100px;
+  position: absolute;
+  top: 0;
+  cursor: pointer;
+}
+
+.copy {
+  display: flex;
+  flex-direction: column;
+  margin: 5px;
+  padding: 5px;
+  min-width: 100px;
+}
+
+.copy > div {
+  justify-content: space-between;
+  display: flex;
+  align-items: center;
+  margin: 50px 0;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 1420px) {
+  .copy > div {
+    margin: 20px 0;
+  }
+
+  .contentFooter > div > h4 {
+    margin: 5px 0;
+  }
+}
+
+.contentFooter > div > h4 {
+  font-size: 18px;
+  color: #3d3d3dda;
+  letter-spacing: 1px;
+}
+
+.copy::before {
+  content: "";
+  display: inline-block;
+  width: 100%;
+  height: 1px;
+  background: #3d3d3d36;
+}
+
+@media (max-width: 1024px) {
+  .login-content > div {
+    width: 100%;
+    margin-top: 20px;
+  }
+
+  .txt > div {
+    margin-top: 0;
+  }
+
+  .select-station select {
+    width: 100%;
+  }
+}
+
+.animation-form {
+  animation: show 2s forwards;
+}
