@@ -6,57 +6,33 @@
 package com.mycompany.moveplus;
 
 import javax.swing.JLabel;
+import java.util.List;
+import javax.swing.JFrame;
+import oshi.SystemInfo;
+import static oshi.driver.linux.proc.DiskStats.getDiskStats;
+import oshi.hardware.CentralProcessor;
+import oshi.hardware.GlobalMemory;
+import oshi.hardware.HWDiskStore;
+import oshi.hardware.HardwareAbstractionLayer;
+import oshi.software.os.OSProcess;
+import oshi.software.os.OperatingSystem;
 
 /**
  *
  * @author enlem
  */
-public class TelaLogin extends javax.swing.JFrame {
-
-    Login user = new Login();
-
-    String login;
-    String password;
-
-    String login_definido = "root";
-    String senha_definido = "root";
+public class TelaComponente extends javax.swing.JFrame {        
+   TelaLogin tela = new TelaLogin();    
+   TelaComponente show = new TelaComponente(); 
+    
 
     /**
      * Creates new form TelaLogin
      */
-    public TelaLogin() {
+    public TelaComponente() {
         initComponents();
     }
 
-    void enviarDados(String login, String password) {
-        user.setLogin(login);
-        user.setPassword(password);
-        teste();
-    }
-
-    public void teste() {
-        String sucesso = "Logado";
-        String erro = "Erro. Usuário e/ou senha incorretos.";
-
-        String login = user.getLogin();
-        String password = user.getPassword();
-
-        if (login.equals(login_definido) && password.equals(senha_definido)) {
-
-            atualizarDados(lblAuthentication,sucesso);
-            
-        }
-        
-        else{
-        atualizarDados(lblAuthentication,erro);
-        }
-    }
-    
-    void atualizarDados(JLabel lbl, String status){
-        
-        lbl.setText(status);
-        
-    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -68,96 +44,109 @@ public class TelaLogin extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel2 = new javax.swing.JLabel();
-        btnEntrar = new javax.swing.JButton();
-        txtLogin = new javax.swing.JTextField();
-        txtSenha = new javax.swing.JTextField();
-        lblLogin = new javax.swing.JLabel();
-        lblLogin1 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        lblAuthentication = new javax.swing.JLabel();
+        lblProcessador = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        lblDescProcessador = new javax.swing.JLabel();
+        lblDescMemoria = new javax.swing.JLabel();
+        lblDescDisco = new javax.swing.JLabel();
+        lblDescSO = new javax.swing.JLabel();
+        lblMemoria = new javax.swing.JLabel();
+        lblDisco = new javax.swing.JLabel();
+        lblSO = new javax.swing.JLabel();
 
         jLabel2.setText("jLabel2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        btnEntrar.setText("Entrar");
-        btnEntrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEntrarActionPerformed(evt);
-            }
-        });
-
-        lblLogin.setText("Login");
-
-        lblLogin1.setText("Senha");
-
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel1.setText("MovePlus");
+
+        lblProcessador.setText("Intel Core 2 Duo");
+
+        jLabel3.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel3.setText("Informações da máquina");
+
+        lblDescProcessador.setText("Processador: ");
+
+        lblDescMemoria.setText("Memória: ");
+
+        lblDescDisco.setText("Disco");
+
+        lblDescSO.setText("Sistema Operacional: ");
+
+        lblMemoria.setText("4GB DDR3");
+
+        lblDisco.setText("64GB Seagate");
+
+        lblSO.setText("Windows 10 20H2");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(63, 63, 63)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(46, 46, 46)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblLogin1)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblLogin)
-                                .addGap(43, 43, 43)
-                                .addComponent(txtLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(lblDescMemoria)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblMemoria, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(159, 159, 159)
-                        .addComponent(btnEntrar))
+                        .addComponent(lblDescProcessador)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblProcessador, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(136, 136, 136)
-                        .addComponent(jLabel1))
+                        .addComponent(lblDescSO)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
+                        .addComponent(lblSO, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(128, 128, 128)
-                        .addComponent(lblAuthentication, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(129, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(120, 120, 120)
-                    .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(129, Short.MAX_VALUE)))
+                        .addComponent(lblDescDisco)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblDisco, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(30, 30, 30))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(109, 109, 109))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(30, Short.MAX_VALUE)
+                .addGap(16, 16, 16)
                 .addComponent(jLabel1)
-                .addGap(34, 34, 34)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel3)
+                .addGap(29, 29, 29)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblDescProcessador)
+                    .addComponent(lblProcessador, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblLogin))
-                .addGap(36, 36, 36)
-                .addComponent(lblLogin1)
-                .addGap(28, 28, 28)
-                .addComponent(btnEntrar)
-                .addGap(18, 18, Short.MAX_VALUE)
-                .addComponent(lblAuthentication, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addContainerGap(163, Short.MAX_VALUE)
-                    .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(113, 113, 113)))
+                    .addComponent(lblDescMemoria)
+                    .addComponent(lblMemoria, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblDescDisco)
+                    .addComponent(lblDisco, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblDescSO)
+                    .addComponent(lblSO, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(76, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
-        // TODO add your handling code here
-        
-        login = txtLogin.getText();
-        password = txtSenha.getText();
-        enviarDados(login, password);
-    }//GEN-LAST:event_btnEntrarActionPerformed
-
+    
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -175,32 +164,40 @@ public class TelaLogin extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TelaLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaComponente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TelaLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaComponente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TelaLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaComponente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TelaLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaComponente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>x
-
+        //</editor-fold>x
+        
+        
+        
+        
+        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TelaLogin().setVisible(true);
+                new TelaComponente().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnEntrar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel lblAuthentication;
-    private javax.swing.JLabel lblLogin;
-    private javax.swing.JLabel lblLogin1;
-    private javax.swing.JTextField txtLogin;
-    private javax.swing.JTextField txtSenha;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel lblDescDisco;
+    private javax.swing.JLabel lblDescMemoria;
+    private javax.swing.JLabel lblDescProcessador;
+    private javax.swing.JLabel lblDescSO;
+    private javax.swing.JLabel lblDisco;
+    private javax.swing.JLabel lblMemoria;
+    private javax.swing.JLabel lblProcessador;
+    private javax.swing.JLabel lblSO;
     // End of variables declaration//GEN-END:variables
 }
