@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard MovePlus</title>
+    <title>Perfil MovePlus</title>
     <link rel="sortcut icon" href="../Login/img/favicon.png" type="image/x-icon" />
     <link href="https://use.fontawesome.com/releases/v5.0.1/css/all.css" rel="stylesheet">
     <link rel="stylesheet" href="./css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./css/tablet.css">
     <link rel="stylesheet" href="./css/desktop.css">
+    <link rel="stylesheet" href="./css/profile.css">
 </head>
 <body>
     <header>
@@ -61,7 +62,7 @@
                 <div class="link">
                     <a href="../Login/viewEstation.html">Ver estações</a>
                 </div>
-                <li class="item-active">
+                <li>
                     <a href="./dash.html">
                         <img src="./img/icon-dashboard.png" alt="">
                         Dashboard
@@ -75,7 +76,7 @@
                     </a>
                 </li>
 
-                <li>
+                <li class="item-active">
                     <a href="./perfil.html">
                         <img src="./img/user-icon.png" alt="">
                         Perfil
@@ -145,86 +146,52 @@
                     </div>
                 </div>
             </div>
-            <div class="flex-station">
-                <div class="viewMachines">
-                    <h3>Dashboard</h3>
-                    <p>Olá, bem vindo de volta !</p>
+
+            <!-- ------------------------- -->
+        
+            <div class="flex-profile">
+                <div>
+                <div class="viewProfile">
+                    <h3>Perfil</h3>
+                    <p>Visualize e atualize suas informações de perfil !</p>
+                </div>
+                    <div class="cards-profile">
+                        <div class="card-profile">
+                            <div class="img-card">
+                                <div>
+                                    <img src="./img/perfil (2).png" alt="">
+                                </div>
+                            </div> 
+                            <div class="name-profile">
+                                <h3>Fernando Laurito</h3>
+                                <p>Credêncial: <span>123456</span></p>
+                            </div> 
+                        </div>
+
+                        <div class="info-profile">
+                            <div>
+                               <label for="">Email:</label>
+                               <input type="text" placeholder="fernando@gmail.com">
+                            </div>
+                            
+                            <div>
+                                <label for="">Credêncial:</label>
+                                <input type="text" placeholder="465874856">
+                             </div>   
+
+                             <div>
+                                <label for="">Senha:</label>
+                                <input type="password" placeholder="***********">
+                             </div>
+                             
+                             <div>
+                                <button class="update">
+                                    Atualizar
+                                </button>
+                             </div>   
+
+                        </div>
                     </div>
-                    <div class="cards-dash">
-                        <div class="card">
-                            <div>
-                                <div class="icon-card">
-                                    <img src="./img/icon-maquina-cartao.png" alt="">
-                                </div>
-                                <div class="text-card">
-                                    <h3>Total de maquinas</h3>
-                                    <p>10</p>
-                                </div>
-                            </div>  
-                        </div>
-                        <div class="card">
-                            <div>
-                                <div class="icon-card">
-                                    <img src="./img/icon-maquina-cartao.png" alt="">
-                                </div>
-                                <div class="text-card">
-                                    <h3>Maquinas Ativas</h3>
-                                    <p>9</p>
-                                </div>
-                            </div>  
-                        </div>
-                        <div class="card">
-                            <div>
-                                <div class="icon-card">
-                                    <img src="./img/icon-maquina-cartao.png" alt="">
-                                </div>
-                                <div class="text-card">
-                                    <h3>Maquinas inativas</h3>
-                                    <p>1</p>
-                                </div>
-                            </div>  
-                        </div>
-                    </div>
-                    <div class="viewMachines graph">
-                    <p class="darkP">Selecione abaixo a <span>maquina</span> que voce deseja visualizar !</p>
-
-                    <select name="estações" id="estacao">
-                        <option value="leste">Maquina setor Leste</option>
-                        <option value="sul">Maquina setor sul</option>
-                        <option value="suldeste">Maquina setor sudeste</option>
-                    </select>
-
-                    <p class="darkP">Terminal Funcionando.</p>
-
-                        <div>
-                            <div>
-                                <p class="info-machine"><span>CPU</span></p>
-                                <div>
-                                    <canvas id="graphCpu" class="line-chart-cpu" style="height: 100%; width: 100%;">
-
-                                    </canvas>
-                                </div>    
-                            </div>
-
-                            <div>
-                                <p class="info-machine"><span>Memória RAM</span></p>
-                                <div>
-                                    <canvas id="graphRam" class="line-chart-ram" style="height: 100%; width: 100%;">
-
-                                    </canvas>
-                                </div>    
-                            </div>
-
-                            <div>
-                                <p class="info-machine"><span>Disco 0 (c:)</span></p>
-                                <div>
-                                    <canvas class="line-chart-disco" id="graphDisco" style="height: 100%; width: 100%;">
-
-                                    </canvas>
-                                </div>    
-                            </div>
-                        </div>
-
                     </div>
                     <footer>
                         <div class="copy">
@@ -322,7 +289,3 @@ btnProfMenu.addEventListener("click", activeProf);
 
 </script>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-<script src="graph.js"></script>
-<script src="graphRam.js"></script>
-<script src="graphDisco.js"></script>
