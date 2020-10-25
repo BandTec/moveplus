@@ -128,6 +128,7 @@
   border: solid 1px #3d3d3d21;
   padding: 0 15px;
   box-sizing: border-box;
+  background-color: #fafafa;
 }
 
 .flex-profile .cards-profile .info-profile div .update {

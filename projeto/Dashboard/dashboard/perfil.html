@@ -70,7 +70,7 @@
                 </li>
 
                 <li>
-                    <a href="#">
+                    <a href="./cadTerminais.html">
                         <img src="./img/icon-machina.png" alt="">
                         Nova Maquina
                     </a>
@@ -164,24 +164,24 @@
                             </div> 
                             <div class="name-profile">
                                 <h3>Fernando Laurito</h3>
-                                <p>Credêncial: <span>123456</span></p>
+                                <p>Credêncial: <span id="credencialImg"></span></p>
                             </div> 
                         </div>
 
                         <div class="info-profile">
                             <div>
                                <label for="">Email:</label>
-                               <input type="text" placeholder="fernando@gmail.com">
+                               <input type="text" id="userProfile" Use readonly=true>
                             </div>
                             
                             <div>
                                 <label for="">Credêncial:</label>
-                                <input type="text" placeholder="465874856">
+                                <input type="text" id="credencialProf" Use readonly=true>
                              </div>   
 
                              <div>
                                 <label for="">Senha:</label>
-                                <input type="password" placeholder="***********">
+                                <input type="text" id="senhaProf" Use readonly=true>
                              </div>
                              
                              <div>
@@ -275,8 +275,16 @@ profile();
 
 const user = JSON.parse(sessionStorage.user);
 const identityUser = document.querySelector("#user");
+const identityUserProfile = document.querySelector("#userProfile");
+const identitySenhaProfile = document.querySelector("#senhaProf");
+const identityCredencialProfile = document.querySelector("#credencialProf");
+const identityCredencialProfileImg = document.querySelector("#credencialImg");
 
 identityUser.innerHTML = user.email;
+identityUserProfile.value = user.email;
+identitySenhaProfile.value = user.senha;
+identityCredencialProfile.value = user.credencial;
+identityCredencialProfileImg.innerHTML = user.credencial;
 
 const btnProfMenu = document.querySelector("#btnMobileProf");
 const activeProfMenu = document.querySelector(".menu-profile");

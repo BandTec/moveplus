@@ -3,13 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard MovePlus</title>
+    <title>Cadastro de terminais MovePlus</title>
     <link rel="sortcut icon" href="../Login/img/favicon.png" type="image/x-icon" />
     <link href="https://use.fontawesome.com/releases/v5.0.1/css/all.css" rel="stylesheet">
     <link rel="stylesheet" href="./css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./css/tablet.css">
     <link rel="stylesheet" href="./css/desktop.css">
+    <link rel="stylesheet" href="./css/profile.css">
+    <link rel="stylesheet" href="./css/cadastro.css">
 </head>
 <body>
     <header>
@@ -61,14 +63,14 @@
                 <div class="link">
                     <a href="../Login/viewEstation.html">Ver estações</a>
                 </div>
-                <li class="item-active">
+                <li>
                     <a href="./dash.html">
                         <img src="./img/icon-dashboard.png" alt="">
                         Dashboard
                     </a>
                 </li>
 
-                <li>
+                <li class="item-active">
                     <a href="./cadTerminais.html">
                         <img src="./img/icon-machina.png" alt="">
                         Nova Maquina
@@ -145,87 +147,19 @@
                     </div>
                 </div>
             </div>
-            <div class="flex-station">
-                <div class="viewMachines">
-                    <h3>Dashboard</h3>
-                    <p>Olá, bem vindo de volta !</p>
+
+            <!-- ------------------------- -->
+        
+            <div class="flex-profile">
+                <div>
+                    <div class="viewProfile">
+                        <h3>Novo terminal</h3>
+                        <p>Aqui será possível o cadastro de novas maquinas!</p>
                     </div>
-                    <div class="cards-dash">
-                        <div class="card">
-                            <div>
-                                <div class="icon-card">
-                                    <img src="./img/icon-maquina-cartao.png" alt="">
-                                </div>
-                                <div class="text-card">
-                                    <h3>Total de maquinas</h3>
-                                    <p>10</p>
-                                </div>
-                            </div>  
-                        </div>
-                        <div class="card">
-                            <div>
-                                <div class="icon-card">
-                                    <img src="./img/icon-maquina-cartao.png" alt="">
-                                </div>
-                                <div class="text-card">
-                                    <h3>Maquinas Ativas</h3>
-                                    <p>9</p>
-                                </div>
-                            </div>  
-                        </div>
-                        <div class="card">
-                            <div>
-                                <div class="icon-card">
-                                    <img src="./img/icon-maquina-cartao.png" alt="">
-                                </div>
-                                <div class="text-card">
-                                    <h3>Maquinas inativas</h3>
-                                    <p>1</p>
-                                </div>
-                            </div>  
-                        </div>
-                    </div>
-                    <div class="viewMachines graph">
-                    <p class="darkP">Selecione abaixo a <span>maquina</span> que voce deseja visualizar !</p>
-
-                    <select name="estações" id="estacao">
-                        <option value="leste">Maquina setor Leste</option>
-                        <option value="sul">Maquina setor sul</option>
-                        <option value="suldeste">Maquina setor sudeste</option>
-                    </select>
-
-                    <p class="darkP">Terminal Funcionando.</p>
-
-                        <div>
-                            <div>
-                                <p class="info-machine"><span>CPU</span></p>
-                                <div>
-                                    <canvas id="graphCpu" class="line-chart-cpu" style="height: 100%; width: 100%;">
-
-                                    </canvas>
-                                </div>    
-                            </div>
-
-                            <div>
-                                <p class="info-machine"><span>Memória RAM</span></p>
-                                <div>
-                                    <canvas id="graphRam" class="line-chart-ram" style="height: 100%; width: 100%;">
-
-                                    </canvas>
-                                </div>    
-                            </div>
-
-                            <div>
-                                <p class="info-machine"><span>Disco 0 (c:)</span></p>
-                                <div>
-                                    <canvas class="line-chart-disco" id="graphDisco" style="height: 100%; width: 100%;">
-
-                                    </canvas>
-                                </div>    
-                            </div>
-                        </div>
+                    <div class="cards-profile">
 
                     </div>
+                </div>
                     <footer>
                         <div class="copy">
                             <h3>© MovePlus 2020</h3>
@@ -322,7 +256,3 @@ btnProfMenu.addEventListener("click", activeProf);
 
 </script>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-<script src="graph.js"></script>
-<script src="graphRam.js"></script>
-<script src="graphDisco.js"></script>
