@@ -30,8 +30,28 @@
                     </span>
                     <img src="./img/icon-notification2.png" alt="" style="margin: 5px 10px 0 0; width: 37px;">
                 </div>
-                <img src="./img/perfil (2).png" alt="" class="img-profile">
-                <i class="fas fa-angle-down"></i>
+
+                <div class="profile-menu" id="btnMobileProf">
+                    <img src="./img/perfil (2).png" alt="" class="img-profile">
+                    <i class="fas fa-angle-down"></i>
+                    <div class="menu-profile">
+                            <ul>
+                                <li>
+                                    <a href="#">
+                                        <img src="./img/perfil (2).png" alt="" class="img-profile logout-perfil">
+                                        Perfil
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="#" onclick="logout()">
+                                        <img src="./img/icon-logout.png" alt="" class="logout-perfil" style="border-radius: 0; box-shadow: none; border: none !important;">
+                                        Logout
+                                    </a>
+                                </li>
+                            </ul>
+                    </div>
+                </div>
             </div>
         </div>
             <ul class="menu-hidden" id="menuHidden">
@@ -287,10 +307,18 @@ function profile(){
 profile();
 
 const user = JSON.parse(sessionStorage.user);
-console.log(user);
 const identityUser = document.querySelector("#user");
 
 identityUser.innerHTML = user.email;
+
+const btnProfMenu = document.querySelector("#btnMobileProf");
+const activeProfMenu = document.querySelector(".menu-profile");
+
+function activeProf(){
+    activeProfMenu.classList.toggle("popBlock");
+}
+
+btnProfMenu.addEventListener("click", activeProf);
 
 </script>
 
@@ -298,126 +326,3 @@ identityUser.innerHTML = user.email;
 <script src="graph.js"></script>
 <script src="graphRam.js"></script>
 <script src="graphDisco.js"></script>
-<!-- <script src="graphDisco.js"></script> -->
-<!-- <script>
-    var cpu = document.getElementsByClassName("line-chart-cpu");
-    var data = new Date();
-    var hora = data.getHours();
-    var min  = data.getMinutes();
-    var seg = data.getSeconds();
-
-    let horaAtual = `${hora}:${min}:${seg}`;
-    
-    function rand() {
-        return Math.random() * 101;
-    }
-
-    var chartGraph = new Chart(cpu, {
-        type: 'line',
-        options: {
-        layout: {
-            padding: {
-                left: 20,
-                right: 20,
-                top: 20,
-                bottom: 20
-            }
-        },
-            title: {
-                display: true,
-                text: 'Intel(R)Core(TM)i7-8565U CPU @ 1.80GHz',
-                left: 0
-            },
-        
-    },
-        data:{
-            labels: [horaAtual, horaAtual],
-            datasets: [{
-                label: 'Uso',
-                data: [
-                    rand(),
-                    rand(),
-                    rand(),
-                    rand()
-                ],
-                borderWidth: 3,
-                borderColor: '#48bfe3',
-                backgroundColor: 'transparent',
-            },]
-        },
-        
-    });
-
-    var ram = document.getElementsByClassName("line-chart-ram");
-    var chartGraph = new Chart(ram, {
-        type: 'line',
-        options: {
-        layout: {
-            padding: {
-                left: 30,
-                right: 30,
-                top: 30,
-                bottom: 30
-            }
-        },
-        title: {
-                display: true,
-                text: '8,0 GB',
-                left: 0
-            },
-    },
-        data:{
-            labels: [horaAtual, horaAtual],
-            datasets: [{
-                label: 'Uso',
-                data: [
-                    rand(),
-                    rand(),
-                    rand(),
-                    rand()
-                ],
-                borderWidth: 3,
-                borderColor: '#72efdd',
-                backgroundColor: 'transparent',
-            },]
-        },
-        
-    });
-
-    var disco = document.getElementsByClassName("line-chart-disco");
-    var chartGraph = new Chart(disco, {
-        type: 'line',
-        options: {
-        layout: {
-            padding: {
-                left: 30,
-                right: 30,
-                top: 30,
-                bottom: 30
-            }
-        },
-        title: {
-                display: true,
-                text: 'Kingston 400GB',
-                left: 0
-        },
-        
-    },
-        data:{
-            labels: [horaAtual, horaAtual],
-            datasets: [{
-                label: 'Uso',
-                data: [
-                    rand(),
-                    rand(),
-                    rand(),
-                    rand()
-                ],
-                borderWidth: 3,
-                borderColor: '#3d3d3d',
-                backgroundColor: 'transparent',
-            },]
-        },
-        
-    });
-</script> -->

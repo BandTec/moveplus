@@ -130,13 +130,62 @@ nav > div > .profile-notification {
   align-items: center;
 }
 
-nav > div > .profile-notification > .img-profile {
+nav > div > .profile-notification > .profile-menu {
+  display: flex;
+  align-items: center;
+}
+
+nav > div > .profile-notification > .profile-menu > .img-profile {
   width: 37px !important;
   height: 37px !important;
   border-radius: 50%;
   box-shadow: 2px 3px 5px #3d3d3d6b;
   cursor: pointer;
   border: solid 1px #3d3d3d6c !important;
+}
+
+.menu-profile {
+  list-style: none;
+  position: fixed;
+  top: 0;
+  right: 15px;
+  box-shadow: 2px 6px 10px #3d3d3d34;
+  width: 50%;
+  border-radius: 5px;
+  height: auto;
+  box-sizing: border-box;
+  margin-top: 85px;
+  transition: all 1s;
+  background-color: white;
+  display: none;
+}
+
+.menu-profile > ul {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.menu-profile ul li {
+  list-style: none;
+  padding: 15px 0;
+  margin: 5px 0;
+}
+
+.menu-profile ul li a {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  color: #3d3d3dc5;
+  font-size: 18px;
+  text-decoration: none;
+  margin-left: 20px;
+}
+
+.menu-profile ul li a img {
+  width: 25px;
 }
 
 i {

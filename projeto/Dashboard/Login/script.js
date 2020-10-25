@@ -30,7 +30,7 @@ function login(email, senha){
         console.log('entrou');
         setTimeout(() =>{
           window.location = "../dashboard/dash.html";
-        }, 5000);
+        }, 4000);
         const user = {
           email: response[0].emailUsuarioEstacao, 
           credencial: response[0].credencialUsuarioEstacao,
