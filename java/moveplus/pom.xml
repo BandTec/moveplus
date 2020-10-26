@@ -3,6 +3,13 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.mycompany</groupId>
     <artifactId>moveplus</artifactId>
+<configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>**br.com.teste.TesteMain**</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
     <properties>
