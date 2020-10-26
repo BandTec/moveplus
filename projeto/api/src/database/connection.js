@@ -4,7 +4,7 @@ const config = {
   host: "localhost",
   port: "3306",
   user: "admin",
-  password:"Nanfer7193",
+  password:"admin123",
   database:"bdMetro"
 }
 
