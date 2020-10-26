@@ -1,0 +1,94 @@
+.flex-profile {
+  height: 100%;
+  justify-content: space-between;
+}
+
+.flex-profile .flex .cards-profile {
+  flex-direction: column;
+}
+
+.flex-profile .flex .cards-profile .cadMachine {
+  width: 100%;
+  height: auto;
+}
+
+.flex-profile .flex .cards-profile .cadMachine button {
+  border-radius: 5px;
+  background-color: #3d3d3d;
+  color: white;
+  box-shadow: 2px 3px 6px #3d3d3d3b;
+  width: 100%;
+  height: 52px;
+  font-size: 16px;
+  font-weight: 500;
+  border: none;
+  margin-top: 5px;
+  cursor: pointer;
+}
+
+.flex-profile .flex .cards-profile .cadMachine input {
+  border-radius: 5px;
+  background-color: white;
+  color: #3d3d3d;
+  box-shadow: 2px 3px 6px #3d3d3d3b;
+  width: 100%;
+  height: 52px;
+  font-size: 14px;
+  padding: 10px;
+  box-sizing: border-box;
+  font-weight: 500;
+  border: none;
+  margin-top: 5px;
+}
+
+.flex-profile .flex .cards-profile .card {
+  width: 100%;
+  height: 200px;
+  background-color: white;
+  box-shadow: 2px 3px 6px #3d3d3d1e;
+  margin: 10px 0;
+  border-radius: 5px;
+}
+
+@media (min-width: 900px) {
+  .flex-profile .flex .cards-profile .cadMachine {
+    padding: 0 5px;
+    box-sizing: border-box;
+    flex-direction: row !important;
+    display: flex;
+  }
+
+  .flex-profile {
+    height: 100%;
+  }
+
+  .flex-profile .cards-profile {
+    margin: 10px 0;
+  }
+
+  .flex-profile .flex .cards-profile .cards {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+  }
+
+  .flex-profile .flex .cards-profile .card {
+    margin: 5px 5px;
+    flex-wrap: wrap;
+  }
+
+  .flex-profile .flex .cards-profile .cadMachine button {
+    width: 58%;
+    margin-right: 5px;
+  }
+
+  .flex-profile .flex .cards-profile .cadMachine input {
+    width: 28%;
+    margin-left: 10px;
+  }
+
+  .btn-filtro {
+    width: 28% !important;
+    margin-left: 10px !important;
+  }
+}

@@ -8,7 +8,10 @@ function createUser(email, credencial, senha){
       const response = ajax.responseText;
       alert("cadastrado com sucesso");
       window.location.reload();
-    } 
+    }
+    // else {
+    //   alert('Preencha todos os campos');
+    // }
   }
 
   ajax.send(params);
