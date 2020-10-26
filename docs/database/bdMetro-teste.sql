@@ -9,6 +9,7 @@ numeroTerminais int
 
 create table UsuarioEstacao(
 idUsuario int primary key auto_increment,
+emailUsuario varchar(50),
 credencialUsuarioEstacao char (13),
 senhaUsuarioEstacao char (10),
 fkEstacao int,
