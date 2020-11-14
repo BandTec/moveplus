@@ -64,3 +64,4 @@ primary key (fkTerminal, fkProblema),
 DataHora datetime
 );
 
+insert into TipoErro values(null,'erro de porta','alta','10min');

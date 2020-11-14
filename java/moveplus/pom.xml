@@ -33,10 +33,32 @@
         </dependency>
         
         <dependency>
-	<groupId>be.ceau</groupId>
-	<artifactId>chart</artifactId>
-	<version>2.6.0</version>
-</dependency>
+            <groupId>be.ceau</groupId>
+            <artifactId>chart</artifactId>
+            <version>2.6.0</version>        
+        </dependency>
+
+        <dependency>
+            <groupId>com.microsoft.sqlserver</groupId>
+            <artifactId>mssql-jdbc</artifactId>
+            <version>7.2.2.jre8</version>
+            <!-- ou versão 7.2.2.jre11, se sua JDK for a 11 -->
+            <!-- ou versão que já existir na .m2 local -->
+        </dependency>
+        
+                <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-dbcp2 -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-dbcp2</artifactId>
+            <version>2.8.0</version>
+        </dependency>
+        
+        <!-- https://mvnrepository.com/artifact/org.springframework/spring-jdbc -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jdbc</artifactId>
+            <version>5.3.1</version>
+        </dependency>
 
     </dependencies>
     <name>moveplus</name>
