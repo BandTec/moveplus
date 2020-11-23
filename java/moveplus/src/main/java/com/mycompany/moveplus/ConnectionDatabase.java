@@ -22,13 +22,13 @@ public class ConnectionDatabase {
         this.datasource.setDriverClassName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 
         //Url do banco
-        this.datasource.setUrl("jdbc:sqlserver://srvdbmoveplus.database.windows.net:1433;database=moveplus-database;user=admindb@srvdbmoveplus;password={your_password_here};encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;");
+        this.datasource.setUrl("jdbc:sqlserver://moveplus-server.database.windows.net:1433;database=moveplus-database-final;user=master@moveplus-server;password={your_password_here};encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;");
 
         //Usuario        
-        this.datasource.setUsername("admindb");
+        this.datasource.setUsername("master");
 
         //Senha
-        this.datasource.setPassword("Mastermind2020");
+        this.datasource.setPassword("Moveplus2020");
     }
 
     public BasicDataSource getDatasource() {
