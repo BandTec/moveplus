@@ -18,8 +18,8 @@ public class TesteConexao {
         ConnectionDatabase config = new ConnectionDatabase();
 
         JdbcTemplate con = new JdbcTemplate(config.getDatasource());
-
-        System.out.println(con.queryForList("select * from TipoErro;"));
+        
+        System.out.println(con.queryForList("select * from Monitoracao;"));
         
     }
     
