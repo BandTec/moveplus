@@ -23,10 +23,6 @@ import java.text.*;
  */
 public class MovePlusOshi {
 
-    //Chamando a conexão com o Azure
-    ConnectionDatabase config = new ConnectionDatabase();
-    JdbcTemplate con = new JdbcTemplate(config.getDatasource());
-
     //Criando uma nova classe de infos do Sistema
     SystemInfo si = new SystemInfo();
     OperatingSystem os = si.getOperatingSystem(); //pegando infos do OS do sistema
@@ -47,29 +43,20 @@ public class MovePlusOshi {
         System.out.println("---------------  Disco  ---------------");
         System.out.println(dadosDisco);
         System.out.println("---------------  Processos  ---------------");
-    }
-
-    public void usoCpu() {
-        
         System.out.println("");
         System.out.println("---------------  Uso de CPU  ---------------");
-        
-        while (true) {
-            //Variavel com o valor de uso da CPU
-            Double stats = cpu.getSystemCpuLoadBetweenTicks(oldTricks);
-            //Convertendo o valor de uso da CPU
-            stats = stats * 100d;
-            //Formatando o valor para string e trocando virgula por ponto
-            String var = String.format("%.2f", stats);
-            var = var.replace(",", ".");
-            //Inicio da string de insert
-            String insert = "INSERT INTO Monitoracao (cpuMonitoracao) VALUES (" + var + ");";
-            con.update(insert);
-            //Printando o uso da CPU
-            System.out.println(String.format("CPU Usage - %.2f", (stats)));
-            //Intervalo de tempo entre cada leitura
-            Util.sleep(1200);
-        }
+    }
+
+    public String usoCpu() {
+
+        //Variavel com o valor de uso da CPU
+        Double pctCpu = cpu.getSystemCpuLoadBetweenTicks(oldTricks);
+        //Convertendo o valor de uso da CPU 
+        pctCpu = pctCpu * 100d;
+        //Formatando o valor para string e trocando virgula por ponto
+        String valorCpu = String.format("%.2f", pctCpu);
+        valorCpu = valorCpu.replace(",", ".");
+        return valorCpu;
     }
 
     public void processos() {
@@ -97,9 +84,9 @@ public class MovePlusOshi {
             Util.sleep(1000);
         }
     }
-    
+
     public void usoRam() {
-                //   ** Código para pegar informações de RAM **
+        //   ** Código para pegar informações de RAM **
         // RamInfo info = new RamInfo();
         //  List<HWDiskStore> teste = si.getHardware().getDiskStores();
         //      System.out.println(teste);
@@ -117,5 +104,19 @@ public class MovePlusOshi {
         MovePlusOshi mpo = new MovePlusOshi();
         mpo.dadosHardware();
 
+        //Chamando a conexão com o Azure
+        ConnectionDatabase config = new ConnectionDatabase();
+        JdbcTemplate con = new JdbcTemplate(config.getDatasource());
+
+        while (true) {
+            String insert = "INSERT INTO Monitoracao (memoriaMonitoracao,"
+                    + "cpuMonitoracao,discoMonitoracao,redeMonitoracao"
+                    + ") values (11.11," + mpo.usoCpu() + ",33.33,44.44);";
+
+            System.out.println(insert);
+
+            con.update(insert);
+            Util.sleep(1200);
+        }
     }
 }
