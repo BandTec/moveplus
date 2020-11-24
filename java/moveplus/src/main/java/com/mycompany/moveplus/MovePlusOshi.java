@@ -59,7 +59,7 @@ public class MovePlusOshi {
         valorCpu = valorCpu.replace(",", ".");
         return valorCpu;
     }
-    
+
     public String dataHora() {
         String timeStamp = new SimpleDateFormat("yyyyMMdd HH:mm:ss").format(Calendar.getInstance().getTime());
         return timeStamp;
@@ -91,18 +91,23 @@ public class MovePlusOshi {
         }
     }
 
-    public void usoRam() {
-        //   ** Código para pegar informações de RAM **
-        // RamInfo info = new RamInfo();
-        //  List<HWDiskStore> teste = si.getHardware().getDiskStores();
-        //      System.out.println(teste);
-        //  GlobalMemory memory = si.getHardware().getMemory();
-        //        long maxRam = memory.getTotal();
-        //        long availableRam = memory.getAvailable();
-        //        long usedRam = maxRam - availableRam;
-        //        double percentageUsed = Math.ceil((usedRam / maxRam) * 100);
-        //     
-        //System.out.println("MaxRam: " + maxRam + " Avaiable: " + availableRam + "Usada" + usedRam + " Porcentagem:" + percentageUsed);
+    public String usoRam() {
+        //Código para pegar informações de RAM
+        //Pegando o dado de total de RAM e convertendo para double
+        long getTotalRam = memoria.getTotal();
+        double totalRam = ((double) getTotalRam);
+
+        //Pegando o dado de total disponível de RAM e convertendo para double
+        long getAvailableRam = memoria.getAvailable();
+        double availableRam = ((double) getAvailableRam);
+
+//        //Calculando a quantidade em uso e a porcentagem em uso de Ram
+        double usedRam = totalRam - availableRam;
+        double pctUsedRam = (usedRam / totalRam) * 100;
+        String valorRam = String.format("%.2f", pctUsedRam);
+        valorRam = valorRam.replace(",", ".");
+//
+        return valorRam;
     }
 
     public static void main(String[] args) {
@@ -117,7 +122,8 @@ public class MovePlusOshi {
         while (true) {
             String insert = "INSERT INTO Monitoracao (memoriaMonitoracao,"
                     + "cpuMonitoracao,discoMonitoracao,redeMonitoracao,"
-                    + "dataHoraMonitoracao) values (11.11," + mpo.usoCpu() + ",33.33,44.44, '" + mpo.dataHora() + "');";
+                    + "dataHoraMonitoracao) values (" + mpo.usoRam() + "," 
+                    + mpo.usoCpu() + ",33.33,44.44, '" + mpo.dataHora() + "');";
 
             System.out.println(insert);
 
