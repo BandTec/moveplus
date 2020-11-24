@@ -17,6 +17,7 @@ import oshi.util.Util;
 import java.lang.*;
 import org.springframework.jdbc.core.JdbcTemplate;
 import java.text.*;
+import java.util.Calendar;
 
 /**
  * @author beatriz
@@ -57,6 +58,11 @@ public class MovePlusOshi {
         String valorCpu = String.format("%.2f", pctCpu);
         valorCpu = valorCpu.replace(",", ".");
         return valorCpu;
+    }
+    
+    public String dataHora() {
+        String timeStamp = new SimpleDateFormat("yyyyMMdd HH:mm:ss").format(Calendar.getInstance().getTime());
+        return timeStamp;
     }
 
     public void processos() {
@@ -110,13 +116,13 @@ public class MovePlusOshi {
 
         while (true) {
             String insert = "INSERT INTO Monitoracao (memoriaMonitoracao,"
-                    + "cpuMonitoracao,discoMonitoracao,redeMonitoracao"
-                    + ") values (11.11," + mpo.usoCpu() + ",33.33,44.44);";
+                    + "cpuMonitoracao,discoMonitoracao,redeMonitoracao,"
+                    + "dataHoraMonitoracao) values (11.11," + mpo.usoCpu() + ",33.33,44.44, '" + mpo.dataHora() + "');";
 
             System.out.println(insert);
 
             con.update(insert);
-            Util.sleep(1200);
+            Util.sleep(5000);
         }
     }
 }
