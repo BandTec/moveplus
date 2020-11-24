@@ -83,7 +83,7 @@ public class MovePlusOshi {
             String var = String.format("%.2f", stats);
             var = var.replace(",", ".");
             //Inicio da string de insert
-            String insert = "INSERT INTO Monitoracao (cpuTerminal) VALUES (";
+            String insert = "INSERT INTO Monitoracao (cpuMonitoracao) VALUES (";
             //Fechando a string de insert
             String close = ");";
             //Concatenando o valor dos textos em uma só query
