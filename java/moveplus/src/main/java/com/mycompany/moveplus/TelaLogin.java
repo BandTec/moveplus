@@ -5,7 +5,6 @@
  */
 package com.mycompany.moveplus;
 
-
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.util.List;
@@ -28,9 +27,9 @@ public class TelaLogin extends javax.swing.JFrame {
     /**
      *
      */
+    MPOshi moveplus = new MPOshi();
     CardLayout cardLayout;
-    
-    
+
     Login user = new Login();
 
     String login;
@@ -44,20 +43,18 @@ public class TelaLogin extends javax.swing.JFrame {
      */
     public TelaLogin() {
         initComponents();
-        cardLayout = (CardLayout)(pnlCards.getLayout()); 
+        cardLayout = (CardLayout) (pnlCards.getLayout());
         txtSenha1.setEchoChar('\u0000');
-        
+
     }
 
     void enviarDados(String login, String password) {
         user.setLogin(login);
         user.setPassword(password);
-        teste();
+        Logar();
     }
 
-
-    public void teste() {
-       // String sucesso = "Logado";
+    public void Logar() {
         String erro = "Erro. Usuário e/ou senha incorretos.";
 
         String login = user.getLogin();
@@ -65,25 +62,42 @@ public class TelaLogin extends javax.swing.JFrame {
 
         if (login.equals(login_definido) && password.equals(senha_definido)) {
 
-           // atualizarDados(lblResult,sucesso);
-           switchPanels(jPanel3);
-            
-        }
-        else{
-        atualizarDados(lblResult,erro);
-        }
-    }
-    
-    void atualizarDados(JLabel lbl, String status){
-        
-        lbl.setText(status);
-        
-    }
-    
- 
+            // atualizarDados(lblResult,sucesso);
+            switchPanels(jPanel3);
 
-    
-  
+            String cpuName = moveplus.cpu.toString();
+            Integer indCpuName = cpuName.indexOf("CPU");
+
+            String osName = moveplus.os.toString();
+            Integer indOsName = osName.length();
+
+            if (osName.contains("LTS")) {
+                indOsName = osName.indexOf("LTS");
+            } else if (osName.contains("(")) {
+                indOsName = osName.indexOf("(") - 1;
+            }
+
+            String diskSize = moveplus.dadosDisco.toString();
+            Integer indDiskModelMin = diskSize.indexOf("model:") + 6;
+            Integer indDiskModelMax = diskSize.indexOf("-", indDiskModelMin + 20);
+
+            Integer indDiskSizeMin = diskSize.indexOf("size:") + 5;
+            Integer indDiskSizeMax = diskSize.indexOf("B", indDiskModelMin) + 1;
+
+            lblprocessador.setText(cpuName.substring(0, indCpuName));
+            lblSO.setText(osName.substring(0, indOsName));
+            lblMemoria.setText(moveplus.memoria.toString());
+            lblDisco.setText(diskSize.substring(indDiskModelMin, indDiskModelMax) + "\n" + diskSize.substring(indDiskSizeMin, indDiskSizeMax));
+        } else {
+            atualizarDados(lblResult, erro);
+        }
+    }
+
+    void atualizarDados(JLabel lbl, String status) {
+
+        lbl.setText(status);
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -807,22 +821,22 @@ public class TelaLogin extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
- 
+
     private void jPanel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MousePressed
         // TODO add your handling code here:
         new Drag(jPanel1).onPress(evt);
-     
+
     }//GEN-LAST:event_jPanel1MousePressed
 
     private void jPanel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseDragged
         // TODO add your handling code here:
         new Drag(jPanel1).moveWindow(evt);
-    
+
     }//GEN-LAST:event_jPanel1MouseDragged
 
     private void txtLogin1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLogin1ActionPerformed
         // TODO add your handling code here:
-       
+
     }//GEN-LAST:event_txtLogin1ActionPerformed
 
     private void txtLogin1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtLogin1MouseClicked
@@ -836,29 +850,29 @@ public class TelaLogin extends javax.swing.JFrame {
 
         login = txtLogin1.getText();
         password = txtSenha1.getText();
-        enviarDados(login, password);        
-     
+        enviarDados(login, password);
+
     }//GEN-LAST:event_btnEntrarActionPerformed
 
     private void jDesktopPane1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jDesktopPane1MousePressed
         // TODO add your handling code here:
-        
-       
+
+
     }//GEN-LAST:event_jDesktopPane1MousePressed
 
     private void jLayeredPane1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLayeredPane1MouseDragged
         // TODO add your handling code here:
-       
+
     }//GEN-LAST:event_jLayeredPane1MouseDragged
 
     private void jLayeredPane1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLayeredPane1MousePressed
         // TODO add your handling code here:
-         
+
     }//GEN-LAST:event_jLayeredPane1MousePressed
 
     private void jDesktopPane1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jDesktopPane1MouseDragged
         // TODO add your handling code here:
-   
+
     }//GEN-LAST:event_jDesktopPane1MouseDragged
 
     private void kButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kButton2ActionPerformed
@@ -888,34 +902,33 @@ public class TelaLogin extends javax.swing.JFrame {
 
     private void jSplitPane1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jSplitPane1MouseDragged
         // TODO add your handling code here:
-         new Drag(jSplitPane1).moveWindow(evt);
+        new Drag(jSplitPane1).moveWindow(evt);
     }//GEN-LAST:event_jSplitPane1MouseDragged
 
     private void txtSenha1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtSenha1MouseClicked
         // TODO add your handling code here:                 
-         txtSenha1.setEchoChar('*');
-         txtSenha1.setText("");
-         txtSenha1.setForeground(Color.decode("#808080"));
+        txtSenha1.setEchoChar('*');
+        txtSenha1.setText("");
+        txtSenha1.setForeground(Color.decode("#808080"));
     }//GEN-LAST:event_txtSenha1MouseClicked
 
     private void close(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_close
         // TODO add your handling code here:
         System.exit(0);
     }//GEN-LAST:event_close
-    
-    public void switchPanels(JPanel panel)
-    {
+
+    public void switchPanels(JPanel panel) {
         jLayeredPane1.removeAll();
         jLayeredPane1.add(panel);
         jLayeredPane1.repaint();
         jLayeredPane1.revalidate();
     }
-                                     
+
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-         
+
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -942,9 +955,9 @@ public class TelaLogin extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TelaLogin().setVisible(true);               
+                new TelaLogin().setVisible(true);
             }
-            
+
         });
     }
 
