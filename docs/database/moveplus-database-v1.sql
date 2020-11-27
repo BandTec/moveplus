@@ -30,7 +30,7 @@ sistemaOperacionalTerminal varchar(45)
 
 create table Terminal(
 idTerminal int primary key identity,
-statusTerminal int check (statusTerminal IN ('Operante','Não Operante','Manutencao')),
+statusTerminal varchar check (statusTerminal IN ('Operante','Não Operante','Manutencao')),
 seriesNumberTerminal char(10),
 fkEstacao int,
 fkEmpresaTerminal int,
@@ -43,7 +43,7 @@ foreign key (fkConfigTerminal) references ConfigTerminal(idConfigTerminal)
 create table Erro(
 idErro int primary key IDENTITY,
 nomeErro varchar(25),
-nivelErro int check (nivelErro IN ('Baixo','Medio','Alto','Critico')),
+nivelErro varchar check (nivelErro IN ('Baixo','Medio','Alto','Critico')),
 tempoManutencaoErro time
 );
 

@@ -6,6 +6,10 @@
 package com.mycompany.moveplus;
 
 import java.util.List;
+import java.lang.*;
+import java.text.*;
+import java.util.Calendar;
+import oshi.util.Util;
 import oshi.SystemInfo;
 import oshi.hardware.CentralProcessor;
 import oshi.hardware.GlobalMemory;
@@ -13,11 +17,10 @@ import oshi.hardware.HWDiskStore;
 import oshi.hardware.HardwareAbstractionLayer;
 import oshi.software.os.OSProcess;
 import oshi.software.os.OperatingSystem;
-import oshi.util.Util;
-import java.lang.*;
+import oshi.hardware.HWPartition;
+import java.sql.SQLException;
 import org.springframework.jdbc.core.JdbcTemplate;
-import java.text.*;
-import java.util.Calendar;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 
 /**
  * @author beatriz
@@ -44,8 +47,13 @@ public class MovePlusOshi {
         System.out.println("---------------  Disco  ---------------");
         System.out.println(dadosDisco);
         System.out.println("---------------  Processos  ---------------");
-        System.out.println("");
-        System.out.println("---------------  Uso de CPU  ---------------");
+    }
+
+    public Boolean checkIdTerminal(String id) {
+
+        String selectId = "SELECT idTerminal from Terminal where idTerminal = " + id;
+
+        return true;
     }
 
     public String usoCpu() {
@@ -101,32 +109,67 @@ public class MovePlusOshi {
         long getAvailableRam = memoria.getAvailable();
         double availableRam = ((double) getAvailableRam);
 
-//        //Calculando a quantidade em uso e a porcentagem em uso de Ram
+        //Calculando a quantidade em uso e a porcentagem em uso de Ram
         double usedRam = totalRam - availableRam;
         double pctUsedRam = (usedRam / totalRam) * 100;
         String valorRam = String.format("%.2f", pctUsedRam);
         valorRam = valorRam.replace(",", ".");
-//
+
         return valorRam;
     }
 
-    public static void main(String[] args) {
+    public void usoDisco(int pid) {
+        /**
+         * ByteRead : Returns the number of bytes the process has read from
+         * disk. ByteWritten : Returns the number of bytes the process has
+         * written to disk.
+         */
+        OSProcess process;
+        SystemInfo si = new SystemInfo();
+        OperatingSystem os = si.getOperatingSystem();
+        process = os.getProcess(pid);
+        System.out.println("\nDisk I/O Usage :");
+        System.out.println("I/O Reads: " + process.getBytesRead());
+        System.out.println("I/O Writes: " + process.getBytesWritten());
+    }
+
+    public void checkId(String id) {
+        ConnectionDatabase config = new ConnectionDatabase();
+        JdbcTemplate con = new JdbcTemplate(config.getDatasource());
+        List<checkIdTerminal> test = con.query("SELECT idTerminal FROM "
+                + "Terminal where idTerminal = " + id + ";", new BeanPropertyRowMapper(checkIdTerminal.class));
+
+        if (test.size() > 0) {
+            for (checkIdTerminal select : test) {
+                System.out.println(select);
+                System.out.println("ID VÁLIDO");
+            }
+        } else {
+            System.out.println("ID INVÁLIDO");
+        }
+
+    }
+
+    public static void main(String[] args) throws SQLException {
 
         MovePlusOshi mpo = new MovePlusOshi();
-        mpo.dadosHardware();
-
         //Chamando a conexão com o Azure
         ConnectionDatabase config = new ConnectionDatabase();
         JdbcTemplate con = new JdbcTemplate(config.getDatasource());
 
+        mpo.checkId("3");
+
         while (true) {
             String insert = "INSERT INTO Monitoracao (memoriaMonitoracao,"
                     + "cpuMonitoracao,discoMonitoracao,redeMonitoracao,"
-                    + "dataHoraMonitoracao) values (" + mpo.usoRam() + "," 
-                    + mpo.usoCpu() + ",33.33,44.44, '" + mpo.dataHora() + "');";
+                    + "dataHoraMonitoracao) values (" + mpo.usoRam() + ","
+                    + mpo.usoCpu() + ",00.00,00.00, '" + mpo.dataHora() + "');";
 
+            System.out.println("------------------------------");
             System.out.println(insert);
-
+            System.out.println("RAM:        " + mpo.usoRam());
+            System.out.println("CPU:        " + mpo.usoCpu());
+            System.out.println("DATETIME:   " + mpo.dataHora());
             con.update(insert);
             Util.sleep(5000);
         }

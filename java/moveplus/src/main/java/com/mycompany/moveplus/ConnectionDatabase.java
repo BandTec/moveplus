@@ -7,12 +7,8 @@ package com.mycompany.moveplus;
 
 import org.apache.commons.dbcp2.BasicDataSource;
 
-/**
- *
- * @author enlem
- */
 public class ConnectionDatabase {
-    
+
     private BasicDataSource datasource;
 
     public ConnectionDatabase() {
@@ -22,7 +18,7 @@ public class ConnectionDatabase {
         this.datasource.setDriverClassName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 
         //Url do banco
-        this.datasource.setUrl("jdbc:sqlserver://moveplus-server.database.windows.net:1433;database=moveplus-database-final;user=master@moveplus-server;password={your_password_here};encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;");
+        this.datasource.setUrl("jdbc:sqlserver://moveplus-server.database.windows.net:1433;database=moveplus-database-final;user=master@moveplus-server;password={your_password_here};encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=3;");
 
         //Usuario        
         this.datasource.setUsername("master");
@@ -34,5 +30,5 @@ public class ConnectionDatabase {
     public BasicDataSource getDatasource() {
         return datasource;
     }
-    
+
 }

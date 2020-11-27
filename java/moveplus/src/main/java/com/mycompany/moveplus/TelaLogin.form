@@ -291,9 +291,6 @@
                         <Component class="javax.swing.JLabel" name="jLabel4">
                           <Properties>
                             <Property name="horizontalAlignment" type="int" value="0"/>
-                            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                              <Image iconType="2" name="/home/beatriz/Downloads/moveplus-master/java/moveplus/src/main/java/resources/logopqn.png"/>
-                            </Property>
                           </Properties>
                         </Component>
                       </SubComponents>
@@ -423,11 +420,6 @@
                           </Layout>
                           <SubComponents>
                             <Component class="javax.swing.JLabel" name="jLabel5">
-                              <Properties>
-                                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                                  <Image iconType="2" name="/home/beatriz/Downloads/moveplus-master/java/moveplus/src/main/java/resources/Hardware.png"/>
-                                </Property>
-                              </Properties>
                             </Component>
                             <Component class="javax.swing.JLabel" name="jLabel9">
                               <Properties>
@@ -625,11 +617,6 @@
                           </Layout>
                           <SubComponents>
                             <Component class="javax.swing.JLabel" name="jLabel6">
-                              <Properties>
-                                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                                  <Image iconType="2" name="/home/beatriz/Downloads/moveplus-master/java/moveplus/src/main/java/resources/Hardware.png"/>
-                                </Property>
-                              </Properties>
                             </Component>
                             <Component class="javax.swing.JLabel" name="jLabel14">
                               <Properties>
@@ -660,11 +647,6 @@
                               </Events>
                             </Component>
                             <Component class="javax.swing.JLabel" name="jLabel23">
-                              <Properties>
-                                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                                  <Image iconType="2" name="/home/beatriz/Downloads/moveplus-master/java/moveplus/src/main/java/resources/grafico1.png"/>
-                                </Property>
-                              </Properties>
                             </Component>
                           </SubComponents>
                         </Container>
@@ -730,11 +712,6 @@
                           </Layout>
                           <SubComponents>
                             <Component class="javax.swing.JLabel" name="jLabel7">
-                              <Properties>
-                                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                                  <Image iconType="2" name="/home/beatriz/Downloads/moveplus-master/java/moveplus/src/main/java/resources/Hardware.png"/>
-                                </Property>
-                              </Properties>
                             </Component>
                             <Component class="javax.swing.JLabel" name="jLabel15">
                               <Properties>
@@ -765,11 +742,6 @@
                               </Events>
                             </Component>
                             <Component class="javax.swing.JLabel" name="jLabel21">
-                              <Properties>
-                                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                                  <Image iconType="2" name="/home/beatriz/Downloads/moveplus-master/java/moveplus/src/main/java/resources/processos.jpeg"/>
-                                </Property>
-                              </Properties>
                             </Component>
                             <Component class="javax.swing.JScrollBar" name="jScrollBar1">
                               <Properties>
@@ -839,11 +811,6 @@
                           </Layout>
                           <SubComponents>
                             <Component class="javax.swing.JLabel" name="jLabel8">
-                              <Properties>
-                                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                                  <Image iconType="2" name="/home/beatriz/Downloads/moveplus-master/java/moveplus/src/main/java/resources/Hardware.png"/>
-                                </Property>
-                              </Properties>
                             </Component>
                             <Component class="javax.swing.JLabel" name="jLabel16">
                               <Properties>
@@ -874,11 +841,6 @@
                               </Events>
                             </Component>
                             <Component class="javax.swing.JLabel" name="jLabel22">
-                              <Properties>
-                                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                                  <Image iconType="2" name="/home/beatriz/Downloads/moveplus-master/java/moveplus/src/main/java/resources/grafico2.png"/>
-                                </Property>
-                              </Properties>
                             </Component>
                           </SubComponents>
                         </Container>
@@ -950,11 +912,6 @@
                   </Events>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel3">
-                  <Properties>
-                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="2" name="/home/beatriz/Downloads/moveplus-master/java/moveplus/src/main/java/resources/logoMp.png"/>
-                    </Property>
-                  </Properties>
                 </Component>
                 <Container class="javax.swing.JPanel" name="jPanel2">
                   <Properties>
