@@ -49,13 +49,6 @@ public class MovePlusOshi {
         System.out.println("---------------  Processos  ---------------");
     }
 
-    public Boolean checkIdTerminal(String id) {
-
-        String selectId = "SELECT idTerminal from Terminal where idTerminal = " + id;
-
-        return true;
-    }
-
     public String usoCpu() {
 
         //Variavel com o valor de uso da CPU
@@ -151,8 +144,9 @@ public class MovePlusOshi {
     }
 
     public static void main(String[] args) throws SQLException {
-
+        //Instanciando a própria classe para usar seus métodos
         MovePlusOshi mpo = new MovePlusOshi();
+
         //Chamando a conexão com o Azure
         ConnectionDatabase config = new ConnectionDatabase();
         JdbcTemplate con = new JdbcTemplate(config.getDatasource());
