@@ -17,8 +17,6 @@ import oshi.hardware.HWDiskStore;
 import oshi.hardware.HardwareAbstractionLayer;
 import oshi.software.os.OSProcess;
 import oshi.software.os.OperatingSystem;
-import oshi.hardware.HWPartition;
-import java.sql.SQLException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 
@@ -129,11 +127,11 @@ public class MovePlusOshi {
     public void checkId(String id) {
         ConnectionDatabase config = new ConnectionDatabase();
         JdbcTemplate con = new JdbcTemplate(config.getDatasource());
-        List<checkIdTerminal> test = con.query("SELECT idTerminal FROM "
+        List<checkIdTerminal> query = con.query("SELECT idTerminal FROM "
                 + "Terminal where idTerminal = " + id + ";", new BeanPropertyRowMapper(checkIdTerminal.class));
 
-        if (test.size() > 0) {
-            for (checkIdTerminal select : test) {
+        if (query.size() > 0) {
+            for (checkIdTerminal select : query) {
                 System.out.println(select);
                 System.out.println("ID VÁLIDO");
             }
@@ -142,8 +140,29 @@ public class MovePlusOshi {
         }
 
     }
-
-    public static void main(String[] args) throws SQLException {
+    
+    public void checkLogin(String user, String password) {
+        ConnectionDatabase config = new ConnectionDatabase();
+        JdbcTemplate con = new JdbcTemplate(config.getDatasource());
+        List<checkIdTerminal> query = con.query("SELECT credencialUsuarioEstacao "
+                + "FROM UsuarioEstacao "
+                + "where credencialUsuarioEstacao = '" + user 
+                + "' and senhaUsuarioEstacao = '" + password + "';", 
+                new BeanPropertyRowMapper(checkIdTerminal.class));
+        
+        System.out.println(query);
+        
+        if (query.size() > 0) {
+            for (checkIdTerminal select : query) {
+                System.out.println(select);
+                System.out.println("LOGIN VÁLIDO");
+            }
+        } else {
+            System.out.println("LOGIN INVÁLIDO");
+        }
+    }
+ 
+    public static void main(String[] args){
         //Instanciando a própria classe para usar seus métodos
         MovePlusOshi mpo = new MovePlusOshi();
 
@@ -151,7 +170,8 @@ public class MovePlusOshi {
         ConnectionDatabase config = new ConnectionDatabase();
         JdbcTemplate con = new JdbcTemplate(config.getDatasource());
 
-        mpo.checkId("3");
+        mpo.checkId("1");
+        mpo.checkLogin("JFK12345","qwerty123");
 
         while (true) {
             String insert = "INSERT INTO Monitoracao (memoriaMonitoracao,"
