@@ -1,17 +1,34 @@
-const mysql = require('mysql');
-
-const config = {
-  host: "localhost",
-  port: "3306",
-  user: "admin",
-  password:"Nanfer7193",
-  database:"bdMetro"
+const configuracoes = {
+    banco: {
+        server: "moveplus-server.database.windows.net",
+        port: "1443",
+        user: "master",
+        password: "Moveplus2020",
+        database: "moveplus-database-final",
+        options: {
+            encrypt: true
+        },
+        pool: {
+            max: 4,
+            min: 1,
+            idleTimeoutMillis: 30000,
+            connectionTimeout: 5000
+        }
+    }
 }
-
-const connection = mysql.createConnection(config);
-connection.connect(function (error){
-  if(error) throw error;
-  console.log('Conectado com sucesso');
+ 
+const sql = require('mssql');
+sql.on('error', err => {
+    console.error(`Erro de Conexão: ${err}`);
 });
 
-module.exports = connection;
+
+function conectar() {
+  sql.close();
+  return sql.connect(configuracoes.banco)
+} 
+
+module.exports = {
+    conectar: conectar,
+    sql: sql
+}

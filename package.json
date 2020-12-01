@@ -5,9 +5,9 @@
       "node": "12"
   },
   "description": "",
-  "main": "projeto/api/src/index.js",
+  "main": "projeto/api/src/server.js",
   "scripts": {
-    "start": "nodemon ./src/server.js"
+    "start": "nodemon projeto/api/src/server.js"
   },
   "keywords": [],
   "author": "",

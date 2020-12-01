@@ -7,6 +7,12 @@ const app = express();
 
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
+routes.get('/teste', function(request, response) {
+    response.json({
+        msg: 'ok'
+    })
+});
+
 app.use(routes);
 
 module.exports = app;
