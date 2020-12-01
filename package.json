@@ -7,7 +7,7 @@
   "description": "",
   "main": "projeto/api/src/server.js",
   "scripts": {
-    "start": "nodemon projeto/api/src/server.js"
+    "dev": "nodemon projeto/api/src/server.js"
   },
   "keywords": [],
   "author": "",
