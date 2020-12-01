@@ -2,7 +2,7 @@
   "name": "api",
   "version": "1.0.0",
   "engines": {
-      "node": "12"
+    "node": "12"
   },
   "description": "",
   "main": "projeto/api/src/server.js",
