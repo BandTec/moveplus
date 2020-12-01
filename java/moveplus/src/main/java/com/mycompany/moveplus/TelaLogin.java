@@ -35,7 +35,7 @@ public class TelaLogin extends javax.swing.JFrame {
     String login;
     String password;
 
-    String login_definido = "";
+    String login_definido = "root";
     String senha_definido = "root";
 
     /**
