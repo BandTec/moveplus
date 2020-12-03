@@ -17,6 +17,11 @@ import oshi.hardware.HWDiskStore;
 import oshi.hardware.HardwareAbstractionLayer;
 import oshi.software.os.OSProcess;
 import oshi.software.os.OperatingSystem;
+import oshi.hardware.HWPartition;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 
@@ -45,6 +50,13 @@ public class MovePlusOshi {
         System.out.println("---------------  Disco  ---------------");
         System.out.println(dadosDisco);
         System.out.println("---------------  Processos  ---------------");
+    }
+
+    public Boolean checkIdTerminal(String id) {
+
+        String selectId = "SELECT idTerminal from Terminal where idTerminal = " + id;
+
+        return true;
     }
 
     public String usoCpu() {
@@ -124,54 +136,63 @@ public class MovePlusOshi {
         System.out.println("I/O Writes: " + process.getBytesWritten());
     }
 
-    public void checkId(String id) {
+    public String catchId(String id) {
+
         ConnectionDatabase config = new ConnectionDatabase();
         JdbcTemplate con = new JdbcTemplate(config.getDatasource());
-        List<checkIdTerminal> query = con.query("SELECT idTerminal FROM "
-                + "Terminal where idTerminal = " + id + ";", new BeanPropertyRowMapper(checkIdTerminal.class));
 
-        if (query.size() > 0) {
-            for (checkIdTerminal select : query) {
-                System.out.println(select);
-                System.out.println("ID VÁLIDO");
+        List<String> test = con.query("SELECT * FROM Terminal where idTerminal = 1;",
+                new BeanPropertyRowMapper(Terminal.class));
+
+        String str = String.format("%s", test);
+        return str;
+
+    }
+
+    public String catchLogin(String user, String pass) {
+        ConnectionDatabase config = new ConnectionDatabase();
+        JdbcTemplate con = new JdbcTemplate(config.getDatasource());
+
+        List<String> test = con.query("SELECT * FROM UsuarioEstacao where "
+                + "emailUsuarioEstacao = '" + user + "' and "
+                + "senhaUsuarioEstacao = '" + pass + "';", new BeanPropertyRowMapper(UsuarioEstacao.class));
+
+        System.out.println(test);
+
+        String str = String.format("%s", test);
+        return str;
+    }
+
+    public void converterParaList(String text) {
+        String num = text;
+        String str[] = num.split(",");
+        List<String> al = new ArrayList<String>();
+        al = Arrays.asList(str);
+
+        if (al.size() > 0) {
+            for (int i = 0; i == 0; i++) {
+                System.out.println(al.get(i));
             }
         } else {
-            System.out.println("ID INVÁLIDO");
+
         }
 
     }
     
-    public void checkLogin(String user, String password) {
-        ConnectionDatabase config = new ConnectionDatabase();
-        JdbcTemplate con = new JdbcTemplate(config.getDatasource());
-        List<checkIdTerminal> query = con.query("SELECT credencialUsuarioEstacao "
-                + "FROM UsuarioEstacao "
-                + "where credencialUsuarioEstacao = '" + user 
-                + "' and senhaUsuarioEstacao = '" + password + "';", 
-                new BeanPropertyRowMapper(checkIdTerminal.class));
+    // Método para editar a lista de acordo
+    public void editarList(List lista, Integer cod) {
         
-        System.out.println(query);
-        
-        if (query.size() > 0) {
-            for (checkIdTerminal select : query) {
-                System.out.println(select);
-                System.out.println("LOGIN VÁLIDO");
-            }
-        } else {
-            System.out.println("LOGIN INVÁLIDO");
-        }
     }
- 
-    public static void main(String[] args){
-        //Instanciando a própria classe para usar seus métodos
-        MovePlusOshi mpo = new MovePlusOshi();
 
+    public static void main(String[] args) throws SQLException {
+
+        MovePlusOshi mpo = new MovePlusOshi();
         //Chamando a conexão com o Azure
         ConnectionDatabase config = new ConnectionDatabase();
         JdbcTemplate con = new JdbcTemplate(config.getDatasource());
 
-        mpo.checkId("1");
-        mpo.checkLogin("JFK12345","qwerty123");
+        mpo.converterParaList(mpo.catchId("1"));
+        mpo.converterParaList(mpo.catchLogin("joao.silva@cptm.gov.br", "qwerty123"));
 
         while (true) {
             String insert = "INSERT INTO Monitoracao (memoriaMonitoracao,"
