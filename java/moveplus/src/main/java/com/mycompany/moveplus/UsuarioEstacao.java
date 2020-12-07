@@ -19,7 +19,11 @@ public class UsuarioEstacao {
 
     @Override
     public String toString() {
-        return "idUsuarioEstacao=" + idUsuarioEstacao + ", credencialUsuarioEstacao=" + credencialUsuarioEstacao + ", emailUsuarioEstacao=" + emailUsuarioEstacao + ", senhaUsuarioEstacao=" + senhaUsuarioEstacao + ", fkEstacao=" + fkEstacao + '}';
+        return "idUsuarioEstacao=" + idUsuarioEstacao
+                + ", credencialUsuarioEstacao=" + credencialUsuarioEstacao 
+                + ", emailUsuarioEstacao=" + emailUsuarioEstacao 
+                + ", senhaUsuarioEstacao=" + senhaUsuarioEstacao 
+                + ", fkEstacao=" + fkEstacao;
     }
 
     public Integer getIdUsuarioEstacao() {

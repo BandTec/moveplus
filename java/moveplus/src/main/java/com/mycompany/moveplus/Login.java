@@ -10,12 +10,9 @@ package com.mycompany.moveplus;
  * @author enlem
  */
 public class Login {
-    
+
     String login;
     String password;
-    
-    
-    
 
     public String getLogin() {
         return login;
@@ -23,7 +20,7 @@ public class Login {
 
     public void setLogin(String login) {
         this.login = login;
-        
+
     }
 
     public String getPassword() {
@@ -33,6 +30,5 @@ public class Login {
     public void setPassword(String password) {
         this.password = password;
     }
-    
-    
+
 }
