@@ -188,7 +188,7 @@
                     </div>
                     <div class="cards-profile">
                         <div class="cadMachine">
-                            <button>
+                            <button data-modal="abrir">
                                 Novo Terminal
                             </button>
                             <input type="text" placeholder="Pesquisar terminal">
@@ -208,6 +208,18 @@
             </div>
         </section>
     </main>
+    <section class="modal-container" data-modal="container">
+        <div class="modal">
+            <button data-modal="fechar" class="fechar">X</button>
+            <form action="">
+                <label for="">Email</label>
+                <input type="text">
+                <label for="">Email</label>
+                <input type="text">
+                <button>Entrar</button>
+            </form>
+        </div>
+    </section>
 </body>
 
 </html>
@@ -217,6 +229,7 @@
 <script src="./js/menuMobile.js"></script>
 <script src="./js/popUp.js"></script>
 <script src="./js/exibir.js"></script>
+<script src="./js/modal.js"></script>
 <script>
 
     const user = JSON.parse(sessionStorage.user);

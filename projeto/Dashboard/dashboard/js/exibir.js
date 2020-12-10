@@ -1,11 +1,10 @@
 fetch('http://localhost:3333/station').then((response) => {
   if (response.ok) {
-    console.log(response);
     const nameStation = document.getElementById('nomeEstacao');
     response.json().then((res) => {
-      res.map((nome) => {
-        nameStation.innerHTML = nome.nomeEstacao;
-      });
+      const user = JSON.parse(sessionStorage.getItem('user'));
+      const estacao = res.find((item) => item.idEstacao === user.estacao);
+      nameStation.innerHTML = estacao.nomeEstacao;
     });
   }
 });

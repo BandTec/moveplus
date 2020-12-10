@@ -28,7 +28,6 @@ function login(email, senha) {
       const response = JSON.parse(ajax.responseText);
       if (response.length > 0) {
         const status = true;
-        console.log('entrou');
         setTimeout(() => {
           window.location = '../dashboard/dash.html';
         }, 4000);
@@ -36,6 +35,7 @@ function login(email, senha) {
           email: response[0].emailUsuarioEstacao,
           credencial: response[0].credencialUsuarioEstacao,
           senha: response[0].senhaUsuarioEstacao,
+          estacao: response[0].fkEstacao,
         };
         sessionStorage.setItem('user', JSON.stringify(user));
         sessionStorage.setItem('status', JSON.stringify(status));
