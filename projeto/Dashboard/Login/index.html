@@ -227,12 +227,14 @@
     const credencialCadastro = document.querySelector("#credencialCad");
     const senhaCadastro = document.querySelector("#senhaCad");
     const btnCadastrar = document.querySelector("#cadastrar");
+    const stations = document.getElementById('selectStation');
 
     btnCadastrar.addEventListener("click", () => {
       createUser(
         emailCadastro.value,
         credencialCadastro.value,
-        senhaCadastro.value
+        senhaCadastro.value,
+        stations.value
       );
     });
   }
@@ -323,4 +325,19 @@
     }
   });
 
+</script>
+
+<script>
+  fetch('http://localhost:3333/station').then(response => {
+    if (response.ok) {
+      console.log(response);
+      response.json().then(res => {
+        console.log(res);
+        const stations = document.getElementById('selectStation');
+        res.map((station) => {
+          stations.innerHTML += `<option value="${station.idEstacao}">${station.nomeEstacao}</option>`;
+        })
+      })
+    }
+  })
 </script>

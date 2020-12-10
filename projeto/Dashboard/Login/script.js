@@ -1,6 +1,6 @@
-function createUser(email, credencial, senha) {
+function createUser(email, credencial, senha, idEstacao) {
   const ajax = new XMLHttpRequest();
-  const params = `email=${email}&credencial=${credencial}&senha=${senha}`;
+  const params = `email=${email}&credencial=${credencial}&senha=${senha}&estacao=${idEstacao}`;
   ajax.open('POST', 'http://localhost:3333/users', true);
   ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
   ajax.onreadystatechange = function () {
@@ -27,7 +27,6 @@ function login(email, senha) {
     console.log(ajax.status);
     if (ajax.status === 200 && ajax.readyState === 4) {
       const response = JSON.parse(ajax.responseText);
-      console.log(response.recordset);
       if (response.length > 0) {
         const status = true;
         console.log('entrou');

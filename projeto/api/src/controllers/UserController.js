@@ -25,7 +25,7 @@ const Usuario = {
       .conectar()
       .then(() => {
         return connection.sql.query('SELECT * FROM Estacao').then((result) => {
-          response.send(result);
+          response.send(result.recordset);
         });
       })
       .catch((error) => {
@@ -61,13 +61,13 @@ const Usuario = {
   },
 
   async create(request, response) {
-    const { email, credencial, senha } = request.body;
+    const { email, credencial, senha, estacao } = request.body;
     connection
       .conectar()
       .then(() => {
         return connection.sql
           .query(
-            `insert into UsuarioEstacao(emailUsuarioEstacao, credencialUsuarioEstacao, senhaUsuarioEstacao) values ('${email}','${credencial}','${senha}')`,
+            `insert into UsuarioEstacao(emailUsuarioEstacao, credencialUsuarioEstacao, senhaUsuarioEstacao, fkEstacao) values ('${email}','${credencial}','${senha}',${estacao})`,
           )
           .then((result) => {
             response.send(result.recordset);
