@@ -1,12 +1,12 @@
 const configuracoes = {
-    banco: {
+    config: {
         server: "moveplus-server.database.windows.net",
-        port: "1443",
         user: "master",
         password: "Moveplus2020",
         database: "moveplus-database-final",
         options: {
-            encrypt: true
+            encrypt: true,
+            enableArithAbort: true 
         },
         pool: {
             max: 4,
@@ -24,8 +24,8 @@ sql.on('error', err => {
 
 
 function conectar() {
-  sql.close();
-  return sql.connect(configuracoes.banco)
+  //sql.close();
+  return sql.connect(configuracoes.config)
 } 
 
 module.exports = {

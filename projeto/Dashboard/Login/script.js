@@ -4,6 +4,7 @@ function createUser(email, credencial, senha) {
   ajax.open('POST', 'http://localhost:3333/users', true);
   ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
   ajax.onreadystatechange = function () {
+    console.log('oi');
     if (ajax.status === 200 && ajax.readyState === 4) {
       const response = ajax.responseText;
       alert('cadastrado com sucesso');
@@ -19,14 +20,14 @@ function createUser(email, credencial, senha) {
 
 function login(email, senha) {
   const ajax = new XMLHttpRequest();
-  console.log('entrou');
   const params = `email=${email}&senha=${senha}`;
   ajax.open('POST', 'http://localhost:3333/users/login', true);
   ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
   ajax.onreadystatechange = function () {
+    console.log(ajax.status);
     if (ajax.status === 200 && ajax.readyState === 4) {
       const response = JSON.parse(ajax.responseText);
-      console.log(response);
+      console.log(response.recordset);
       if (response.length > 0) {
         const status = true;
         console.log('entrou');

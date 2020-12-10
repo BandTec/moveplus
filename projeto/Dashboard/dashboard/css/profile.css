@@ -160,7 +160,7 @@
   }
 
   .flex-profile > div::before {
-    content: "";
+    content: '';
     display: flex;
     width: 100%;
     height: 1px;

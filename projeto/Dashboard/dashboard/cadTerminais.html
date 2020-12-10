@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,30 +14,31 @@
     <link rel="stylesheet" href="./css/profile.css">
     <link rel="stylesheet" href="./css/cadastro.css">
 </head>
+
 <body>
     <header>
         <nav>
-        <div class="esconder">
-            <div class="icon-menuHamburguer">
-                <img src="./img/icon-menu-hamburgue.png" alt="">
-            </div>
-            <div class="profile-notification">
-                <div class="popup" onclick="myFunction()">
-                    <span class="popuptext" id="myPopup">
-                        <h3>
-                            Notificações
-                        </h3>
-                        <p>
-                            Sem novas Notificações
-                        </p>
-                    </span>
-                    <img src="./img/icon-notification2.png" alt="" style="margin: 5px 10px 0 0; width: 37px;">
+            <div class="esconder">
+                <div class="icon-menuHamburguer">
+                    <img src="./img/icon-menu-hamburgue.png" alt="">
                 </div>
+                <div class="profile-notification">
+                    <div class="popup" onclick="myFunction()">
+                        <span class="popuptext" id="myPopup">
+                            <h3>
+                                Notificações
+                            </h3>
+                            <p>
+                                Sem novas Notificações
+                            </p>
+                        </span>
+                        <img src="./img/icon-notification2.png" alt="" style="margin: 5px 10px 0 0; width: 37px;">
+                    </div>
 
-                <div class="profile-menu" id="btnMobileProf">
-                    <img src="./img/perfil (2).png" alt="" class="img-profile">
-                    <i class="fas fa-angle-down"></i>
-                    <div class="menu-profile">
+                    <div class="profile-menu" id="btnMobileProf">
+                        <img src="./img/perfil (2).png" alt="" class="img-profile">
+                        <i class="fas fa-angle-down"></i>
+                        <div class="menu-profile">
                             <ul>
                                 <li>
                                     <a href="#">
@@ -52,10 +54,10 @@
                                     </a>
                                 </li>
                             </ul>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
             <ul class="menu-hidden" id="menuHidden">
                 <div class="logo">
                     <img src="./img/logo-movePlus.png" alt="">
@@ -84,6 +86,13 @@
                     </a>
                 </li>
 
+                <li>
+                    <a href="#">
+                        <i class="material-icons">help_outline</i>
+                        Ajuda
+                    </a>
+                </li>
+
                 <li class="btn-logout" onclick="logout()">
                     <a>
                         <img src="./img/icon-logout.png" alt="">
@@ -102,141 +111,141 @@
                         <p>Estação Trianom Masp</p>
                     </div>
                     <div class="profile-notification perfil-desk">
-                    <div class="popover">
-                        <img src="./img/icon-notification.png" alt="" class="active-pop">
-                        <div class="pop">
-                            <div class="popuptext">
-                                <div style="padding: 20px 30px; box-sizing: border-box;">
-                                <h3>
-                                    Notificações
-                                </h3>
-                                <p>
-                                    Sem novas Notificações
-                                </p>
+                        <div class="popover">
+                            <img src="./img/icon-notification.png" alt="" class="active-pop">
+                            <div class="pop">
+                                <div class="popuptext">
+                                    <div style="padding: 20px 30px; box-sizing: border-box;">
+                                        <h3>
+                                            Notificações
+                                        </h3>
+                                        <p>
+                                            Sem novas Notificações
+                                        </p>
+                                    </div>
                                 </div>
-                            </div> 
+                            </div>
                         </div>
-                    </div>
-                    <div class="profile">
-                        <img src="./img/perfil (2).png" alt="" class="img-profile">
+                        <div class="profile">
+                            <img src="./img/perfil (2).png" alt="" class="img-profile">
 
-                        <h3 class="muda" id="user">Fernando Laurito</h3>
+                            <h3 class="muda" id="user">Fernando Laurito</h3>
 
-                        <i class="fas fa-angle-down" id="info-profile"></i>
+                            <i class="fas fa-angle-down" id="info-profile"></i>
 
-                        <i class="fas fa-angle-up" id="up-profile" style="color: #3d3d3dc5; display:none;"></i>
-                        <div class="profile-active">
-                            
-                            <ul>
-                                <li>
-                                    <a href="#">
-                                        <img src="./img/perfil (2).png" alt="" class="img-profile logout-perfil">
-                                        Perfil
-                                    </a>
-                                </li>
+                            <i class="fas fa-angle-up" id="up-profile" style="color: #3d3d3dc5; display:none;"></i>
+                            <div class="profile-active">
 
-                                <li>
-                                    <a href="#" onclick="logout()">
-                                        <img src="./img/icon-logout.png" alt="" class="logout-perfil" style="border-radius: 0; box-shadow: none; border: none !important;">
-                                        Logout
-                                    </a>
-                                </li>
-                            </ul>
+                                <ul>
+                                    <li>
+                                        <a href="#">
+                                            <img src="./img/perfil (2).png" alt="" class="img-profile logout-perfil">
+                                            Perfil
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="#" onclick="logout()">
+                                            <img src="./img/icon-logout.png" alt="" class="logout-perfil" style="border-radius: 0; box-shadow: none; border: none !important;">
+                                            Logout
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
-                    </div>
                     </div>
                 </div>
             </div>
 
             <!-- ------------------------- -->
-        
-                <div class="flex-profile">
-                    <div class="flex">
-                        <div class="viewProfile">
-                            <h3>Cadastrar terminal</h3>
-                            <p>Aqui será possível o cadastro de novas maquinas!</p>
+
+            <div class="flex-profile">
+                <div class="flex">
+                    <div class="viewProfile">
+                        <h3>Cadastrar terminal</h3>
+                        <p>Aqui será possível o cadastro de novas maquinas!</p>
+                    </div>
+                    <div class="cards-profile">
+                        <div class="cadMachine">
+                            <button>
+                                Novo Terminal
+                            </button>
+                            <input type="text" placeholder="Pesquisar terminal">
+                            <button class="btn-filtro">
+                                Filtrar
+                            </button>
                         </div>
-                        <div class="cards-profile">
-                            <div class="cadMachine">
-                                <button>
-                                    Novo Terminal
-                                </button>
-                                <input type="text" placeholder="Pesquisar terminal">
-                                <button class="btn-filtro">
-                                    Filtrar
-                                </button>
+                        <div class="cards">
+                            <div class="card">
+                                <div class="txtCard">
+                                    <h3>Terminal 1</h3>
+                                </div>
+                                <div class="img-card">
+                                    <div class="border-radius">
+                                        <img src="./img/icon-machina.png" alt="">
+                                    </div>
+                                </div>
+                                <div class="icon">
+                                    <img src="./img/verified.png" alt="" width="30px">
+                                    <img src="./img/plus.png" alt="" width="30px">
+                                    <img src="./img/remove.png" alt="" width="30px">
+                                </div>
                             </div>
-                            <div class="cards">    
-                                <div class="card">
-                                    <div class="txtCard">
-                                        <h3>Terminal 1</h3>
-                                    </div>
-                                    <div class="img-card">
-                                        <div class="border-radius">
+                            <div class="card">
+                                <div class="txtCard">
+                                    <h3>Terminal 2</h3>
+                                </div>
+                                <div class="img-card">
+                                    <div class="border-radius">
                                         <img src="./img/icon-machina.png" alt="">
-                                        </div>
-                                    </div>
-                                    <div class="icon">
-                                        <img src="./img/verified.png" alt="" width="30px">
-                                        <img src="./img/plus.png" alt="" width="30px">
-                                        <img src="./img/remove.png" alt="" width="30px">
                                     </div>
                                 </div>
-                                <div class="card">
-                                    <div class="txtCard">
-                                        <h3>Terminal 2</h3>
-                                    </div>
-                                    <div class="img-card">
-                                        <div class="border-radius">
+                                <div class="icon">
+                                    <img src="./img/verified.png" alt="" width="30px">
+                                    <img src="./img/plus.png" alt="" width="30px">
+                                    <img src="./img/remove.png" alt="" width="30px">
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="txtCard">
+                                    <h3>Terminal 3</h3>
+                                </div>
+                                <div class="img-card">
+                                    <div class="border-radius">
                                         <img src="./img/icon-machina.png" alt="">
-                                        </div>
-                                    </div>
-                                    <div class="icon">
-                                        <img src="./img/verified.png" alt="" width="30px">
-                                        <img src="./img/plus.png" alt="" width="30px">
-                                        <img src="./img/remove.png" alt="" width="30px">
                                     </div>
                                 </div>
-                                <div class="card">
-                                    <div class="txtCard">
-                                        <h3>Terminal 3</h3>
-                                    </div>
-                                    <div class="img-card">
-                                        <div class="border-radius">
+                                <div class="icon">
+                                    <img src="./img/verified.png" alt="" width="30px">
+                                    <img src="./img/plus.png" alt="" width="30px">
+                                    <img src="./img/remove.png" alt="" width="30px">
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="txtCard">
+                                    <h3>Terminal 4</h3>
+                                </div>
+                                <div class="img-card">
+                                    <div class="border-radius">
                                         <img src="./img/icon-machina.png" alt="">
-                                        </div>
-                                    </div>
-                                    <div class="icon">
-                                        <img src="./img/verified.png" alt="" width="30px">
-                                        <img src="./img/plus.png" alt="" width="30px">
-                                        <img src="./img/remove.png" alt="" width="30px">
                                     </div>
                                 </div>
-                                <div class="card">
-                                    <div class="txtCard">
-                                        <h3>Terminal 4</h3>
-                                    </div>
-                                    <div class="img-card">
-                                        <div class="border-radius">
-                                        <img src="./img/icon-machina.png" alt="">
-                                        </div>
-                                    </div>
-                                    <div class="icon">
-                                        <img src="./img/verified.png" alt="" width="30px">
-                                        <img src="./img/plus.png" alt="" width="30px">
-                                        <img src="./img/remove.png" alt="" width="30px">
-                                    </div>
+                                <div class="icon">
+                                    <img src="./img/verified.png" alt="" width="30px">
+                                    <img src="./img/plus.png" alt="" width="30px">
+                                    <img src="./img/remove.png" alt="" width="30px">
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <footer>
-                        <div class="copy">
-                            <h3>© MovePlus 2020</h3>
-                            <p>Todos os direitos reservados.</p>
-                        </div>
-                    </footer>
                 </div>
+                <footer>
+                    <div class="copy">
+                        <h3>© MovePlus 2020</h3>
+                        <p>Todos os direitos reservados.</p>
+                    </div>
+                </footer>
+            </div>
             </div>
         </section>
     </main>
@@ -248,81 +257,81 @@
     var ttChatLoaderS = document.createElement('script');
     document.tomticketChatLoaderScriptVersion = 2;
     ttChatLoaderS.src = 'https://moveplus.tomticket.com/scripts-chat/chat.min.js'
-    + '?id=EP50568'
-    + '&account=3236352P24102020060047'
-    + '&autoOpen=0'
-    + '&hideWhenOffline=0'
-    + '&d=moveplus'
-    + '&ts=' + new Date().getTime()
-    + '&ref=' + encodeURIComponent(document.URL);
+        + '?id=EP50568'
+        + '&account=3236352P24102020060047'
+        + '&autoOpen=0'
+        + '&hideWhenOffline=0'
+        + '&d=moveplus'
+        + '&ts=' + new Date().getTime()
+        + '&ref=' + encodeURIComponent(document.URL);
     document.body.appendChild(ttChatLoaderS);
     //]]>
-    </script>  
+</script>
+
 </html>
 
 <script>
 
-function menuActive() {
-    const btnMenu = document.querySelector(".icon-menuHamburguer img");
-    const ulMenu = document.getElementById('menuHidden');
+    function menuActive() {
+        const btnMenu = document.querySelector(".icon-menuHamburguer img");
+        const ulMenu = document.getElementById('menuHidden');
 
-    function openMenu(){
-        ulMenu.classList.toggle("menu-hidden");
+        function openMenu() {
+            ulMenu.classList.toggle("menu-hidden");
+        }
+
+        btnMenu.addEventListener("click", openMenu);
+    };
+
+    menuActive();
+
+    function myFunction() {
+        var popup = document.getElementById("myPopup");
+        popup.classList.toggle("show");
     }
 
-    btnMenu.addEventListener("click", openMenu);
-};
+    const popover = document.querySelector('.pop');
+    const activePop = document.querySelector('.active-pop');
 
-menuActive();
-
-function myFunction() {
-  var popup = document.getElementById("myPopup");
-  popup.classList.toggle("show");
-}
-
-const popover = document.querySelector('.pop');
-const activePop = document.querySelector('.active-pop');
-
-function activePopover(){
-    popover.classList.toggle("popBlock");
-}
-
-activePop.addEventListener("click", activePopover);
-
-
-function profile(){
-    const profileActive = document.querySelector(".profile-active");
-    const infoProfile = document.querySelector("#info-profile");
-    const profile = document.querySelector(".profile");
-    const profileTxt = document.querySelector(".muda");
-    const upProfile = document.querySelector("#up-profile");
-
-    function activeProfile(){
-        profileActive.classList.toggle("popBlock");
-        profile.classList.toggle("profile-teste");
-        profileTxt.classList.toggle("profileTxta");
-        infoProfile.classList.toggle("none"); 
-        upProfile.classList.toggle("popBlock");
+    function activePopover() {
+        popover.classList.toggle("popBlock");
     }
 
-    infoProfile.addEventListener("click", activeProfile);
-    upProfile.addEventListener("click", activeProfile);
-}
-profile();
+    activePop.addEventListener("click", activePopover);
 
-const user = JSON.parse(sessionStorage.user);
-const identityUser = document.querySelector("#user");
 
-identityUser.innerHTML = user.email;
+    function profile() {
+        const profileActive = document.querySelector(".profile-active");
+        const infoProfile = document.querySelector("#info-profile");
+        const profile = document.querySelector(".profile");
+        const profileTxt = document.querySelector(".muda");
+        const upProfile = document.querySelector("#up-profile");
 
-const btnProfMenu = document.querySelector("#btnMobileProf");
-const activeProfMenu = document.querySelector(".menu-profile");
+        function activeProfile() {
+            profileActive.classList.toggle("popBlock");
+            profile.classList.toggle("profile-teste");
+            profileTxt.classList.toggle("profileTxta");
+            infoProfile.classList.toggle("none");
+            upProfile.classList.toggle("popBlock");
+        }
 
-function activeProf(){
-    activeProfMenu.classList.toggle("popBlock");
-}
+        infoProfile.addEventListener("click", activeProfile);
+        upProfile.addEventListener("click", activeProfile);
+    }
+    profile();
 
-btnProfMenu.addEventListener("click", activeProf);
+    const user = JSON.parse(sessionStorage.user);
+    const identityUser = document.querySelector("#user");
+
+    identityUser.innerHTML = user.email;
+
+    const btnProfMenu = document.querySelector("#btnMobileProf");
+    const activeProfMenu = document.querySelector(".menu-profile");
+
+    function activeProf() {
+        activeProfMenu.classList.toggle("popBlock");
+    }
+
+    btnProfMenu.addEventListener("click", activeProf);
 
 </script>
-

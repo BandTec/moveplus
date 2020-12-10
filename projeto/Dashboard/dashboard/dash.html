@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,33 +9,37 @@
     <link href="https://use.fontawesome.com/releases/v5.0.1/css/all.css" rel="stylesheet">
     <link rel="stylesheet" href="./css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="./css/tablet.css">
     <link rel="stylesheet" href="./css/desktop.css">
 </head>
-<body>
+
+<body style="background-color: #FCFDFF;">
     <header>
         <nav>
-        <div class="esconder">
-            <div class="icon-menuHamburguer">
-                <img src="./img/icon-menu-hamburgue.png" alt="">
-            </div>
-            <div class="profile-notification">
-                <div class="popup" onclick="myFunction()">
-                    <span class="popuptext" id="myPopup">
-                        <h3>
-                            Notificações
-                        </h3>
-                        <p>
-                            Sem novas Notificações
-                        </p>
-                    </span>
-                    <img src="./img/icon-notification2.png" alt="" style="margin: 5px 10px 0 0; width: 37px;">
+            <div class="esconder">
+                <div class="icon-menuHamburguer">
+                    <img src="./img/icon-menu-hamburgue.png" alt="">
                 </div>
+                <div class="profile-notification">
+                    <div class="popup" onclick="myFunction()">
+                        <span class="popuptext" id="myPopup">
+                            <h3>
+                                Notificações
+                            </h3>
+                            <p>
+                                Sem novas Notificações
+                            </p>
+                        </span>
+                        <img src="./img/icon-notification2.png" alt="" style="margin: 5px 10px 0 0; width: 37px;">
+                    </div>
 
-                <div class="profile-menu" id="btnMobileProf">
-                    <img src="./img/perfil (2).png" alt="" class="img-profile">
-                    <i class="fas fa-angle-down"></i>
-                    <div class="menu-profile">
+                    <div class="profile-menu" id="btnMobileProf">
+                        <img src="./img/perfil (2).png" alt="" class="img-profile">
+                        <i class="fas fa-angle-down"></i>
+                        <div class="menu-profile">
                             <ul>
                                 <li>
                                     <a href="#">
@@ -43,6 +48,7 @@
                                     </a>
                                 </li>
 
+
                                 <li>
                                     <a href="#" onclick="logout()">
                                         <img src="./img/icon-logout.png" alt="" class="logout-perfil" style="border-radius: 0; box-shadow: none; border: none !important;">
@@ -50,49 +56,63 @@
                                     </a>
                                 </li>
                             </ul>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
             <ul class="menu-hidden" id="menuHidden">
                 <div class="logo">
-                    <img src="./img/logo-movePlus.png" alt="">
+                    <img src="./img/logomove-removebg-preview.png" alt="">
                 </div>
-                <div class="link">
-                    <a href="../Login/viewEstation.html">Ver estações</a>
+
+                <div class="logo img-menu-profile">
+                    <div class="img-menu">
+                        <img src="./img/perfil (2).png" alt="" style=" width: 100%;">
+                    </div>
+                    <h3 style="color: white; margin: 5px 0; text-transform: uppercase; font-size: 14px;" id="nomeMenu"></h3>
+                    <p style="color: white; font-size: 14px; font-weight: 300;" id="credMenu"></p>
                 </div>
+
                 <li class="item-active">
                     <a href="./dash.html">
-                        <img src="./img/icon-dashboard.png" alt="">
+                        <i class="material-icons icon-active">dashboard</i>
                         Dashboard
                     </a>
                 </li>
 
                 <li>
                     <a href="./cadTerminais.html">
-                        <img src="./img/icon-machina.png" alt="">
+                        <i class="material-icons">add_to_queue</i>
                         Nova Maquina
                     </a>
                 </li>
 
                 <li>
                     <a href="./perfil.html">
-                        <img src="./img/user-icon.png" alt="">
+                        <i class="material-icons">person</i>
                         Perfil
                     </a>
                 </li>
 
+                <li>
+                    <a href="#">
+                        <i class="material-icons">help_outline</i>
+                        Ajuda
+                    </a>
+                </li>
+
+
                 <li class="btn-logout" onclick="logout()">
                     <a>
-                        <img src="./img/icon-logout.png" alt="">
-                        Logout
+                        <i class="material-icons">power_settings_new</i>
+                        Sair da conta
                     </a>
                 </li>
             </ul>
         </nav>
     </header>
 
-    <main style="background: linear-gradient(to right, #48bfe3, #72efdd); background-repeat: no-repeat; height: 320px; border-radius: 0 0 5px 5px;">
+    <main>
         <section class="container-flex">
             <div class="flex-station">
                 <div class="viewStation">
@@ -100,48 +120,48 @@
                         <p>Estação Trianom Masp</p>
                     </div>
                     <div class="profile-notification perfil-desk">
-                    <div class="popover">
-                        <img src="./img/icon-notification.png" alt="" class="active-pop">
-                        <div class="pop">
-                            <div class="popuptext">
-                                <div style="padding: 20px 30px; box-sizing: border-box;">
-                                <h3>
-                                    Notificações
-                                </h3>
-                                <p>
-                                    Sem novas Notificações
-                                </p>
+                        <div class="popover">
+                            <img src="./img/icon-notification2.png" alt="" class="active-pop">
+                            <div class="pop">
+                                <div class="popuptext">
+                                    <div style="padding: 20px 30px; box-sizing: border-box;">
+                                        <h3>
+                                            Notificações
+                                        </h3>
+                                        <p>
+                                            Sem novas Notificações
+                                        </p>
+                                    </div>
                                 </div>
-                            </div> 
+                            </div>
                         </div>
-                    </div>
-                    <div class="profile">
-                        <img src="./img/perfil (2).png" alt="" class="img-profile">
+                        <div class="profile">
+                            <img src="./img/perfil (2).png" alt="" class="img-profile">
 
-                        <h3 class="muda" id="user">Fernando Laurito</h3>
+                            <h3 class="muda" id="user" style="color: #222222;"></h3>
 
-                        <i class="fas fa-angle-down" id="info-profile"></i>
+                            <i class="fas fa-angle-down" id="info-profile" style="color: #3d3d3d;"></i>
 
-                        <i class="fas fa-angle-up" id="up-profile" style="color: #3d3d3dc5; display:none;"></i>
-                        <div class="profile-active">
-                            
-                            <ul>
-                                <li>
-                                    <a href="#">
-                                        <img src="./img/perfil (2).png" alt="" class="img-profile logout-perfil">
-                                        Perfil
-                                    </a>
-                                </li>
+                            <i class="fas fa-angle-up" id="up-profile" style="color: #3d3d3dc5; display:none;"></i>
+                            <div class="profile-active">
 
-                                <li>
-                                    <a href="#" onclick="logout()">
-                                        <img src="./img/icon-logout.png" alt="" class="logout-perfil" style="border-radius: 0; box-shadow: none; border: none !important;">
-                                        Logout
-                                    </a>
-                                </li>
-                            </ul>
+                                <ul>
+                                    <li>
+                                        <a href="#">
+                                            <img src="./img/perfil (2).png" alt="" class="img-profile logout-perfil">
+                                            Perfil
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="#" onclick="logout()">
+                                            <img src="./img/icon-logout.png" alt="" class="logout-perfil" style="border-radius: 0; box-shadow: none; border: none !important;">
+                                            Logout
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
-                    </div>
                     </div>
                 </div>
             </div>
@@ -149,43 +169,43 @@
                 <div class="viewMachines">
                     <h3>Dashboard</h3>
                     <p>Olá, bem vindo de volta !</p>
-                    </div>
-                    <div class="cards-dash">
-                        <div class="card">
-                            <div>
-                                <div class="icon-card">
-                                    <img src="./img/icon-maquina-cartao.png" alt="">
-                                </div>
-                                <div class="text-card">
-                                    <h3>Total de maquinas</h3>
-                                    <p>10</p>
-                                </div>
-                            </div>  
-                        </div>
-                        <div class="card">
-                            <div>
-                                <div class="icon-card">
-                                    <img src="./img/icon-maquina-cartao.png" alt="">
-                                </div>
-                                <div class="text-card">
-                                    <h3>Maquinas Ativas</h3>
-                                    <p>9</p>
-                                </div>
-                            </div>  
-                        </div>
-                        <div class="card">
-                            <div>
-                                <div class="icon-card">
-                                    <img src="./img/icon-maquina-cartao.png" alt="">
-                                </div>
-                                <div class="text-card">
-                                    <h3>Maquinas inativas</h3>
-                                    <p>1</p>
-                                </div>
-                            </div>  
+                </div>
+                <div class="cards-dash">
+                    <div class="card">
+                        <div>
+                            <div class="icon-card">
+                                <img src="./img/icon-maquina-cartao.png" alt="">
+                            </div>
+                            <div class="text-card">
+                                <h3>Total de maquinas</h3>
+                                <p>10</p>
+                            </div>
                         </div>
                     </div>
-                    <div class="viewMachines graph">
+                    <div class="card">
+                        <div>
+                            <div class="icon-card">
+                                <img src="./img/icon-maquina-cartao.png" alt="">
+                            </div>
+                            <div class="text-card">
+                                <h3>Maquinas Ativas</h3>
+                                <p>9</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div>
+                            <div class="icon-card">
+                                <img src="./img/icon-maquina-cartao.png" alt="">
+                            </div>
+                            <div class="text-card">
+                                <h3>Maquinas inativas</h3>
+                                <p>1</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="viewMachines graph">
                     <p class="darkP">Selecione abaixo a <span>maquina</span> que voce deseja visualizar !</p>
 
                     <select name="estações" id="estacao">
@@ -196,43 +216,43 @@
 
                     <p class="darkP">Terminal Funcionando.</p>
 
+                    <div>
                         <div>
+                            <p class="info-machine"><span>CPU</span></p>
                             <div>
-                                <p class="info-machine"><span>CPU</span></p>
-                                <div>
-                                    <canvas id="graphCpu" class="line-chart-cpu" style="height: 100%; width: 100%;">
+                                <canvas id="graphCpu" class="line-chart-cpu" style="height: 100%; width: 100%;">
 
-                                    </canvas>
-                                </div>    
-                            </div>
-
-                            <div>
-                                <p class="info-machine"><span>Memória RAM</span></p>
-                                <div>
-                                    <canvas id="graphRam" class="line-chart-ram" style="height: 100%; width: 100%;">
-
-                                    </canvas>
-                                </div>    
-                            </div>
-
-                            <div>
-                                <p class="info-machine"><span>Disco 0 (c:)</span></p>
-                                <div>
-                                    <canvas class="line-chart-disco" id="graphDisco" style="height: 100%; width: 100%;">
-
-                                    </canvas>
-                                </div>    
+                                </canvas>
                             </div>
                         </div>
 
+                        <div>
+                            <p class="info-machine"><span>Memória RAM</span></p>
+                            <div>
+                                <canvas id="graphRam" class="line-chart-ram" style="height: 100%; width: 100%;">
+
+                                </canvas>
+                            </div>
+                        </div>
+
+                        <div>
+                            <p class="info-machine"><span>Disco 0 (c:)</span></p>
+                            <div>
+                                <canvas class="line-chart-disco" id="graphDisco" style="height: 100%; width: 100%;">
+
+                                </canvas>
+                            </div>
+                        </div>
                     </div>
-                    <footer>
-                        <div class="copy">
-                            <h3>© MovePlus 2020</h3>
-                            <p>Todos os direitos reservados.</p>
-                        </div>
-                     </footer>
+
                 </div>
+                <footer>
+                    <div class="copy">
+                        <h3>© MovePlus 2020</h3>
+                        <p>Todos os direitos reservados.</p>
+                    </div>
+                </footer>
+            </div>
             </div>
         </section>
     </main>
@@ -244,81 +264,86 @@
     var ttChatLoaderS = document.createElement('script');
     document.tomticketChatLoaderScriptVersion = 2;
     ttChatLoaderS.src = 'https://moveplus.tomticket.com/scripts-chat/chat.min.js'
-    + '?id=EP50568'
-    + '&account=3236352P24102020060047'
-    + '&autoOpen=0'
-    + '&hideWhenOffline=0'
-    + '&d=moveplus'
-    + '&ts=' + new Date().getTime()
-    + '&ref=' + encodeURIComponent(document.URL);
+        + '?id=EP50568'
+        + '&account=3236352P24102020060047'
+        + '&autoOpen=0'
+        + '&hideWhenOffline=0'
+        + '&d=moveplus'
+        + '&ts=' + new Date().getTime()
+        + '&ref=' + encodeURIComponent(document.URL);
     document.body.appendChild(ttChatLoaderS);
     //]]>
-    </script>  
+</script>
+
 </html>
 
 <script>
 
-function menuActive() {
-    const btnMenu = document.querySelector(".icon-menuHamburguer img");
-    const ulMenu = document.getElementById('menuHidden');
+    function menuActive() {
+        const btnMenu = document.querySelector(".icon-menuHamburguer img");
+        const ulMenu = document.getElementById('menuHidden');
 
-    function openMenu(){
-        ulMenu.classList.toggle("menu-hidden");
+        function openMenu() {
+            ulMenu.classList.toggle("menu-hidden");
+        }
+
+        btnMenu.addEventListener("click", openMenu);
+    };
+
+    menuActive();
+
+    function myFunction() {
+        var popup = document.getElementById("myPopup");
+        popup.classList.toggle("show");
     }
 
-    btnMenu.addEventListener("click", openMenu);
-};
+    const popover = document.querySelector('.pop');
+    const activePop = document.querySelector('.active-pop');
 
-menuActive();
-
-function myFunction() {
-  var popup = document.getElementById("myPopup");
-  popup.classList.toggle("show");
-}
-
-const popover = document.querySelector('.pop');
-const activePop = document.querySelector('.active-pop');
-
-function activePopover(){
-    popover.classList.toggle("popBlock");
-}
-
-activePop.addEventListener("click", activePopover);
-
-
-function profile(){
-    const profileActive = document.querySelector(".profile-active");
-    const infoProfile = document.querySelector("#info-profile");
-    const profile = document.querySelector(".profile");
-    const profileTxt = document.querySelector(".muda");
-    const upProfile = document.querySelector("#up-profile");
-
-    function activeProfile(){
-        profileActive.classList.toggle("popBlock");
-        profile.classList.toggle("profile-teste");
-        profileTxt.classList.toggle("profileTxta");
-        infoProfile.classList.toggle("none"); 
-        upProfile.classList.toggle("popBlock");
+    function activePopover() {
+        popover.classList.toggle("popBlock");
     }
 
-    infoProfile.addEventListener("click", activeProfile);
-    upProfile.addEventListener("click", activeProfile);
-}
-profile();
+    activePop.addEventListener("click", activePopover);
 
-const user = JSON.parse(sessionStorage.user);
-const identityUser = document.querySelector("#user");
 
-identityUser.innerHTML = user.email;
+    function profile() {
+        const profileActive = document.querySelector(".profile-active");
+        const infoProfile = document.querySelector("#info-profile");
+        const profile = document.querySelector(".profile");
+        const profileTxt = document.querySelector(".muda");
+        const upProfile = document.querySelector("#up-profile");
 
-const btnProfMenu = document.querySelector("#btnMobileProf");
-const activeProfMenu = document.querySelector(".menu-profile");
+        function activeProfile() {
+            profileActive.classList.toggle("popBlock");
+            profile.classList.toggle("profile-teste");
+            profileTxt.classList.toggle("profileTxta");
+            infoProfile.classList.toggle("none");
+            upProfile.classList.toggle("popBlock");
+        }
 
-function activeProf(){
-    activeProfMenu.classList.toggle("popBlock");
-}
+        infoProfile.addEventListener("click", activeProfile);
+        upProfile.addEventListener("click", activeProfile);
+    }
+    profile();
 
-btnProfMenu.addEventListener("click", activeProf);
+    const user = JSON.parse(sessionStorage.user);
+    const identityUser = document.querySelector("#user");
+    const identityUserMenu = document.getElementById("nomeMenu");
+    const credencialUserMenu = document.getElementById("credMenu");
+
+    identityUser.innerHTML = user.email;
+    identityUserMenu.innerHTML = user.email;
+    credencialUserMenu.innerHTML = user.credencial;
+
+    const btnProfMenu = document.querySelector("#btnMobileProf");
+    const activeProfMenu = document.querySelector(".menu-profile");
+
+    function activeProf() {
+        activeProfMenu.classList.toggle("popBlock");
+    }
+
+    btnProfMenu.addEventListener("click", activeProf);
 
 </script>
 
