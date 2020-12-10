@@ -116,7 +116,7 @@
             <div class="flex-station">
                 <div class="viewStation">
                     <div class="station">
-                        <p>Estação Trianom Masp</p>
+                        <p id="nomeEstacao"></p>
                     </div>
                     <div class="profile-notification perfil-desk">
                         <div class="popover">
@@ -222,75 +222,15 @@
         </section>
     </main>
 </body>
-<script src="../Login/script.js"></script>
-<script src="./auth.js"></script>
-<script type="text/javascript">
-    // <![CDATA[
-    var ttChatLoaderS = document.createElement('script');
-    document.tomticketChatLoaderScriptVersion = 2;
-    ttChatLoaderS.src = 'https://moveplus.tomticket.com/scripts-chat/chat.min.js'
-        + '?id=EP50568'
-        + '&account=3236352P24102020060047'
-        + '&autoOpen=0'
-        + '&hideWhenOffline=0'
-        + '&d=moveplus'
-        + '&ts=' + new Date().getTime()
-        + '&ref=' + encodeURIComponent(document.URL);
-    document.body.appendChild(ttChatLoaderS);
-    //]]>
-</script>
 
 </html>
-
+<script src="../Login/script.js"></script>
+<script src="./js/auth.js"></script>
+<script src="./js/helpdesk.js"></script>
+<script src="./js/menuMobile.js"></script>
+<script src="./js/popUp.js"></script>
+<script src="./js/exibir.js"></script>
 <script>
-
-    function menuActive() {
-        const btnMenu = document.querySelector(".icon-menuHamburguer img");
-        const ulMenu = document.getElementById('menuHidden');
-
-        function openMenu() {
-            ulMenu.classList.toggle("menu-hidden");
-        }
-
-        btnMenu.addEventListener("click", openMenu);
-    };
-
-    menuActive();
-
-    function myFunction() {
-        var popup = document.getElementById("myPopup");
-        popup.classList.toggle("show");
-    }
-
-    const popover = document.querySelector('.pop');
-    const activePop = document.querySelector('.active-pop');
-
-    function activePopover() {
-        popover.classList.toggle("popBlock");
-    }
-
-    activePop.addEventListener("click", activePopover);
-
-
-    function profile() {
-        const profileActive = document.querySelector(".profile-active");
-        const infoProfile = document.querySelector("#info-profile");
-        const profile = document.querySelector(".profile");
-        const profileTxt = document.querySelector(".muda");
-        const upProfile = document.querySelector("#up-profile");
-
-        function activeProfile() {
-            profileActive.classList.toggle("popBlock");
-            profile.classList.toggle("profile-teste");
-            profileTxt.classList.toggle("profileTxta");
-            infoProfile.classList.toggle("none");
-            upProfile.classList.toggle("popBlock");
-        }
-
-        infoProfile.addEventListener("click", activeProfile);
-        upProfile.addEventListener("click", activeProfile);
-    }
-    profile();
 
     const user = JSON.parse(sessionStorage.user);
     const identityUser = document.querySelector("#user");
