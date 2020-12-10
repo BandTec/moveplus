@@ -191,23 +191,29 @@ nav > div > .profile-notification > .profile-menu > .img-profile {
 .menu-profile > ul {
   width: 100%;
   height: 100%;
+  background-color: #3d3d3d;
   display: flex;
+  transition: 0.2s;
   flex-direction: column;
+  border-radius: 5px;
 }
 
 .menu-profile ul li {
   list-style: none;
   padding: 15px 0;
   margin: 5px 0;
+  border-radius: 5px;
 }
 
 .menu-profile ul li a {
   display: flex;
   align-items: center;
   width: 100%;
+  font-weight: 300;
   height: 100%;
-  color: #3d3d3dc5;
-  font-size: 18px;
+  border-radius: 5px;
+  color: white;
+  font-size: 16px;
   text-decoration: none;
   margin-left: 20px;
 }
@@ -235,9 +241,8 @@ i {
 .popup .popuptext {
   visibility: hidden;
   width: 250px;
-  background-color: #ffffff;
-  box-shadow: 5px -3px 15px #3d3d3d38;
-  color: #3d3d3d;
+  background-color: #3d3d3d;
+  color: white;
   height: 150px;
   text-align: center;
   border-radius: 5px;
@@ -255,7 +260,7 @@ i {
 .popuptext h3 {
   font-size: 18px;
   font-weight: 700;
-  color: #3d3d3dd0;
+  color: white;
   text-align: left;
   position: relative;
   display: flex;
@@ -268,7 +273,7 @@ i {
   width: 100%;
   margin-top: 10px;
   height: 1px;
-  background-color: #3d3d3d3d;
+  background-color: white;
 }
 
 .popup .popuptext p {
