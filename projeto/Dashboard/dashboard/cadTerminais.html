@@ -9,6 +9,7 @@
     <link href="https://use.fontawesome.com/releases/v5.0.1/css/all.css" rel="stylesheet">
     <link rel="stylesheet" href="./css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="./css/tablet.css">
     <link rel="stylesheet" href="./css/desktop.css">
     <link rel="stylesheet" href="./css/profile.css">
@@ -60,28 +61,34 @@
             </div>
             <ul class="menu-hidden" id="menuHidden">
                 <div class="logo">
-                    <img src="./img/logo-movePlus.png" alt="">
+                    <img src="./img/logomove-removebg-preview.png" alt="">
                 </div>
-                <div class="link">
-                    <a href="../Login/viewEstation.html">Ver estações</a>
+
+                <div class="logo img-menu-profile">
+                    <div class="img-menu">
+                        <img src="./img/perfil (2).png" alt="" style=" width: 100%;">
+                    </div>
+                    <h3 style="color: white; margin: 5px 0; text-transform: uppercase; font-size: 14px;" id="nomeMenu"></h3>
+                    <p style="color: white; font-size: 14px; font-weight: 300;" id="credMenu"></p>
                 </div>
+
                 <li>
                     <a href="./dash.html">
-                        <img src="./img/icon-dashboard.png" alt="">
+                        <i class="material-icons icon-active">dashboard</i>
                         Dashboard
                     </a>
                 </li>
 
                 <li class="item-active">
                     <a href="./cadTerminais.html">
-                        <img src="./img/icon-machina.png" alt="">
+                        <i class="material-icons">add_to_queue</i>
                         Nova Maquina
                     </a>
                 </li>
 
                 <li>
                     <a href="./perfil.html">
-                        <img src="./img/user-icon.png" alt="">
+                        <i class="material-icons">person</i>
                         Perfil
                     </a>
                 </li>
@@ -95,8 +102,8 @@
 
                 <li class="btn-logout" onclick="logout()">
                     <a>
-                        <img src="./img/icon-logout.png" alt="">
-                        Logout
+                        <i class="material-icons">power_settings_new</i>
+                        Sair da conta
                     </a>
                 </li>
             </ul>
@@ -129,7 +136,7 @@
                         <div class="profile">
                             <img src="./img/perfil (2).png" alt="" class="img-profile">
 
-                            <h3 class="muda" id="user">Fernando Laurito</h3>
+                            <h3 class="muda" id="user"></h3>
 
                             <i class="fas fa-angle-down" id="info-profile"></i>
 
@@ -322,8 +329,15 @@
 
     const user = JSON.parse(sessionStorage.user);
     const identityUser = document.querySelector("#user");
+    const identityUserMenu = document.getElementById("nomeMenu");
+    const credencialUserMenu = document.getElementById("credMenu");
 
+    identityUserMenu.innerHTML = user.email;
+    credencialUserMenu.innerHTML = user.credencial;
     identityUser.innerHTML = user.email;
+
+
+    localStorage.setItem("email", user.email);
 
     const btnProfMenu = document.querySelector("#btnMobileProf");
     const activeProfMenu = document.querySelector(".menu-profile");

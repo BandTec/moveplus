@@ -1,10 +1,9 @@
-function createUser(email, credencial, senha, idEstacao) {
+function createUser(email, credencial, senha) {
   const ajax = new XMLHttpRequest();
-  const params = `email=${email}&credencial=${credencial}&senha=${senha}&estacao=${idEstacao}`;
+  const params = `email=${email}&credencial=${credencial}&senha=${senha}`;
   ajax.open('POST', 'http://localhost:3333/users', true);
   ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
   ajax.onreadystatechange = function () {
-    console.log('oi');
     if (ajax.status === 200 && ajax.readyState === 4) {
       const response = ajax.responseText;
       alert('cadastrado com sucesso');
@@ -77,3 +76,15 @@ function update(email, credencial, senha, oldEmail) {
 
   ajax.send(params);
 }
+
+fetch('http://localhost:3333/station').then((response) => {
+  if (response.ok) {
+    console.log(response);
+    const nameStation = document.getElementById('nomeEstacao');
+    response.json().then((res) => {
+      res.map((nome) => {
+        nameStation.innerHTML = nome.nomeEstacao;
+      });
+    });
+  }
+});
