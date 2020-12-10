@@ -18,8 +18,6 @@ public class Terminal {
     private String fkEmpresaTerminal;
     private String fkConfigTerminal;
 
-    
-    
     public String getIdTerminal() {
         return idTerminal;
     }
@@ -72,9 +70,5 @@ public class Terminal {
     public String toString() {
         return "idTerminal=" + idTerminal + ", statusTerminal=" + statusTerminal + ", seriesNumberTerminal=" + seriesNumberTerminal + ", fkEstacao=" + fkEstacao + ", fkEmpresaTerminal=" + fkEmpresaTerminal + ", fkConfigTerminal=" + fkConfigTerminal;
     }
-    
-    
-    
-    
-    
+
 }

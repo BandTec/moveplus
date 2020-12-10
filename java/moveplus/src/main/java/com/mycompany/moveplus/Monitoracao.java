@@ -5,6 +5,7 @@
  */
 package com.mycompany.moveplus;
 
+import java.io.File;
 import org.json.JSONObject;
 import java.util.List;
 import java.text.*;
@@ -17,16 +18,21 @@ import oshi.hardware.HWDiskStore;
 import oshi.hardware.HardwareAbstractionLayer;
 import oshi.software.os.OSProcess;
 import oshi.software.os.OperatingSystem;
+import oshi.hardware.NetworkIF;
 import java.util.ArrayList;
 import java.util.Arrays;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
+import oshi.util.FormatUtil;
 
 /**
  * @author beatriz
  */
 public class Monitoracao {
 
+    Integer contcpu = 0;
+    Integer contram = 0;
+    String FK = "";
     //Criando uma nova classe de infos do Sistema
     SystemInfo si = new SystemInfo();
     OperatingSystem os = si.getOperatingSystem(); //pegando infos do OS do sistema
@@ -34,11 +40,42 @@ public class Monitoracao {
     List<HWDiskStore> dadosDisco = hal.getDiskStores(); //Uma lista de dados do disco do meu Hardware
     GlobalMemory memoria = hal.getMemory();          //Pego memória do meu hard
     CentralProcessor cpu = hal.getProcessor();      //E as informações da cpu
-    long[] oldTricks = cpu.getSystemCpuLoadTicks();
+    long[] oldTricks = cpu.getSystemCpuLoadTicks(); //Uso de CPU
+    List<NetworkIF> rede = hal.getNetworkIFs();
 
-    //Pegando uso de CPU
-    public String usoCpu() {
+    //Pegando dados de uso de memória RAM
+    public String usoRam() throws Exception {
+        Alertas alert = new Alertas();
 
+        //Código para pegar informações de RAM
+        //Pegando o dado de total de RAM e convertendo para double
+        long getTotalRam = memoria.getTotal();
+        double totalRam = ((double) getTotalRam);
+
+        //Pegando o dado de total disponível de RAM e convertendo para double
+        long getAvailableRam = memoria.getAvailable();
+        double availableRam = ((double) getAvailableRam);
+
+        //Calculando a quantidade em uso e a porcentagem em uso de Ram
+        double usedRam = totalRam - availableRam;
+        double pctUsedRam = (usedRam / totalRam) * 100;
+        String valorRam = String.format("%.2f", pctUsedRam);
+        valorRam = valorRam.replace(",", ".");
+
+        if (pctUsedRam > 90.0) {
+            contram++;
+            if (contram == 5) {
+                alert.ram();
+                contram = 0;
+            }
+        }
+
+        return valorRam;
+    }
+
+    public String usoCpu() throws Exception {
+
+        Alertas alert = new Alertas();
         //Variavel com o valor de uso da CPU
         Double pctCpu = cpu.getSystemCpuLoadBetweenTicks(oldTricks);
         //Convertendo o valor de uso da CPU 
@@ -46,15 +83,43 @@ public class Monitoracao {
         //Formatando o valor para string e trocando virgula por ponto
         String valorCpu = String.format("%.2f", pctCpu);
         valorCpu = valorCpu.replace(",", ".");
+
+        if (pctCpu > 10.0) {
+            contcpu++;
+            if (contcpu == 5) {
+                alert.cpu();
+                contcpu = 0;
+            }
+        }
         return valorCpu;
     }
-    
+
+    public String usoDisco() throws Exception {
+        Alertas alert = new Alertas();
+        File[] roots = File.listRoots();
+        for (File root : roots) {
+            double free = (double) ((root.getUsableSpace() / 1024) / 1024) / 1024;
+            double total = (double) ((root.getTotalSpace() / 1024) / 1024) / 1024;
+            double used = total - free;
+            double pctdisk = (used * 100) / total;
+            String disco = String.format("%.2f", pctdisk);
+            disco = disco.replaceAll(",", ".");
+            System.out.format("%.1f %s used of %.1f", pctdisk, "%", total);
+
+            if (pctdisk > 50.0) {
+                alert.disco();
+            }
+            return disco;
+        }
+        return "a";
+    }
+
     //Pegando dados de datetime
     public String dataHora() {
         String timeStamp = new SimpleDateFormat("yyyyMMdd HH:mm:ss").format(Calendar.getInstance().getTime());
         return timeStamp;
     }
-    
+
     //Pegando processos
     public void processos() {
         //Aqui só imprimindo o cabeçalho, esses números servem para dizer o espaçamento
@@ -82,26 +147,6 @@ public class Monitoracao {
         }
     }
 
-    //Pegando dados de uso de memória RAM
-    public String usoRam() {
-        //Código para pegar informações de RAM
-        //Pegando o dado de total de RAM e convertendo para double
-        long getTotalRam = memoria.getTotal();
-        double totalRam = ((double) getTotalRam);
-
-        //Pegando o dado de total disponível de RAM e convertendo para double
-        long getAvailableRam = memoria.getAvailable();
-        double availableRam = ((double) getAvailableRam);
-
-        //Calculando a quantidade em uso e a porcentagem em uso de Ram
-        double usedRam = totalRam - availableRam;
-        double pctUsedRam = (usedRam / totalRam) * 100;
-        String valorRam = String.format("%.2f", pctUsedRam);
-        valorRam = valorRam.replace(",", ".");
-
-        return valorRam;
-    }
-
     //Check se ID fornecido é legítimo
     public String checkId(String id) {
 
@@ -122,15 +167,16 @@ public class Monitoracao {
 
             String fk = lista.get(0);
             fk = fk.replace("[idTerminal=", "");
+            FK = fk;
             return fk;
 
         } else {
             System.out.println("ERRO");
-            
+
         }
         return "";
     }
-    
+
     //Checkando se login fornecido é legítimo
     public void checkLogin(String user, String pass) {
         ConnectionDatabase config = new ConnectionDatabase();

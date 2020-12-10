@@ -20,44 +20,34 @@ public class Run {
 
         Monitoracao mpo = new Monitoracao();
 
-        //Chamando a conexão com o Azure
+//        Chamando a conexão com o Azure
         ConnectionDatabase config = new ConnectionDatabase();
         JdbcTemplate con = new JdbcTemplate(config.getDatasource());
-        Run d = new Run();
-        d.slack();
-        System.out.println("ID");
-        mpo.checkId("1");
-        System.out.println("LOGIN");
-        mpo.checkLogin("joao.silva@cptm.gov.br", "qwerty123");
+        mpo.checkId("2");
+//        mpo.checkLogin("joao.silva@cptm.gov.br", "qwerty123");
 
         while (true) {
+            String cpu = mpo.usoCpu();
+            String ram = mpo.usoRam();
+            String disco = mpo.usoDisco();
+            String datetime = mpo.dataHora();
             String insert = "INSERT INTO Monitoracao (memoriaMonitoracao,"
                     + "cpuMonitoracao,discoMonitoracao,redeMonitoracao,"
-                    + "dataHoraMonitoracao, fkTerminal) values (" + mpo.usoRam() + ","
-                    + mpo.usoCpu() + ",00.00,00.00, '" + mpo.dataHora() + "', "
-                    + mpo.checkId("1") + ");";
+                    + "dataHoraMonitoracao, fkTerminal) values (" + ram + ","
+                    + cpu + "," + disco + ",00.00,'" + datetime + "',"
+                    + mpo.FK + ");";
 
             System.out.println("------------------------------");
-            System.out.println(insert);
-            System.out.println("RAM:        " + mpo.usoRam());
-            System.out.println("CPU:        " + mpo.usoCpu());
-            System.out.println("DATETIME:   " + mpo.dataHora());
-            System.out.println("FKESTACAO   " + mpo.checkId("1"));
+            System.out.println("CPU:        " + cpu);
+            System.out.println("RAM:        " + ram);
+            System.out.println("DISCO:      " + disco);
+            System.out.println("DATETIME:   " + datetime);
+            System.out.println("FKESTACAO   " + mpo.FK);
             con.update(insert);
             Util.sleep(5000);
         }
     
-    
-    }
-    
-    //Enviar mensagem para o slack
-    public  void slack() throws Exception {
-        Slack slack = new Slack();
-
-        JSONObject message = new JSONObject();
-        message.put("text", "Teste");
-
-        slack.sendMessage(message);
+        
     }
     
 }
