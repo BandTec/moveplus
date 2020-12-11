@@ -30,9 +30,16 @@ import oshi.util.FormatUtil;
  */
 public class Monitoracao {
 
+    //Contadores para os logs e alertas do Slack
     Integer contcpu = 0;
     Integer contram = 0;
-    String FK = "";
+    Integer contdisco = 0;
+    
+    //Constantes para armazenar informações do terminal
+    String IDTERMINAL = "";
+    String IDCONFIGTERMINAL = "";
+    String FKCONFIGTERMINAL = "";
+
     //Criando uma nova classe de infos do Sistema
     SystemInfo si = new SystemInfo();
     OperatingSystem os = si.getOperatingSystem(); //pegando infos do OS do sistema
@@ -62,17 +69,22 @@ public class Monitoracao {
         String valorRam = String.format("%.2f", pctUsedRam);
         valorRam = valorRam.replace(",", ".");
 
+        //Verificando se a porcentagem de uso da RAM está muito alta
         if (pctUsedRam > 90.0) {
             contram++;
-            if (contram == 5) {
+            //Caso esteja muito alta por 1 minuto, gerar log e enviar alerta
+            if (contram == 12) {
                 alert.ram();
                 contram = 0;
             }
+        } else { //Caso o uso esteja abaixo de 90%, zerar contador
+            contram = 0;
         }
 
         return valorRam;
     }
 
+    //Pegando uso de CPU
     public String usoCpu() throws Exception {
 
         Alertas alert = new Alertas();
@@ -83,17 +95,22 @@ public class Monitoracao {
         //Formatando o valor para string e trocando virgula por ponto
         String valorCpu = String.format("%.2f", pctCpu);
         valorCpu = valorCpu.replace(",", ".");
-
-        if (pctCpu > 10.0) {
+        
+        //Verificando se o uso é superior a 90%
+        if (pctCpu > 90.0) {
             contcpu++;
-            if (contcpu == 5) {
+            //Caso o uso de mantenha acima de 90% durante 1 minuto, gerar log e enviar aleta
+            if (contcpu == 12) {
                 alert.cpu();
                 contcpu = 0;
             }
+        } else { //Caso contrário, zere o contador
+            contcpu = 0;
         }
         return valorCpu;
     }
 
+    //Pegando uso de Disco
     public String usoDisco() throws Exception {
         Alertas alert = new Alertas();
         File[] roots = File.listRoots();
@@ -104,14 +121,36 @@ public class Monitoracao {
             double pctdisk = (used * 100) / total;
             String disco = String.format("%.2f", pctdisk);
             disco = disco.replaceAll(",", ".");
-            System.out.format("%.1f %s used of %.1f", pctdisk, "%", total);
-
+            
+            //Verificando se o uso do HD superou 50%
             if (pctdisk > 50.0) {
-                alert.disco();
+                contdisco++;
+                //Se o uso for superior a 50% durante uma hora, enviar alerta;
+                if (contdisco == 720) {
+                    alert.disco();
+                }
+
+            } else { //Caso uso seja inferior, zerar contador
+                contdisco = 0;
             }
             return disco;
         }
-        return "a";
+        return "";
+    }
+
+    //Método para formatar os dados de Disco
+    public String catchDiskSize() throws Exception {
+        Alertas alert = new Alertas();
+        File[] roots = File.listRoots();
+        for (File root : roots) {
+            //Convertendo o tamanho para GB
+            double total = (double) ((root.getTotalSpace() / 1024) / 1024) / 1024;
+            //Editando string para envio ao banco
+            String a = String.format("%.2f", total);
+            a = a.replaceAll(",", ".");
+            return a;
+        }
+        return "";
     }
 
     //Pegando dados de datetime
@@ -149,29 +188,42 @@ public class Monitoracao {
 
     //Check se ID fornecido é legítimo
     public String checkId(String id) {
-
+        
+        //Chamando conexão com o Azure
         ConnectionDatabase config = new ConnectionDatabase();
         JdbcTemplate con = new JdbcTemplate(config.getDatasource());
-
-        List<String> select = con.query("SELECT idTerminal FROM Terminal "
+        
+        //Buscando se o ID fornecido existe
+        List<String> select = con.query("SELECT * FROM Terminal "
                 + "where idTerminal = " + id + ";",
                 new BeanPropertyRowMapper(Terminal.class));
-
+        
+        //Caso exista...
         if (select.size() > 0) {
 
-            //Editando a lista
+            //Criando a lista com o resultado da query
             String txt = String.format("%s", select);
             String str[] = txt.split(",");
             List<String> lista = new ArrayList();
             lista = Arrays.asList(str);
 
-            String fk = lista.get(0);
-            fk = fk.replace("[idTerminal=", "");
-            FK = fk;
-            return fk;
+            //Salvando o ID
+            id = lista.get(0);
+            id = id.replace("[idTerminal=", "");
+            IDTERMINAL = id;
 
-        } else {
-            System.out.println("ERRO");
+            //Salvando o FkConfigTerminal
+            String fkConfig = lista.get(5);
+            fkConfig = fkConfig.replaceAll("fkConfigTerminal=", "");
+            fkConfig = fkConfig.replaceAll("]", "");
+            fkConfig = fkConfig.replaceAll(" ", "");
+            System.out.println(fkConfig);
+            FKCONFIGTERMINAL = fkConfig;
+
+            return id;
+
+        } else { //Caso não exista, dê erro
+            System.out.println("TERMINAL INVÁLIDO");
 
         }
         return "";
@@ -179,18 +231,123 @@ public class Monitoracao {
 
     //Checkando se login fornecido é legítimo
     public void checkLogin(String user, String pass) {
+        
+        //Chamando a conexão com o Azure
         ConnectionDatabase config = new ConnectionDatabase();
         JdbcTemplate con = new JdbcTemplate(config.getDatasource());
-
+        
+        //Buscando se o login e senha fornecidos existem
         List<String> select = con.query("SELECT * FROM UsuarioEstacao where "
                 + "emailUsuarioEstacao = '" + user + "' and "
                 + "senhaUsuarioEstacao = '" + pass + "';", new BeanPropertyRowMapper(UsuarioEstacao.class));
-
+        
+        //Caso exista
         if (select.size() > 0) {
-            System.out.println("OK");
-        } else {
-            System.out.println("ERRO");
+            System.out.println("Bem vindo");
+        } else { //Caso não exista dê erro e gere um log
+            System.out.println("USUÁRIO E/OU SENHA INVÁLIDO(S)");
         }
     }
+    
+    //Convertendo dados de hardware do processador
+    public String catchCpu() {
+        //Convertendo double para String
+        String cputxt = String.format("%s", cpu);
+        
+        //Criando lista
+        String list1 = cputxt;
+        String str[] = list1.split(" ");
+        List<String> cpulist = new ArrayList<String>();
+        cpulist = Arrays.asList(str);
+        
+        //Formatando dados do processador para envio ao banco
+        String cpux = cpulist.get(0) + cpulist.get(1) + cpulist.get(2) + cpulist.get(3);
 
+        return cpux;
+    }
+
+    //Convertendo dados de hardware de memória
+    public String catchRam() {
+        //Convertendo double para String
+        String memtxt = String.format("%s", memoria);
+        
+        //Criando a lista
+        String list1 = memtxt;
+        String str[] = list1.split(" ");
+        List<String> list = new ArrayList<String>();
+        list = Arrays.asList(str);
+        
+        //Formatando dados da memória para envio ao banco
+        String ramx = list.get(2);
+        ramx = ramx.replaceAll("GiB/", "");
+        ramx = ramx.replaceAll(",", ".");
+
+        return ramx;
+    }
+    
+    //Validando configurações da máquina com o banco
+    public void checkConfig() throws Exception {
+        
+        //Chamando a conexão com o Azure
+        ConnectionDatabase config = new ConnectionDatabase();
+        JdbcTemplate con = new JdbcTemplate(config.getDatasource());
+        
+        //Convertendo para String os valores necessários
+        String processador = catchCpu();
+        String ram = catchRam();
+        String disco = catchDiskSize();
+        String so = String.format("%s", os);
+        
+        //Buscando se existe uma configuração igual a da máquina já existente
+        List<String> select = con.query("SELECT idConfigTerminal FROM ConfigTerminal where "
+                + "processadorTerminal = '" + processador + "' and "
+                + "memoriaTerminal = " + ram + " and "
+                + "discoTerminal = " + disco + " and "
+                + "sistemaOperacionalTerminal = '" + so + "';",
+                new BeanPropertyRowMapper(ConfigTerminal.class));
+
+        //SE A CONFIGURAÇÃO EXISTIR...
+        if (select.size() > 0) {
+
+            //Criando a lista
+            String txt = String.format("%s", select);
+            String str[] = txt.split(",");
+            List<String> lista = new ArrayList();
+            lista = Arrays.asList(str);
+
+            //Formatando valores para serem guarrdados
+            String idConfig = lista.get(0);
+            idConfig = idConfig.replace("[ConfigTerminal{idConfigTerminal=", "");
+            IDCONFIGTERMINAL = idConfig;
+
+            //SE O TERMINAL NÃO POSSUIR CONFIGURAÇÃO, INSERIR CONFIGURAÇÃO
+            if (FKCONFIGTERMINAL.equals("null")) {
+                String insert = "UPDATE Terminal set fkConfigTerminal = "
+                        + IDCONFIGTERMINAL + " where idTerminal = "
+                        + IDTERMINAL + ";";
+                con.update(insert);
+            }
+            //Caso o terminal já possua uma configuração, dê erro
+            if (!FKCONFIGTERMINAL.equals("null") && !FKCONFIGTERMINAL.equals(IDCONFIGTERMINAL)) {
+                System.out.println("TERMINAL INVÁLIDO");
+                System.exit(1);
+            }
+
+        } else { //SENÃO...
+            //Inserir uma nova configuração
+            String insert = "INSERT INTO ConfigTerminal (processadorTerminal,"
+                    + "memoriaTerminal,discoTerminal,sistemaOperacionalTerminal)"
+                    + "values ('" + processador + "','"
+                    + ram + "','" + disco + "','" + so + "'" + ");";
+            
+            //Atualizar terminal atual com a nova configuração
+            String insert2 = "UPDATE Terminal set fkConfigTerminal = "
+                    + IDCONFIGTERMINAL + " where idTerminal = "
+                    + IDTERMINAL + ";";
+
+            con.update(insert);
+            con.update(insert2);
+        }
+
+    }
 }

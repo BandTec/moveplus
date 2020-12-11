@@ -70,7 +70,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>com.mycompany.moveplus.TelaLogin</mainClass>
+                            <mainClass>com.mycompany.moveplus.Run</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>
@@ -98,7 +98,7 @@
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <!-- <classpathPrefix>lib</classpathPrefix> -->
-                            <mainClass>com.mycompany.moveplus.TelaLogin</mainClass>
+                            <mainClass>com.mycompany.moveplus.Run</mainClass>
                         </manifest>
                         <manifestEntries>
                             <Class-Path>lib/</Class-Path>
