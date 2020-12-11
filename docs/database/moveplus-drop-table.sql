@@ -1,0 +1,8 @@
+DROP TABLE MONITORACAO;
+DROP TABLE TerminalAlerta ;
+DROP TABLE Terminal ;
+DROP TABLE ConfigTerminal;
+DROP TABLE ALERTA;
+DROP TABLE EmpresaTerminal;
+DROP TABLE UsuarioEstacao;
+DROP TABLE ESTACAO;

@@ -34,7 +34,7 @@ public class Monitoracao {
     Integer contcpu = 0;
     Integer contram = 0;
     Integer contdisco = 0;
-    
+
     //Constantes para armazenar informações do terminal
     String IDTERMINAL = "";
     String IDCONFIGTERMINAL = "";
@@ -95,7 +95,7 @@ public class Monitoracao {
         //Formatando o valor para string e trocando virgula por ponto
         String valorCpu = String.format("%.2f", pctCpu);
         valorCpu = valorCpu.replace(",", ".");
-        
+
         //Verificando se o uso é superior a 90%
         if (pctCpu > 90.0) {
             contcpu++;
@@ -121,7 +121,7 @@ public class Monitoracao {
             double pctdisk = (used * 100) / total;
             String disco = String.format("%.2f", pctdisk);
             disco = disco.replaceAll(",", ".");
-            
+
             //Verificando se o uso do HD superou 50%
             if (pctdisk > 50.0) {
                 contdisco++;
@@ -188,16 +188,16 @@ public class Monitoracao {
 
     //Check se ID fornecido é legítimo
     public String checkId(String id) {
-        
+
         //Chamando conexão com o Azure
         ConnectionDatabase config = new ConnectionDatabase();
         JdbcTemplate con = new JdbcTemplate(config.getDatasource());
-        
+
         //Buscando se o ID fornecido existe
         List<String> select = con.query("SELECT * FROM Terminal "
                 + "where idTerminal = " + id + ";",
                 new BeanPropertyRowMapper(Terminal.class));
-        
+
         //Caso exista...
         if (select.size() > 0) {
 
@@ -224,6 +224,7 @@ public class Monitoracao {
 
         } else { //Caso não exista, dê erro
             System.out.println("TERMINAL INVÁLIDO");
+            System.exit(1);
 
         }
         return "";
@@ -231,35 +232,36 @@ public class Monitoracao {
 
     //Checkando se login fornecido é legítimo
     public void checkLogin(String user, String pass) {
-        
+
         //Chamando a conexão com o Azure
         ConnectionDatabase config = new ConnectionDatabase();
         JdbcTemplate con = new JdbcTemplate(config.getDatasource());
-        
+
         //Buscando se o login e senha fornecidos existem
         List<String> select = con.query("SELECT * FROM UsuarioEstacao where "
                 + "emailUsuarioEstacao = '" + user + "' and "
                 + "senhaUsuarioEstacao = '" + pass + "';", new BeanPropertyRowMapper(UsuarioEstacao.class));
-        
+
         //Caso exista
         if (select.size() > 0) {
             System.out.println("Bem vindo");
         } else { //Caso não exista dê erro e gere um log
             System.out.println("USUÁRIO E/OU SENHA INVÁLIDO(S)");
+            System.exit(1);
         }
     }
-    
+
     //Convertendo dados de hardware do processador
     public String catchCpu() {
         //Convertendo double para String
         String cputxt = String.format("%s", cpu);
-        
+
         //Criando lista
         String list1 = cputxt;
         String str[] = list1.split(" ");
         List<String> cpulist = new ArrayList<String>();
         cpulist = Arrays.asList(str);
-        
+
         //Formatando dados do processador para envio ao banco
         String cpux = cpulist.get(0) + cpulist.get(1) + cpulist.get(2) + cpulist.get(3);
 
@@ -270,13 +272,13 @@ public class Monitoracao {
     public String catchRam() {
         //Convertendo double para String
         String memtxt = String.format("%s", memoria);
-        
+
         //Criando a lista
         String list1 = memtxt;
         String str[] = list1.split(" ");
         List<String> list = new ArrayList<String>();
         list = Arrays.asList(str);
-        
+
         //Formatando dados da memória para envio ao banco
         String ramx = list.get(2);
         ramx = ramx.replaceAll("GiB/", "");
@@ -284,20 +286,20 @@ public class Monitoracao {
 
         return ramx;
     }
-    
+
     //Validando configurações da máquina com o banco
     public void checkConfig() throws Exception {
-        
+
         //Chamando a conexão com o Azure
         ConnectionDatabase config = new ConnectionDatabase();
         JdbcTemplate con = new JdbcTemplate(config.getDatasource());
-        
+
         //Convertendo para String os valores necessários
         String processador = catchCpu();
         String ram = catchRam();
         String disco = catchDiskSize();
         String so = String.format("%s", os);
-        
+
         //Buscando se existe uma configuração igual a da máquina já existente
         List<String> select = con.query("SELECT idConfigTerminal FROM ConfigTerminal where "
                 + "processadorTerminal = '" + processador + "' and "
@@ -306,20 +308,19 @@ public class Monitoracao {
                 + "sistemaOperacionalTerminal = '" + so + "';",
                 new BeanPropertyRowMapper(ConfigTerminal.class));
 
+        //Criando a lista
+        String txt = String.format("%s", select);
+        String str[] = txt.split(",");
+        List<String> lista = new ArrayList();
+        lista = Arrays.asList(str);
+
+        //Formatando valores para serem guarrdados
+        String idConfig = lista.get(0);
+        idConfig = idConfig.replace("[ConfigTerminal{idConfigTerminal=", "");
+        IDCONFIGTERMINAL = idConfig;
+
         //SE A CONFIGURAÇÃO EXISTIR...
         if (select.size() > 0) {
-
-            //Criando a lista
-            String txt = String.format("%s", select);
-            String str[] = txt.split(",");
-            List<String> lista = new ArrayList();
-            lista = Arrays.asList(str);
-
-            //Formatando valores para serem guarrdados
-            String idConfig = lista.get(0);
-            idConfig = idConfig.replace("[ConfigTerminal{idConfigTerminal=", "");
-            IDCONFIGTERMINAL = idConfig;
-
             //SE O TERMINAL NÃO POSSUIR CONFIGURAÇÃO, INSERIR CONFIGURAÇÃO
             if (FKCONFIGTERMINAL.equals("null")) {
                 String insert = "UPDATE Terminal set fkConfigTerminal = "
@@ -339,7 +340,7 @@ public class Monitoracao {
                     + "memoriaTerminal,discoTerminal,sistemaOperacionalTerminal)"
                     + "values ('" + processador + "','"
                     + ram + "','" + disco + "','" + so + "'" + ");";
-            
+
             //Atualizar terminal atual com a nova configuração
             String insert2 = "UPDATE Terminal set fkConfigTerminal = "
                     + IDCONFIGTERMINAL + " where idTerminal = "
