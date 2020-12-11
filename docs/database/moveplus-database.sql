@@ -25,35 +25,39 @@ idConfigTerminal int primary key identity,
 processadorTerminal varchar(45),
 memoriaTerminal varchar (45),
 discoTerminal varchar(45),
-sistemaOperacionalTerminal varchar(45)
+sistemaOperacionalTerminal varchar(75)
 );
 
 create table Terminal(
 idTerminal int primary key identity,
-statusTerminal varchar check (statusTerminal IN ('Operante','Não Operante','Manutencao')),
+nomeTerminal varchar(10),
+statusTerminal varchar,
 seriesNumberTerminal char(10),
 fkEstacao int,
 fkEmpresaTerminal int,
 fkConfigTerminal int,
 foreign key (fkEstacao) references Estacao (idEstacao),
 foreign key (fkEmpresaTerminal) references EmpresaTerminal(idEmpresaTerminal),
-foreign key (fkConfigTerminal) references ConfigTerminal(idConfigTerminal)
+foreign key (fkConfigTerminal) references ConfigTerminal(idConfigTerminal),
+
+check (statusTerminal = 'Operante' or statusTerminal = 'Inoperante' or statusTerminal = 'Manutencao')
 );
 
-create table Erro(
-idErro int primary key IDENTITY,
-nomeErro varchar(25),
-nivelErro varchar check (nivelErro IN ('Baixo','Medio','Alto','Critico')),
-tempoManutencaoErro time
+create table Alerta(
+idAlerta int primary key IDENTITY,
+nomeAlerta varchar(25),
+nivelAlerta varchar(5),
+
+check (nivelAlerta = 'Alto' or nivelAlerta = 'Médio' or nivelAlerta = 'Baixo')
 );
 
-create table TerminalErro(
-datahoraTerminalErro datetime,
+create table TerminalAlerta(
+datahoraTerminalAlerta datetime,
 fkTerminal int,
-fkErro int,
+fkAlerta int,
 foreign key (fkTerminal) references Terminal (idTerminal),
-foreign key (fkErro) references Erro (idErro),
-primary key (fkTerminal, fkErro),
+foreign key (fkAlerta) references Alerta (idAlerta),
+primary key (fkTerminal, Alerta),
 );
 
 create table Monitoracao( 
@@ -61,7 +65,6 @@ idMonitoracao int primary key identity,
 memoriaMonitoracao decimal (4,2),
 cpuMonitoracao decimal (4,2),
 discoMonitoracao decimal (4,2),
-redeMonitoracao decimal (4,2),
 dataHoraMonitoracao datetime,
 fkTerminal int,
 foreign key (fkTerminal) references Terminal (idTerminal)
