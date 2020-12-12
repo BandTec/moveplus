@@ -227,8 +227,6 @@ public class Monitoracao {
             //Caso exista...
             if (select.size() > 0) {
 
-                
-
                 //Salvando o FkConfigTerminal
                 String fkConfig = lista.get(5);
                 fkConfig = fkConfig.replaceAll("fkConfigTerminal=", "");
