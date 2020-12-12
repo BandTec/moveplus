@@ -340,7 +340,7 @@ public class Monitoracao {
         IDCONFIGTERMINAL = idConfig;
 
         //SE A CONFIGURAÇÃO EXISTIR...
-        if (lista.size() > 1) {
+        if (lista.size() > 0) {
             //SE O TERMINAL NÃO POSSUIR CONFIGURAÇÃO, INSERIR CONFIGURAÇÃO
             if (FKCONFIGTERMINAL.equals("null")) {
                 System.out.println("TERMINAL SEM CONFIGURAÇÃO");
