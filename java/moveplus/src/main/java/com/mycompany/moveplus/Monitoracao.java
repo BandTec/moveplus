@@ -206,23 +206,24 @@ public class Monitoracao {
             onlyNumber = true;
         }
 
+        //Caso o id possua somente numeros
         if (onlyNumber) {
 
             //Buscando se o ID fornecido existe
             List<String> select = con.query("SELECT * FROM Terminal "
                     + "where idTerminal = " + id + ";",
                     new BeanPropertyRowMapper(Terminal.class));
-            
-            //Criando a lista com o resultado da query
-                String txt = String.format("%s", select);
-                String str[] = txt.split(",");
-                List<String> lista = new ArrayList();
-                lista = Arrays.asList(str);
 
-                //Salvando o ID
-                id = lista.get(0);
-                id = id.replace("[idTerminal=", "");
-                IDTERMINAL = id;
+            //Criando a lista com o resultado da query
+            String txt = String.format("%s", select);
+            String str[] = txt.split(",");
+            List<String> lista = new ArrayList();
+            lista = Arrays.asList(str);
+
+            //Salvando o ID
+            id = lista.get(0);
+            id = id.replace("[idTerminal=", "");
+            IDTERMINAL = id;
 
             //Caso exista...
             if (select.size() > 0) {
@@ -236,13 +237,14 @@ public class Monitoracao {
                 System.out.println("FKCONFIGTERMINAL = " + fkConfig);
                 return id;
 
+            } else { //Caso não exista, dê erro
+                System.out.println("TERMINAL INVÁLIDO");
+                System.exit(1);
             }
-        } else { //Caso não exista, dê erro
-            System.out.println("TERMINAL INVÁLIDO");
+        } else { //Caso não tenha algo além de números
+            System.out.println("TERMINAL INVÁLIDO - DIGITE APENAS O ID");
             System.exit(1);
-
         }
-
         return "";
     }
 
@@ -341,6 +343,7 @@ public class Monitoracao {
         if (lista.size() > 1) {
             //SE O TERMINAL NÃO POSSUIR CONFIGURAÇÃO, INSERIR CONFIGURAÇÃO
             if (FKCONFIGTERMINAL.equals("null")) {
+                System.out.println("TERMINAL SEM CONFIGURAÇÃO");
                 String insert = "UPDATE Terminal set fkConfigTerminal = "
                         + IDCONFIGTERMINAL + " where idTerminal = "
                         + IDTERMINAL + ";";
@@ -354,17 +357,42 @@ public class Monitoracao {
 
         } else { //SENÃO...
             //Inserir uma nova configuração
-            String insert = "INSERT INTO ConfigTerminal (processadorTerminal,"
-                    + "memoriaTerminal,discoTerminal,sistemaOperacionalTerminal)"
-                    + "values ('" + processador + "','"
-                    + ram + "','" + disco + "','" + so + "'" + ");";
+            System.out.println("INSERINDO UMA NOVA CONFIGURAÇÃO");
+            String insert = "INSERT INTO ConfigTerminal values ('"
+                    + processador + "','"
+                    + ram + "','"
+                    + disco + "','"
+                    + so + "');";
+
+            con.update(insert);
+
+            //Buscando se existe uma configuração igual a da máquina já existente
+            List<String> select2 = con.query("SELECT idConfigTerminal FROM ConfigTerminal where "
+                    + "processadorTerminal = '" + processador + "' and "
+                    + "memoriaTerminal = " + ram + " and "
+                    + "discoTerminal = " + disco + " and "
+                    + "sistemaOperacionalTerminal = '" + so + "';",
+                    new BeanPropertyRowMapper(ConfigTerminal.class
+                    ));
+
+            //Criando a lista
+            String txt2 = String.format("%s", select2);
+            String str2[] = txt2.split(",");
+            List<String> lista2 = new ArrayList();
+            lista2 = Arrays.asList(str2);
+
+            //Formatando valores para serem guarrdados
+            idConfig = lista2.get(0);
+            idConfig = idConfig.replace("[ConfigTerminal{idConfigTerminal=","");
+            IDCONFIGTERMINAL = idConfig;
+            System.out.println("IDCONFIGTERMINAL = "+IDCONFIGTERMINAL);
 
             //Atualizar terminal atual com a nova configuração
+            System.out.println("VINCULANDO NOVA CONFIGURAÇÃO AO TERMINAL");
             String insert2 = "UPDATE Terminal set fkConfigTerminal = "
                     + IDCONFIGTERMINAL + " where idTerminal = "
                     + IDTERMINAL + ";";
 
-            con.update(insert);
             con.update(insert2);
         }
 
