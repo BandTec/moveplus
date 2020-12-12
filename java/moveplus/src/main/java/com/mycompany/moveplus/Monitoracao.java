@@ -212,11 +212,8 @@ public class Monitoracao {
             List<String> select = con.query("SELECT * FROM Terminal "
                     + "where idTerminal = " + id + ";",
                     new BeanPropertyRowMapper(Terminal.class));
-
-            //Caso exista...
-            if (select.size() > 0) {
-
-                //Criando a lista com o resultado da query
+            
+            //Criando a lista com o resultado da query
                 String txt = String.format("%s", select);
                 String str[] = txt.split(",");
                 List<String> lista = new ArrayList();
@@ -226,6 +223,11 @@ public class Monitoracao {
                 id = lista.get(0);
                 id = id.replace("[idTerminal=", "");
                 IDTERMINAL = id;
+
+            //Caso exista...
+            if (select.size() > 0) {
+
+                
 
                 //Salvando o FkConfigTerminal
                 String fkConfig = lista.get(5);
@@ -364,7 +366,8 @@ public class Monitoracao {
                     + IDCONFIGTERMINAL + " where idTerminal = "
                     + IDTERMINAL + ";";
 
-            con.update(insert,insert2);
+            con.update(insert);
+            con.update(insert2);
         }
 
     }
