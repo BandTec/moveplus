@@ -206,35 +206,37 @@ public class Monitoracao {
             onlyNumber = true;
         }
 
-        //Buscando se o ID fornecido existe
-        List<String> select = con.query("SELECT * FROM Terminal "
-                + "where idTerminal = " + id + ";",
-                new BeanPropertyRowMapper(Terminal.class));
+        if (onlyNumber) {
 
-        //Caso exista...
-        if (select.size() > 0 && onlyNumber) {
+            //Buscando se o ID fornecido existe
+            List<String> select = con.query("SELECT * FROM Terminal "
+                    + "where idTerminal = " + id + ";",
+                    new BeanPropertyRowMapper(Terminal.class));
 
-            //Criando a lista com o resultado da query
-            String txt = String.format("%s", select);
-            String str[] = txt.split(",");
-            List<String> lista = new ArrayList();
-            lista = Arrays.asList(str);
+            //Caso exista...
+            if (select.size() > 0) {
 
-            //Salvando o ID
-            id = lista.get(0);
-            id = id.replace("[idTerminal=", "");
-            IDTERMINAL = id;
+                //Criando a lista com o resultado da query
+                String txt = String.format("%s", select);
+                String str[] = txt.split(",");
+                List<String> lista = new ArrayList();
+                lista = Arrays.asList(str);
 
-            //Salvando o FkConfigTerminal
-            String fkConfig = lista.get(5);
-            fkConfig = fkConfig.replaceAll("fkConfigTerminal=", "");
-            fkConfig = fkConfig.replaceAll("]", "");
-            fkConfig = fkConfig.replaceAll(" ", "");
-            System.out.println(fkConfig);
-            FKCONFIGTERMINAL = fkConfig;
+                //Salvando o ID
+                id = lista.get(0);
+                id = id.replace("[idTerminal=", "");
+                IDTERMINAL = id;
 
-            return id;
+                //Salvando o FkConfigTerminal
+                String fkConfig = lista.get(5);
+                fkConfig = fkConfig.replaceAll("fkConfigTerminal=", "");
+                fkConfig = fkConfig.replaceAll("]", "");
+                fkConfig = fkConfig.replaceAll(" ", "");
+                FKCONFIGTERMINAL = fkConfig;
+                System.out.println("FKCONFIGTERMINAL = " + fkConfig);
+                return id;
 
+            }
         } else { //Caso não exista, dê erro
             System.out.println("TERMINAL INVÁLIDO");
             System.exit(1);
