@@ -280,7 +280,7 @@ public class Monitoracao {
         cpulist = Arrays.asList(str);
 
         //Formatando dados do processador para envio ao banco
-        String cpux = cpulist.get(0) + cpulist.get(1) + cpulist.get(2) + cpulist.get(3);
+        String cpux = cpulist.get(0) + cpulist.get(1) + cpulist.get(2);
 
         return cpux;
     }
@@ -364,8 +364,7 @@ public class Monitoracao {
                     + IDCONFIGTERMINAL + " where idTerminal = "
                     + IDTERMINAL + ";";
 
-            con.update(insert);
-            con.update(insert2);
+            con.update(insert,insert2);
         }
 
     }

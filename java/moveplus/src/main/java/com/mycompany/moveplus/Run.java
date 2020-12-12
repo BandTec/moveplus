@@ -27,6 +27,8 @@ public class Run {
         
         //Instanciando a classe de Monitoracao
         Monitoracao mpo = new Monitoracao();
+        
+        mpo.catchCpu();
 
         //Recebendo informações de login
         System.out.println("Digite seu email");
