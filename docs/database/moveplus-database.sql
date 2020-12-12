@@ -22,16 +22,16 @@ emailEmpresaTerminal varchar (45)
 
 create table ConfigTerminal(
 idConfigTerminal int primary key identity,
-processadorTerminal varchar(45),
-memoriaTerminal varchar (45),
-discoTerminal varchar(45),
-sistemaOperacionalTerminal varchar(75)
+processadorTerminal varchar(30),
+memoriaTerminal varchar (30),
+discoTerminal varchar(30),
+sistemaOperacionalTerminal varchar(100)
 );
 
 create table Terminal(
 idTerminal int primary key identity,
-nomeTerminal varchar(10),
-statusTerminal varchar,
+nomeTerminal varchar(15),
+statusTerminal varchar(10),
 seriesNumberTerminal char(10),
 fkEstacao int,
 fkEmpresaTerminal int,
@@ -45,7 +45,7 @@ check (statusTerminal = 'Operante' or statusTerminal = 'Inoperante' or statusTer
 
 create table Alerta(
 idAlerta int primary key IDENTITY,
-nomeAlerta varchar(25),
+nomeAlerta varchar(100),
 nivelAlerta varchar(5),
 
 check (nivelAlerta = 'Alto' or nivelAlerta = 'Médio' or nivelAlerta = 'Baixo')
@@ -57,7 +57,7 @@ fkTerminal int,
 fkAlerta int,
 foreign key (fkTerminal) references Terminal (idTerminal),
 foreign key (fkAlerta) references Alerta (idAlerta),
-primary key (fkTerminal, Alerta),
+primary key (fkTerminal, fkAlerta)
 );
 
 create table Monitoracao( 

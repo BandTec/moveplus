@@ -28,7 +28,7 @@ public class Log {
         //Criação do objeto para gravar no arquivo
         PrintWriter gravarArq = new PrintWriter(arq);
 
-        gravarArq.printf("\n%s - %s - USO DE CPU SUPERIOR A 50%s"
+        gravarArq.printf("\n%s - %s - USO DE CPU SUPERIOR A 90%s"
                 + "\nDetalhes:"
                 + "\nCPU: %s", dataDia, hora, porc,txt
                 + "------------------------\n");
@@ -41,7 +41,7 @@ public class Log {
 
         //Criação do objeto para gravar no arquivo
         PrintWriter gravarArq = new PrintWriter(arq);
-        gravarArq.printf("\n%s - %s -USO DE RAM SUPERIOR A 50%s"
+        gravarArq.printf("\n%s - %s -USO DE RAM SUPERIOR A 90%s"
                 + "\nDetalhes:"
                 + "\nRAM: %s", dataDia, hora,porc, txtRam
                 + "------------------------\n");
