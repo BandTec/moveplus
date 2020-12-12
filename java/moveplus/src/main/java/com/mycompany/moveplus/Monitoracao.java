@@ -5,6 +5,7 @@
  */
 package com.mycompany.moveplus;
 
+import static java.awt.SystemColor.text;
 import java.io.File;
 import org.json.JSONObject;
 import java.util.List;
@@ -21,6 +22,7 @@ import oshi.software.os.OperatingSystem;
 import oshi.hardware.NetworkIF;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.regex.Pattern;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import oshi.util.FormatUtil;
@@ -193,13 +195,24 @@ public class Monitoracao {
         ConnectionDatabase config = new ConnectionDatabase();
         JdbcTemplate con = new JdbcTemplate(config.getDatasource());
 
+        //Variável para guardar se o id fornecido contém apenas números ou não
+        Boolean onlyNumber;
+        String regex = "\\d+";
+
+        //Se contiver algo além de números, onlyNumber = false;
+        if (id.matches(regex) == false) {
+            onlyNumber = false;
+        } else { //se for apenas número, onlyNumber = true;
+            onlyNumber = true;
+        }
+
         //Buscando se o ID fornecido existe
         List<String> select = con.query("SELECT * FROM Terminal "
                 + "where idTerminal = " + id + ";",
                 new BeanPropertyRowMapper(Terminal.class));
 
         //Caso exista...
-        if (select.size() > 0) {
+        if (select.size() > 0 && onlyNumber) {
 
             //Criando a lista com o resultado da query
             String txt = String.format("%s", select);
@@ -227,6 +240,7 @@ public class Monitoracao {
             System.exit(1);
 
         }
+
         return "";
     }
 
@@ -240,7 +254,8 @@ public class Monitoracao {
         //Buscando se o login e senha fornecidos existem
         List<String> select = con.query("SELECT * FROM UsuarioEstacao where "
                 + "emailUsuarioEstacao = '" + user + "' and "
-                + "senhaUsuarioEstacao = '" + pass + "';", new BeanPropertyRowMapper(UsuarioEstacao.class));
+                + "senhaUsuarioEstacao = '" + pass + "';", new BeanPropertyRowMapper(UsuarioEstacao.class
+                ));
 
         //Caso exista
         if (select.size() > 0) {
@@ -306,7 +321,8 @@ public class Monitoracao {
                 + "memoriaTerminal = " + ram + " and "
                 + "discoTerminal = " + disco + " and "
                 + "sistemaOperacionalTerminal = '" + so + "';",
-                new BeanPropertyRowMapper(ConfigTerminal.class));
+                new BeanPropertyRowMapper(ConfigTerminal.class
+                ));
 
         //Criando a lista
         String txt = String.format("%s", select);
@@ -320,7 +336,7 @@ public class Monitoracao {
         IDCONFIGTERMINAL = idConfig;
 
         //SE A CONFIGURAÇÃO EXISTIR...
-        if (select.size() > 0) {
+        if (lista.size() > 1) {
             //SE O TERMINAL NÃO POSSUIR CONFIGURAÇÃO, INSERIR CONFIGURAÇÃO
             if (FKCONFIGTERMINAL.equals("null")) {
                 String insert = "UPDATE Terminal set fkConfigTerminal = "
@@ -330,7 +346,7 @@ public class Monitoracao {
             }
             //Caso o terminal já possua uma configuração, dê erro
             if (!FKCONFIGTERMINAL.equals("null") && !FKCONFIGTERMINAL.equals(IDCONFIGTERMINAL)) {
-                System.out.println("TERMINAL INVÁLIDO");
+                System.out.println("TERMINAL FORNECIDO NÃO CORRESPONDE AO HARDWARE ENCONTRADO");
                 System.exit(1);
             }
 
