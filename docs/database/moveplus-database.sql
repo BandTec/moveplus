@@ -52,12 +52,12 @@ check (nivelAlerta = 'Alto' or nivelAlerta = 'Médio' or nivelAlerta = 'Baixo')
 );
 
 create table TerminalAlerta(
-datahoraTerminalAlerta datetime,
+dataHoraTerminalAlerta datetime,
 fkTerminal int,
 fkAlerta int,
 foreign key (fkTerminal) references Terminal (idTerminal),
 foreign key (fkAlerta) references Alerta (idAlerta),
-primary key (fkTerminal, fkAlerta)
+primary key (dataHoraTerminalAlerta,fkTerminal, fkAlerta)
 );
 
 create table Monitoracao( 
