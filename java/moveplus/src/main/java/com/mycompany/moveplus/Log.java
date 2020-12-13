@@ -9,6 +9,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Date;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 /**
  *
@@ -21,43 +22,64 @@ public class Log {
     String hora = dataHora.getHours() + ":" + dataHora.getMinutes() + ":" + dataHora.getSeconds();
     String porc = "%";
 
-    public void altoUsoCpu(String txt) throws IOException, Exception {
+    Monitoracao mpo = new Monitoracao();
 
-        FileWriter arq = new FileWriter("C:\\txt2\\LOG.txt", true);
+    //Chamando a conexão com o Azure
+    ConnectionDatabase config = new ConnectionDatabase();
+    JdbcTemplate con = new JdbcTemplate(config.getDatasource());
+
+    public void altoUsoRam(String txtRam, String fkTerminal) throws IOException, Exception {
+
+        String insert = "INSERT INTO TerminalAlerta values ('"
+                + mpo.dataHora() + "'," + fkTerminal + ", 1);";
+
+        con.update(insert);
+
+        FileWriter arq = new FileWriter("./LOG.txt", true);
+
+        //Criação do objeto para gravar no arquivo
+        PrintWriter gravarArq = new PrintWriter(arq);
+        gravarArq.printf("\n%s - %s -USO DE RAM SUPERIOR A 90%s"
+                + "\nDetalhes:"
+                + "\nRAM: %s", dataDia, hora, porc, txtRam
+                + "------------------------\n");
+        arq.close();
+    }
+
+    public void altoUsoCpu(String txt, String fkTerminal) throws IOException, Exception {
+
+        String insert = "INSERT INTO TerminalAlerta values ('"
+                + mpo.dataHora() + "'," + fkTerminal + ", 2);";
+
+        con.update(insert);
+
+        FileWriter arq = new FileWriter("./LOG.txt", true);
 
         //Criação do objeto para gravar no arquivo
         PrintWriter gravarArq = new PrintWriter(arq);
 
         gravarArq.printf("\n%s - %s - USO DE CPU SUPERIOR A 90%s"
                 + "\nDetalhes:"
-                + "\nCPU: %s", dataDia, hora, porc,txt
+                + "\nCPU: %s", dataDia, hora, porc, txt
                 + "------------------------\n");
         arq.close();
+
     }
 
-    public void altoUsoRam(String txtRam) throws IOException, Exception {
+    public void altoUsoDisco(String txtDisco, String fkTerminal) throws IOException, Exception {
+        String insert = "INSERT INTO TerminalAlerta values ('"
+                + mpo.dataHora() + "'," + fkTerminal + ", 2);";
 
-        FileWriter arq = new FileWriter("C:\\txt2\\LOG.txt", true);
+        con.update(insert);
 
-        //Criação do objeto para gravar no arquivo
-        PrintWriter gravarArq = new PrintWriter(arq);
-        gravarArq.printf("\n%s - %s -USO DE RAM SUPERIOR A 90%s"
-                + "\nDetalhes:"
-                + "\nRAM: %s", dataDia, hora,porc, txtRam
-                + "------------------------\n");
-        arq.close();
-    }
-
-    public void altoUsoDisco(String txtDisco) throws IOException, Exception {
-
-        FileWriter arq = new FileWriter("C:\\txt2\\LOG.txt", true);
+        FileWriter arq = new FileWriter("./LOG.txt", true);
 
         //Criação do objeto para gravar no arquivo
         PrintWriter gravarArq = new PrintWriter(arq);
 
         gravarArq.printf("\n%s - %s - USO DE DISCO SUPERIOR A 50%s"
                 + "\nDetalhes:"
-                + "\nDISCO: %s", dataDia, hora,porc, txtDisco
+                + "\nDISCO: %s", dataDia, hora, porc, txtDisco
                 + "------------------------\n");
 
         arq.close();

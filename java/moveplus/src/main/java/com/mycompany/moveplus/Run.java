@@ -6,10 +6,8 @@
 package com.mycompany.moveplus;
 
 import java.util.Scanner;
-import org.json.JSONObject;
 import org.springframework.jdbc.core.JdbcTemplate;
 import oshi.util.Util;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 
 /**
  *

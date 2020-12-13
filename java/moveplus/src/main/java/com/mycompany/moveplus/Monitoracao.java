@@ -38,9 +38,9 @@ public class Monitoracao {
     Integer contdisco = 0;
 
     //Constantes para armazenar informações do terminal
-    String IDTERMINAL = "";
-    String IDCONFIGTERMINAL = "";
-    String FKCONFIGTERMINAL = "";
+    String IDTERMINAL;
+    String IDCONFIGTERMINAL;
+    String FKCONFIGTERMINAL;
 
     //Criando uma nova classe de infos do Sistema
     SystemInfo si = new SystemInfo();
@@ -55,6 +55,7 @@ public class Monitoracao {
     //Pegando dados de uso de memória RAM
     public String usoRam() throws Exception {
         Alertas alert = new Alertas();
+        Log log = new Log();
 
         //Código para pegar informações de RAM
         //Pegando o dado de total de RAM e convertendo para double
@@ -72,11 +73,12 @@ public class Monitoracao {
         valorRam = valorRam.replace(",", ".");
 
         //Verificando se a porcentagem de uso da RAM está muito alta
-        if (pctUsedRam > 90.0) {
+        if (pctUsedRam > 60.0) {
             contram++;
             //Caso esteja muito alta por 1 minuto, gerar log e enviar alerta
             if (contram == 12) {
                 alert.ram();
+                log.altoUsoRam(valorRam,IDTERMINAL);
                 contram = 0;
             }
         } else { //Caso o uso esteja abaixo de 90%, zerar contador
@@ -86,9 +88,28 @@ public class Monitoracao {
         return valorRam;
     }
 
+    //Convertendo dados de hardware de memória
+    public String catchRam() {
+        //Convertendo double para String
+        String memtxt = String.format("%s", memoria);
+
+        //Criando a lista
+        String list1 = memtxt;
+        String str[] = list1.split(" ");
+        List<String> list = new ArrayList<String>();
+        list = Arrays.asList(str);
+
+        //Formatando dados da memória para envio ao banco
+        String ramx = list.get(2);
+        ramx = ramx.replaceAll("GiB/", "");
+        ramx = ramx.replaceAll(",", ".");
+
+        return ramx;
+    }
+
     //Pegando uso de CPU
     public String usoCpu() throws Exception {
-
+        Log log = new Log();
         Alertas alert = new Alertas();
         //Variavel com o valor de uso da CPU
         Double pctCpu = cpu.getSystemCpuLoadBetweenTicks(oldTricks);
@@ -99,11 +120,12 @@ public class Monitoracao {
         valorCpu = valorCpu.replace(",", ".");
 
         //Verificando se o uso é superior a 90%
-        if (pctCpu > 90.0) {
+        if (pctCpu > 01.0) {
             contcpu++;
             //Caso o uso de mantenha acima de 90% durante 1 minuto, gerar log e enviar aleta
             if (contcpu == 12) {
                 alert.cpu();
+                log.altoUsoCpu(valorCpu,IDTERMINAL);
                 contcpu = 0;
             }
         } else { //Caso contrário, zere o contador
@@ -112,9 +134,27 @@ public class Monitoracao {
         return valorCpu;
     }
 
+    //Convertendo dados de hardware do processador
+    public String catchCpu() {
+        //Convertendo double para String
+        String cputxt = String.format("%s", cpu);
+
+        //Criando lista
+        String list1 = cputxt;
+        String str[] = list1.split(" ");
+        List<String> cpulist = new ArrayList<String>();
+        cpulist = Arrays.asList(str);
+
+        //Formatando dados do processador para envio ao banco
+        String cpux = cpulist.get(0) + cpulist.get(1) + cpulist.get(2);
+
+        return cpux;
+    }
+
     //Pegando uso de Disco
     public String usoDisco() throws Exception {
         Alertas alert = new Alertas();
+        Log log = new Log();
         File[] roots = File.listRoots();
         for (File root : roots) {
             double free = (double) ((root.getUsableSpace() / 1024) / 1024) / 1024;
@@ -130,6 +170,8 @@ public class Monitoracao {
                 //Se o uso for superior a 50% durante uma hora, enviar alerta;
                 if (contdisco == 720) {
                     alert.disco();
+                    log.altoUsoDisco(disco,IDTERMINAL);
+
                 }
 
             } else { //Caso uso seja inferior, zerar contador
@@ -270,42 +312,6 @@ public class Monitoracao {
         }
     }
 
-    //Convertendo dados de hardware do processador
-    public String catchCpu() {
-        //Convertendo double para String
-        String cputxt = String.format("%s", cpu);
-
-        //Criando lista
-        String list1 = cputxt;
-        String str[] = list1.split(" ");
-        List<String> cpulist = new ArrayList<String>();
-        cpulist = Arrays.asList(str);
-
-        //Formatando dados do processador para envio ao banco
-        String cpux = cpulist.get(0) + cpulist.get(1) + cpulist.get(2);
-
-        return cpux;
-    }
-
-    //Convertendo dados de hardware de memória
-    public String catchRam() {
-        //Convertendo double para String
-        String memtxt = String.format("%s", memoria);
-
-        //Criando a lista
-        String list1 = memtxt;
-        String str[] = list1.split(" ");
-        List<String> list = new ArrayList<String>();
-        list = Arrays.asList(str);
-
-        //Formatando dados da memória para envio ao banco
-        String ramx = list.get(2);
-        ramx = ramx.replaceAll("GiB/", "");
-        ramx = ramx.replaceAll(",", ".");
-
-        return ramx;
-    }
-
     //Validando configurações da máquina com o banco
     public void checkConfig() throws Exception {
 
@@ -383,9 +389,9 @@ public class Monitoracao {
 
             //Formatando valores para serem guarrdados
             idConfig = lista2.get(0);
-            idConfig = idConfig.replace("[ConfigTerminal{idConfigTerminal=","");
+            idConfig = idConfig.replace("[ConfigTerminal{idConfigTerminal=", "");
             IDCONFIGTERMINAL = idConfig;
-            System.out.println("IDCONFIGTERMINAL = "+IDCONFIGTERMINAL);
+            System.out.println("IDCONFIGTERMINAL = " + IDCONFIGTERMINAL);
 
             //Atualizar terminal atual com a nova configuração
             System.out.println("VINCULANDO NOVA CONFIGURAÇÃO AO TERMINAL");

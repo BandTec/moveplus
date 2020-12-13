@@ -1,0 +1,60 @@
+
+12/12/2020 - 20:33:0 -USO DE RAM SUPERIOR A 90%
+Detalhes:
+RAM: 67.62------------------------
+
+12/12/2020 - 20:35:10 - USO DE CPU SUPERIOR A 90%
+Detalhes:
+CPU: 7.04------------------------
+
+12/12/2020 - 20:35:10 -USO DE RAM SUPERIOR A 90%
+Detalhes:
+RAM: 67.99------------------------
+
+12/12/2020 - 20:36:20 - USO DE CPU SUPERIOR A 90%
+Detalhes:
+CPU: 6.74------------------------
+
+12/12/2020 - 20:36:20 -USO DE RAM SUPERIOR A 90%
+Detalhes:
+RAM: 68.36------------------------
+
+12/12/2020 - 20:37:25 - USO DE CPU SUPERIOR A 90%
+Detalhes:
+CPU: 6.66------------------------
+
+12/12/2020 - 20:37:25 -USO DE RAM SUPERIOR A 90%
+Detalhes:
+RAM: 68.34------------------------
+
+12/12/2020 - 21:30:19 - USO DE CPU SUPERIOR A 90%
+Detalhes:
+CPU: 26.82------------------------
+
+12/12/2020 - 21:30:23 -USO DE RAM SUPERIOR A 90%
+Detalhes:
+RAM: 65.71------------------------
+
+12/12/2020 - 21:44:59 - USO DE CPU SUPERIOR A 90%
+Detalhes:
+CPU: 22.05------------------------
+
+12/12/2020 - 21:45:3 -USO DE RAM SUPERIOR A 90%
+Detalhes:
+RAM: 73.00------------------------
+
+12/12/2020 - 21:46:56 - USO DE CPU SUPERIOR A 90%
+Detalhes:
+CPU: 22.80------------------------
+
+12/12/2020 - 21:47:0 -USO DE RAM SUPERIOR A 90%
+Detalhes:
+RAM: 72.26------------------------
+
+12/12/2020 - 21:48:55 - USO DE CPU SUPERIOR A 90%
+Detalhes:
+CPU: 24.07------------------------
+
+12/12/2020 - 21:48:59 -USO DE RAM SUPERIOR A 90%
+Detalhes:
+RAM: 72.42------------------------
