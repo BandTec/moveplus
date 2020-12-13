@@ -51,8 +51,6 @@ public class Telas extends javax.swing.JFrame {
         gerarGrafico(grafRam, graficoMemoria);
         cardLayout = (CardLayout) (pnlCards.getLayout());
         txtSenha1.setEchoChar('\u0000');
-        pnlBtns.setVisible(false);
-        btnCadastrar.setVisible(false);
     }
 
     void executarProcessos() {
@@ -103,27 +101,13 @@ public class Telas extends javax.swing.JFrame {
     }
 //----
 
-    public void Login() throws Exception {
-        String erro = "Erro. Usuário e/ou senha incorretos.";
-        
-//        mp.checkLogin();
-//        String login = txtLogin1.getText();
-//        String password = txtSenha1.getText();
-//
-//        pnlBtns;
-        btnCadastrar.setVisible(true);
-//
-//        if (login.equals("root") && password.equals("root")) {
-//            pnlBtns.setVisible(true);
-//            btnCadastrar.setVisible(true);
-//            switchPanels(jpnlD);
-//            lblprocessador.setText(mp.catchCpu());
-//            lblSO.setText(mp.catchSO());
-//            lblMemoria.setText(mp.catchRam() + "Gb");
-//            lblDisco.setText(mp.catchDiskSize() + "Gb");
-//        } else {
-//            lblResult.setText("Login Inválido!");
-//        }
+    public void startMenu() throws Exception {
+
+            lblprocessador.setText(mp.catchCpu());
+            lblSO.setText(mp.catchSO());
+            lblMemoria.setText(mp.catchRam() + "GB");
+            lblDisco.setText(mp.catchDiskSize() + "GB");
+
     }
 //----
 
@@ -617,6 +601,7 @@ public class Telas extends javax.swing.JFrame {
     jLabel23.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
     jLabel23.setText("manutenção");
 
+    btnMudarStatus.setText("DESATIVAR");
     btnMudarStatus.setFont(new java.awt.Font("Waree", 1, 15)); // NOI18N
     btnMudarStatus.setkEndColor(new java.awt.Color(255, 153, 153));
     btnMudarStatus.setkHoverEndColor(new java.awt.Color(153, 255, 255));
@@ -624,7 +609,6 @@ public class Telas extends javax.swing.JFrame {
     btnMudarStatus.setkHoverStartColor(new java.awt.Color(51, 204, 255));
     btnMudarStatus.setkPressedColor(new java.awt.Color(153, 255, 204));
     btnMudarStatus.setkStartColor(new java.awt.Color(255, 153, 153));
-    btnMudarStatus.setLabel("SUSPENDER");
     btnMudarStatus.addActionListener(new java.awt.event.ActionListener() {
         public void actionPerformed(java.awt.event.ActionEvent evt) {
             btnMudarStatusActionPerformed(evt);
@@ -769,6 +753,7 @@ public class Telas extends javax.swing.JFrame {
     jLabel25.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
     jLabel25.setIcon(new javax.swing.ImageIcon(getClass().getResource("/logopqn.png"))); // NOI18N
 
+    btnManutencao.setText("Status");
     btnManutencao.setFont(new java.awt.Font("Ubuntu", 0, 15)); // NOI18N
     btnManutencao.setkEndColor(new java.awt.Color(102, 255, 255));
     btnManutencao.setkHoverEndColor(new java.awt.Color(255, 255, 255));
@@ -777,7 +762,6 @@ public class Telas extends javax.swing.JFrame {
     btnManutencao.setkPressedColor(new java.awt.Color(0, 204, 204));
     btnManutencao.setkSelectedColor(new java.awt.Color(255, 255, 255));
     btnManutencao.setkStartColor(new java.awt.Color(51, 204, 255));
-    btnManutencao.setLabel("Manutenção");
     btnManutencao.addActionListener(new java.awt.event.ActionListener() {
         public void actionPerformed(java.awt.event.ActionEvent evt) {
             btnManutencaoActionPerformed(evt);
@@ -1072,7 +1056,7 @@ public class Telas extends javax.swing.JFrame {
             .addComponent(kGradientPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addGap(37, 37, 37)
             .addComponent(btnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addContainerGap(89, Short.MAX_VALUE))
+            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
     );
 
     jLayeredPane1.setLayer(pnlMenu, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -1098,7 +1082,7 @@ public class Telas extends javax.swing.JFrame {
         jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
         .addGroup(jLayeredPane1Layout.createSequentialGroup()
             .addComponent(pnlLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGap(0, 8, Short.MAX_VALUE))
+            .addGap(0, 0, Short.MAX_VALUE))
         .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(pnlMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1139,7 +1123,7 @@ public class Telas extends javax.swing.JFrame {
        
         if (mp.LOGINVALIDO) {
             switchPanels(jpnlD);
-            btnCadastrar.setVisible(true);
+//            btnCadastrar.setVisible(true);
         } else {
             lblResult.setText("Login Inválido!");
         }
@@ -1201,18 +1185,12 @@ public class Telas extends javax.swing.JFrame {
         }
 
         if (mp.IDVALIDO && mp.IDCONFIGVALIDO) {
-            jLayeredPane1.setVisible(true);
-            pnlBtns.setVisible(true);
-            pnlMenu.setVisible(true);
-            lblprocessador.setText(mp.catchCpu());
-            lblSO.setText(mp.catchSO());
-            lblMemoria.setText(mp.catchRam() + "Gb");
-            switchPanels(pnlMenu);
             try {
-                lblDisco.setText(mp.catchDiskSize() + "Gb");
+                startMenu();
             } catch (Exception ex) {
                 Logger.getLogger(Telas.class.getName()).log(Level.SEVERE, null, ex);
             }
+            switchPanels(pnlMenu);
         } else {
             lblResultID.setText("ID inválido! Entre em contato com a central!");
         }
@@ -1253,20 +1231,22 @@ public class Telas extends javax.swing.JFrame {
     }//GEN-LAST:event_btnClose1close
 
     private void btnMudarStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMudarStatusActionPerformed
-        lblStatus.setText("INOPERANTE");
+        lblStatus.setText("OPERANTE");
         if (operante) {
-            lblStatus.setText("INOPERANTE");
+            mp.manutencao(2);
+            lblStatus.setText("MANUTENCAO");
             lblStatus.setForeground(Color.decode("#FF9999"));
             btnMudarStatus.setkEndColor(Color.decode("#1CFEBA"));
             btnMudarStatus.setkStartColor(Color.decode("#1CFEBA"));
-            btnMudarStatus.setText("Ativar");
+            btnMudarStatus.setText("ATIVAR");
             operante = false;
         } else {
+            mp.manutencao(1);
             lblStatus.setText("OPERANTE");
             lblStatus.setForeground(Color.decode("#1CFEBA"));
             btnMudarStatus.setkEndColor(Color.decode("#FF9999"));
             btnMudarStatus.setkStartColor(Color.decode("#FF9999"));
-            btnMudarStatus.setText("Suspender");
+            btnMudarStatus.setText("DESATIVAR");
             operante = true;
         }
     }//GEN-LAST:event_btnMudarStatusActionPerformed

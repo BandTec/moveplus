@@ -359,7 +359,6 @@ public class Monitoracao {
         String idConfig = lista.get(0);
         idConfig = idConfig.replace("[ConfigTerminal{idConfigTerminal=", "");
         IDCONFIGTERMINAL = idConfig;
-        
 
         //SE A CONFIGURAÇÃO EXISTIR...
         if (select.size() > 0) {
@@ -417,9 +416,26 @@ public class Monitoracao {
                     + IDTERMINAL + ";";
 
             con.update(insert2);
-            
+
             IDCONFIGVALIDO = true;
         }
 
+    }
+
+    public void manutencao(Integer cod) {
+
+        //Chamando a conexão com o Azure
+        ConnectionDatabase config = new ConnectionDatabase();
+        JdbcTemplate con = new JdbcTemplate(config.getDatasource());
+
+        if (cod == 1) {
+            String update = "UPDATE TERMINAL set statusTerminal = 'Operante'"
+                    + "where idTerminal = " + IDTERMINAL + ";";
+            con.update(update);
+        } else {
+            String update = "UPDATE TERMINAL set statusTerminal = 'Manutencao'"
+                    + "where idTerminal = " + IDTERMINAL + ";";
+            con.update(update);
+        }
     }
 }
