@@ -20,7 +20,7 @@ import org.json.JSONObject;
 public class Slack {
     
 //    private static HttpClient client = HttpClient.newHttpClient();
-    private static final String url = "https://hooks.slack.com/services/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";
+    private static final String url = "https://hooks.slack.com/services/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";
     
     public void sendMessage(JSONObject message) throws Exception {
 

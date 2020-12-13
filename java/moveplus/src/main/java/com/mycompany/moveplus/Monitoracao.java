@@ -78,7 +78,7 @@ public class Monitoracao {
             //Caso esteja muito alta por 1 minuto, gerar log e enviar alerta
             if (contram == 12) {
                 alert.ram();
-                log.altoUsoRam(valorRam,IDTERMINAL);
+                log.altoUsoRam(valorRam, IDTERMINAL);
                 contram = 0;
             }
         } else { //Caso o uso esteja abaixo de 90%, zerar contador
@@ -125,7 +125,7 @@ public class Monitoracao {
             //Caso o uso de mantenha acima de 90% durante 1 minuto, gerar log e enviar aleta
             if (contcpu == 12) {
                 alert.cpu();
-                log.altoUsoCpu(valorCpu,IDTERMINAL);
+                log.altoUsoCpu(valorCpu, IDTERMINAL);
                 contcpu = 0;
             }
         } else { //Caso contrário, zere o contador
@@ -170,7 +170,7 @@ public class Monitoracao {
                 //Se o uso for superior a 50% durante uma hora, enviar alerta;
                 if (contdisco == 720) {
                     alert.disco();
-                    log.altoUsoDisco(disco,IDTERMINAL);
+                    log.altoUsoDisco(disco, IDTERMINAL);
 
                 }
 
@@ -195,6 +195,17 @@ public class Monitoracao {
             return a;
         }
         return "";
+    }
+
+    public String catchSO() {
+        String cpu = os.toString();
+        String nomeCurto = null;
+
+        if (cpu.length() > 20) {
+            String separadoCpu[] = cpu.split("\\s");
+            nomeCurto = String.format("%s %s %s", separadoCpu[0], separadoCpu[1], separadoCpu[2]);
+        }
+        return nomeCurto;
     }
 
     //Pegando dados de datetime

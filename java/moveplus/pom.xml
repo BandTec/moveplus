@@ -12,6 +12,11 @@
     </properties>
     <dependencies>
         <dependency>
+            <groupId>org.jfree</groupId>
+            <artifactId>jfreechart</artifactId>
+            <version>1.5.1</version>
+        </dependency>
+        <dependency>
             <groupId>com.github.oshi</groupId>
             <artifactId>oshi-core</artifactId>
             <version>5.3.0</version>
@@ -70,7 +75,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>com.mycompany.moveplus.Run</mainClass>
+                            <mainClass>com.mycompany.moveplus.Telas</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>
@@ -98,7 +103,7 @@
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <!-- <classpathPrefix>lib</classpathPrefix> -->
-                            <mainClass>com.mycompany.moveplus.Run</mainClass>
+                            <mainClass>com.mycompany.moveplus.Telas</mainClass>
                         </manifest>
                         <manifestEntries>
                             <Class-Path>lib/</Class-Path>
