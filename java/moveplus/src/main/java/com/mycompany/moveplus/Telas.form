@@ -399,6 +399,11 @@
                               </Properties>
                             </Component>
                             <Component class="javax.swing.JLabel" name="jLabel7">
+                              <Properties>
+                                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                                  <Image iconType="3" name="/Hardware.png"/>
+                                </Property>
+                              </Properties>
                             </Component>
                           </SubComponents>
                         </Container>
@@ -487,6 +492,11 @@
                               </Events>
                             </Component>
                             <Component class="javax.swing.JLabel" name="jLabel8">
+                              <Properties>
+                                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                                  <Image iconType="3" name="/Hardware.png"/>
+                                </Property>
+                              </Properties>
                             </Component>
                             <Container class="javax.swing.JPanel" name="graficoMemoria">
                               <Properties>
@@ -584,6 +594,11 @@
                               </Events>
                             </Component>
                             <Component class="javax.swing.JLabel" name="jLabel6">
+                              <Properties>
+                                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                                  <Image iconType="3" name="/Hardware.png"/>
+                                </Property>
+                              </Properties>
                             </Component>
                             <Container class="javax.swing.JScrollPane" name="jScrollPane1">
                               <Properties>
@@ -708,6 +723,11 @@
                               </Events>
                             </Component>
                             <Component class="javax.swing.JLabel" name="jLabel5">
+                              <Properties>
+                                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                                  <Image iconType="3" name="/Hardware.png"/>
+                                </Property>
+                              </Properties>
                             </Component>
                             <Container class="javax.swing.JPanel" name="graficoCpu">
                               <Properties>
@@ -796,6 +816,11 @@
                           </Layout>
                           <SubComponents>
                             <Component class="javax.swing.JLabel" name="jLabel22">
+                              <Properties>
+                                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                                  <Image iconType="3" name="/Hardware.png"/>
+                                </Property>
+                              </Properties>
                             </Component>
                             <Component class="javax.swing.JLabel" name="jLabel23">
                               <Properties>
@@ -1072,6 +1097,9 @@
                         <Component class="javax.swing.JLabel" name="jLabel25">
                           <Properties>
                             <Property name="horizontalAlignment" type="int" value="0"/>
+                            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                              <Image iconType="3" name="/logopqn.png"/>
+                            </Property>
                           </Properties>
                         </Component>
                         <Component class="keeptoo.KButton" name="btnManutencao">
@@ -1313,6 +1341,9 @@
                 </Container>
                 <Component class="javax.swing.JLabel" name="jLabel3">
                   <Properties>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/logoMp.png"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value=" "/>
                   </Properties>
                   <Constraints>
@@ -1385,13 +1416,18 @@
                           <Component id="kGradientPanel1" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
                           <Component id="btnCadastrar" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="89" max="32767" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
               </Layout>
               <SubComponents>
                 <Component class="javax.swing.JLabel" name="jLabel21">
+                  <Properties>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/logoMp.png"/>
+                    </Property>
+                  </Properties>
                 </Component>
                 <Container class="keeptoo.KGradientPanel" name="kGradientPanel1">
                   <Properties>

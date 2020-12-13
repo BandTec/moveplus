@@ -4,16 +4,13 @@ import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JInternalFrame;
 
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
@@ -42,8 +39,8 @@ public class Telas extends javax.swing.JFrame {
     JInternalFrame grafCpu = new Graficos("CPU");
     JInternalFrame grafRam = new Graficos("RAM");
 
-    Boolean operante = true; 
-   
+    Boolean operante = true;
+
     List<String[]> lista = new ArrayList<>();
 
     CardLayout cardLayout;
@@ -54,6 +51,8 @@ public class Telas extends javax.swing.JFrame {
         gerarGrafico(grafRam, graficoMemoria);
         cardLayout = (CardLayout) (pnlCards.getLayout());
         txtSenha1.setEchoChar('\u0000');
+        pnlBtns.setVisible(false);
+        btnCadastrar.setVisible(false);
     }
 
     void executarProcessos() {
@@ -71,16 +70,18 @@ public class Telas extends javax.swing.JFrame {
         double cpuUsage = 0; //CPU    
         int processID = 0;                           //ID do processo
         String processName = "";                           //Nome do processo     
+        DecimalFormat formatador = new DecimalFormat("0.00");
 
         for (OSProcess process : os.getProcesses(10, OperatingSystem.ProcessSort.CPU)) {
-            ramMemory = ((float)process.getResidentSetSize() / (float) memory.getTotal()) * 100;             //RAM, no Linux RE
+            ramMemory = ((float) process.getResidentSetSize() / 1024) / 1000;             //RAM, no Linux RE
             cpuUsage = process.getProcessCpuLoadBetweenTicks(process) * 100; //CPU    
             processID = process.getProcessID();                           //ID do processo
             processName = process.getName();                           //Nome do processo    
+            String ramFormat = formatador.format(ramMemory);
 
-            String ramStr = String.format("%.2f%s",ramMemory,"%");
+            String ramStr = String.format("%s Mb", ramFormat);
             String idStr = "" + processID + ' ';
-            String cpuStr = String.format("%.2f%s",cpuUsage,"%");
+            String cpuStr = String.format("%.2f%s", cpuUsage, "%");
 
             lista.add(new String[]{idStr, processName, ramStr, cpuStr});
         }
@@ -102,12 +103,17 @@ public class Telas extends javax.swing.JFrame {
     }
 //----
 
-    public void Logar() throws Exception {
+    public void Iniciar() throws Exception {
         String erro = "Erro. Usuário e/ou senha incorretos.";
         String login = txtLogin1.getText();
         String password = txtSenha1.getText();
 
+        pnlBtns.setVisible(true);
+        btnCadastrar.setVisible(true);
+
         if (login.equals("root") && password.equals("root")) {
+            pnlBtns.setVisible(true);
+            btnCadastrar.setVisible(true);
             switchPanels(jpnlD);
             lblprocessador.setText(mp.catchCpu());
             lblSO.setText(mp.catchSO());
@@ -318,6 +324,8 @@ public class Telas extends javax.swing.JFrame {
         jLabel24.setText("operacional");
         jLabel24.setToolTipText("");
 
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Hardware.png"))); // NOI18N
+
         javax.swing.GroupLayout hardwareLayout = new javax.swing.GroupLayout(hardware);
         hardware.setLayout(hardwareLayout);
         hardwareLayout.setHorizontalGroup(
@@ -415,6 +423,8 @@ public class Telas extends javax.swing.JFrame {
             }
         });
 
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Hardware.png"))); // NOI18N
+
         graficoMemoria.setMaximumSize(new java.awt.Dimension(300, 300));
         graficoMemoria.setName("graficoMemoria"); // NOI18N
         graficoMemoria.setLayout(new java.awt.BorderLayout());
@@ -476,6 +486,8 @@ public class Telas extends javax.swing.JFrame {
                 close(evt);
             }
         });
+
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Hardware.png"))); // NOI18N
 
         jScrollPane1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
@@ -553,6 +565,8 @@ public class Telas extends javax.swing.JFrame {
         }
     });
 
+    jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Hardware.png"))); // NOI18N
+
     graficoCpu.setMaximumSize(new java.awt.Dimension(300, 300));
     graficoCpu.setName("graficoArrombado"); // NOI18N
     graficoCpu.setLayout(new java.awt.BorderLayout());
@@ -593,6 +607,8 @@ public class Telas extends javax.swing.JFrame {
 
     manutencao.setBackground(new java.awt.Color(255, 255, 255));
     manutencao.setName("manutencao"); // NOI18N
+
+    jLabel22.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Hardware.png"))); // NOI18N
 
     jLabel23.setFont(new java.awt.Font("Insaniburger", 0, 30)); // NOI18N
     jLabel23.setForeground(new java.awt.Color(51, 51, 51));
@@ -749,6 +765,7 @@ public class Telas extends javax.swing.JFrame {
     });
 
     jLabel25.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+    jLabel25.setIcon(new javax.swing.ImageIcon(getClass().getResource("/logopqn.png"))); // NOI18N
 
     btnManutencao.setFont(new java.awt.Font("Ubuntu", 0, 15)); // NOI18N
     btnManutencao.setkEndColor(new java.awt.Color(102, 255, 255));
@@ -932,6 +949,7 @@ public class Telas extends javax.swing.JFrame {
 
     pnlLogin.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 141, -1, -1));
 
+    jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/logoMp.png"))); // NOI18N
     jLabel3.setText(" ");
     pnlLogin.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 10, -1, -1));
 
@@ -949,6 +967,8 @@ public class Telas extends javax.swing.JFrame {
             jpnlDMousePressed(evt);
         }
     });
+
+    jLabel21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/logoMp.png"))); // NOI18N
 
     kGradientPanel1.setkFillBackground(false);
     kGradientPanel1.setkGradientFocus(1000);
@@ -1076,7 +1096,7 @@ public class Telas extends javax.swing.JFrame {
         jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
         .addGroup(jLayeredPane1Layout.createSequentialGroup()
             .addComponent(pnlLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGap(0, 0, Short.MAX_VALUE))
+            .addGap(0, 8, Short.MAX_VALUE))
         .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(pnlMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1112,7 +1132,7 @@ public class Telas extends javax.swing.JFrame {
 
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
         try {
-            Logar();
+            Iniciar();
         } catch (Exception ex) {
             Logger.getLogger(Telas.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -1206,7 +1226,7 @@ public class Telas extends javax.swing.JFrame {
     private void btnClose1close(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnClose1close
         System.exit(0);
     }//GEN-LAST:event_btnClose1close
-   
+
     private void btnMudarStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMudarStatusActionPerformed
         lblStatus.setText("INOPERANTE");
         if (operante) {
@@ -1235,10 +1255,8 @@ public class Telas extends javax.swing.JFrame {
 
     public static void main(String args[]) {
 
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Telas().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new Telas().setVisible(true);
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
