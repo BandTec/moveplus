@@ -41,7 +41,9 @@ public class Monitoracao {
     String IDTERMINAL;
     String IDCONFIGTERMINAL;
     String FKCONFIGTERMINAL;
-
+    Boolean IDVALIDO;
+    Boolean IDCONFIGVALIDO;
+    Boolean LOGINVALIDO;
     //Criando uma nova classe de infos do Sistema
     SystemInfo si = new SystemInfo();
     OperatingSystem os = si.getOperatingSystem(); //pegando infos do OS do sistema
@@ -276,6 +278,7 @@ public class Monitoracao {
             //Salvando o ID
             id = lista.get(0);
             id = id.replace("[idTerminal=", "");
+            IDVALIDO = true;
             IDTERMINAL = id;
 
             //Caso exista...
@@ -292,11 +295,11 @@ public class Monitoracao {
 
             } else { //Caso não exista, dê erro
                 System.out.println("TERMINAL INVÁLIDO");
-                System.exit(1);
+                IDVALIDO = false;
             }
         } else { //Caso não tenha algo além de números
             System.out.println("TERMINAL INVÁLIDO - DIGITE APENAS O ID");
-            System.exit(1);
+            IDVALIDO = false;
         }
         return "";
     }
@@ -317,9 +320,10 @@ public class Monitoracao {
         //Caso exista
         if (select.size() > 0) {
             System.out.println("Bem vindo");
+            LOGINVALIDO = true;
         } else { //Caso não exista dê erro e gere um log
             System.out.println("USUÁRIO E/OU SENHA INVÁLIDO(S)");
-            System.exit(1);
+            LOGINVALIDO = false;
         }
     }
 
@@ -355,9 +359,11 @@ public class Monitoracao {
         String idConfig = lista.get(0);
         idConfig = idConfig.replace("[ConfigTerminal{idConfigTerminal=", "");
         IDCONFIGTERMINAL = idConfig;
+        
 
         //SE A CONFIGURAÇÃO EXISTIR...
         if (select.size() > 0) {
+            IDCONFIGVALIDO = true;
             //SE O TERMINAL NÃO POSSUIR CONFIGURAÇÃO, INSERIR CONFIGURAÇÃO
             if (FKCONFIGTERMINAL.equals("null")) {
                 System.out.println("TERMINAL SEM CONFIGURAÇÃO");
@@ -369,7 +375,7 @@ public class Monitoracao {
             //Caso o terminal já possua uma configuração, dê erro
             if (!FKCONFIGTERMINAL.equals("null") && !FKCONFIGTERMINAL.equals(IDCONFIGTERMINAL)) {
                 System.out.println("TERMINAL FORNECIDO NÃO CORRESPONDE AO HARDWARE ENCONTRADO");
-                System.exit(1);
+                IDCONFIGVALIDO = false;
             }
 
         } else { //SENÃO...
@@ -411,6 +417,8 @@ public class Monitoracao {
                     + IDTERMINAL + ";";
 
             con.update(insert2);
+            
+            IDCONFIGVALIDO = true;
         }
 
     }

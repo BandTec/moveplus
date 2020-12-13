@@ -103,25 +103,27 @@ public class Telas extends javax.swing.JFrame {
     }
 //----
 
-    public void Iniciar() throws Exception {
+    public void Login() throws Exception {
         String erro = "Erro. Usuário e/ou senha incorretos.";
-        String login = txtLogin1.getText();
-        String password = txtSenha1.getText();
-
-        pnlBtns.setVisible(true);
+        
+//        mp.checkLogin();
+//        String login = txtLogin1.getText();
+//        String password = txtSenha1.getText();
+//
+//        pnlBtns;
         btnCadastrar.setVisible(true);
-
-        if (login.equals("root") && password.equals("root")) {
-            pnlBtns.setVisible(true);
-            btnCadastrar.setVisible(true);
-            switchPanels(jpnlD);
-            lblprocessador.setText(mp.catchCpu());
-            lblSO.setText(mp.catchSO());
-            lblMemoria.setText(mp.catchRam() + "Gb");
-            lblDisco.setText(mp.catchDiskSize() + "Gb");
-        } else {
-            lblResult.setText("Login Inválido!");
-        }
+//
+//        if (login.equals("root") && password.equals("root")) {
+//            pnlBtns.setVisible(true);
+//            btnCadastrar.setVisible(true);
+//            switchPanels(jpnlD);
+//            lblprocessador.setText(mp.catchCpu());
+//            lblSO.setText(mp.catchSO());
+//            lblMemoria.setText(mp.catchRam() + "Gb");
+//            lblDisco.setText(mp.catchDiskSize() + "Gb");
+//        } else {
+//            lblResult.setText("Login Inválido!");
+//        }
     }
 //----
 
@@ -1131,10 +1133,15 @@ public class Telas extends javax.swing.JFrame {
     }//GEN-LAST:event_txtLogin1MouseClicked
 
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
-        try {
-            Iniciar();
-        } catch (Exception ex) {
-            Logger.getLogger(Telas.class.getName()).log(Level.SEVERE, null, ex);
+        String user = txtLogin1.getText();
+        String pass = txtSenha1.getText();
+        mp.checkLogin(user,pass);
+       
+        if (mp.LOGINVALIDO) {
+            switchPanels(jpnlD);
+            btnCadastrar.setVisible(true);
+        } else {
+            lblResult.setText("Login Inválido!");
         }
     }//GEN-LAST:event_btnEntrarActionPerformed
 
@@ -1186,8 +1193,26 @@ public class Telas extends javax.swing.JFrame {
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
         String idTerminal = txtID.getText();
-        if (idTerminal.equals("1")) {
+        mp.checkId(idTerminal);
+        try {
+            mp.checkConfig();
+        } catch (Exception ex) {
+            Logger.getLogger(Telas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        if (mp.IDVALIDO && mp.IDCONFIGVALIDO) {
+            jLayeredPane1.setVisible(true);
+            pnlBtns.setVisible(true);
+            pnlMenu.setVisible(true);
+            lblprocessador.setText(mp.catchCpu());
+            lblSO.setText(mp.catchSO());
+            lblMemoria.setText(mp.catchRam() + "Gb");
             switchPanels(pnlMenu);
+            try {
+                lblDisco.setText(mp.catchDiskSize() + "Gb");
+            } catch (Exception ex) {
+                Logger.getLogger(Telas.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } else {
             lblResultID.setText("ID inválido! Entre em contato com a central!");
         }
