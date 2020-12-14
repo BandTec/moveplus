@@ -28,6 +28,18 @@ public class Log {
     ConnectionDatabase config = new ConnectionDatabase();
     JdbcTemplate con = new JdbcTemplate(config.getDatasource());
 
+    public void Login(String user) throws Exception {
+        FileWriter arq = new FileWriter("./LOG.txt", true);
+
+        //Criação do objeto para gravar no arquivo
+        PrintWriter gravarArq = new PrintWriter(arq);
+        gravarArq.printf("\n%s - %s -USUARIO LOGADO"
+                + "\nDetalhes:"
+                + "\nUser: %s"
+                + "\n------------------------\n", dataDia, hora, user);
+        arq.close();
+    }
+
     public void altoUsoRam(String txtRam, String fkTerminal) throws IOException, Exception {
 
         String insert = "INSERT INTO TerminalAlerta values ('"
@@ -41,8 +53,8 @@ public class Log {
         PrintWriter gravarArq = new PrintWriter(arq);
         gravarArq.printf("\n%s - %s -USO DE RAM SUPERIOR A 90%s"
                 + "\nDetalhes:"
-                + "\nRAM: %s", dataDia, hora, porc, txtRam
-                + "------------------------\n");
+                + "\nRAM: %s"
+                + "\n------------------------\n", dataDia, hora, porc, txtRam);
         arq.close();
     }
 
@@ -60,15 +72,15 @@ public class Log {
 
         gravarArq.printf("\n%s - %s - USO DE CPU SUPERIOR A 90%s"
                 + "\nDetalhes:"
-                + "\nCPU: %s", dataDia, hora, porc, txt
-                + "------------------------\n");
+                + "\nCPU: %s"
+                + "\n------------------------\n", dataDia, hora, porc, txt);
         arq.close();
 
     }
 
     public void altoUsoDisco(String txtDisco, String fkTerminal) throws IOException, Exception {
         String insert = "INSERT INTO TerminalAlerta values ('"
-                + mpo.dataHora() + "'," + fkTerminal + ", 2);";
+                + mpo.dataHora() + "'," + fkTerminal + ", 3);";
 
         con.update(insert);
 
@@ -79,9 +91,45 @@ public class Log {
 
         gravarArq.printf("\n%s - %s - USO DE DISCO SUPERIOR A 50%s"
                 + "\nDetalhes:"
-                + "\nDISCO: %s", dataDia, hora, porc, txtDisco
-                + "------------------------\n");
+                + "\nDISCO: %s"
+                + "\n------------------------\n", dataDia, hora, porc, txtDisco);
 
+        arq.close();
+    }
+
+    public void statusManutencao(String fkTerminal) throws IOException, Exception {
+
+        String insert = "INSERT INTO TerminalAlerta values ('"
+                + mpo.dataHora() + "'," + fkTerminal + ", 8);";
+
+        con.update(insert);
+
+        FileWriter arq = new FileWriter("./LOG.txt", true);
+
+        //Criação do objeto para gravar no arquivo
+        PrintWriter gravarArq = new PrintWriter(arq);
+        gravarArq.printf("\n%s - %s - STATUS DO TERMINAL MUDOU"
+                + "\nDetalhes:"
+                + "\nID: %s Status: Manutencao"
+                + "\n------------------------\n", dataDia, hora, fkTerminal);
+        arq.close();
+    }
+
+    public void statusOperante(String fkTerminal) throws IOException, Exception {
+
+        String insert = "INSERT INTO TerminalAlerta values ('"
+                + mpo.dataHora() + "'," + fkTerminal + ", 9);";
+
+        con.update(insert);
+
+        FileWriter arq = new FileWriter("./LOG.txt", true);
+
+        //Criação do objeto para gravar no arquivo
+        PrintWriter gravarArq = new PrintWriter(arq);
+        gravarArq.printf("\n%s - %s - STATUS DO TERMINAL MUDOU"
+                + "\nDetalhes:"
+                + "\nID: %s Status: Operante"
+                + "\n------------------------\n", dataDia, hora, fkTerminal);
         arq.close();
     }
 

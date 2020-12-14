@@ -41,7 +41,7 @@ public class Telas extends javax.swing.JFrame {
     JInternalFrame grafRam = new Graficos("RAM");
 
     Boolean operante = true;
-
+    
     List<String[]> lista = new ArrayList<>();
 
     CardLayout cardLayout;
@@ -1236,7 +1236,11 @@ public class Telas extends javax.swing.JFrame {
     private void btnMudarStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMudarStatusActionPerformed
         lblStatus.setText("OPERANTE");
         if (operante) {
-            mp.manutencao(2);
+            try {
+                mp.manutencao(2);
+            } catch (Exception ex) {
+                Logger.getLogger(Telas.class.getName()).log(Level.SEVERE, null, ex);
+            }
             lblStatus.setText("MANUTENCAO");
             lblStatus.setForeground(Color.decode("#FF9999"));
             btnMudarStatus.setkEndColor(Color.decode("#1CFEBA"));
@@ -1244,7 +1248,11 @@ public class Telas extends javax.swing.JFrame {
             btnMudarStatus.setText("ATIVAR");
             operante = false;
         } else {
-            mp.manutencao(1);
+            try {
+                mp.manutencao(1);
+            } catch (Exception ex) {
+                Logger.getLogger(Telas.class.getName()).log(Level.SEVERE, null, ex);
+            }
             lblStatus.setText("OPERANTE");
             lblStatus.setForeground(Color.decode("#1CFEBA"));
             btnMudarStatus.setkEndColor(Color.decode("#FF9999"));

@@ -25,7 +25,7 @@ public class Alertas {
         slack.sendMessage(message);
 
     }
-    
+
     public void ram() throws Exception {
         Slack slack = new Slack();
 
@@ -35,7 +35,7 @@ public class Alertas {
         slack.sendMessage(message);
 
     }
-    
+
     public void disco() throws Exception {
         Slack slack = new Slack();
 
@@ -44,5 +44,24 @@ public class Alertas {
 
         slack.sendMessage(message);
 
+    }
+
+    public void iniciouManutencao(String id) throws Exception {
+        Slack slack = new Slack();
+
+        JSONObject message = new JSONObject();
+        message.put("text", "TERMINAL DE ID " + id + " ESTA EM MANUTENCAO");
+
+        slack.sendMessage(message);
+
+    }
+
+    public void retornouOperacao(String id) throws Exception {
+        Slack slack = new Slack();
+
+        JSONObject message = new JSONObject();
+        message.put("text", "TERMINAL DE ID " + id + " ESTA OPERANTE");
+
+        slack.sendMessage(message);
     }
 }

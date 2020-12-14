@@ -50,7 +50,7 @@ public class Monitoracao {
     Boolean IDVALIDO;
     Boolean IDCONFIGVALIDO;
     Boolean LOGINVALIDO;
-    
+
     Timer tempo;
     //Criando uma nova classe de infos do Sistema
     SystemInfo si = new SystemInfo();
@@ -62,7 +62,6 @@ public class Monitoracao {
     long[] oldTricks = cpu.getSystemCpuLoadTicks(); //Uso de CPU
     List<NetworkIF> rede = hal.getNetworkIFs();
 
-    
     void timerInsert() {
         Timer timer = new Timer(10000, new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -75,8 +74,7 @@ public class Monitoracao {
         });
         timer.start();
     }
-    
-    
+
     //Pegando dados de uso de memória RAM
     public String usoRam() throws Exception {
         Alertas alert = new Alertas();
@@ -328,12 +326,14 @@ public class Monitoracao {
     }
 
     //Checkando se login fornecido é legítimo
-    public void checkLogin(String user, String pass) {
+    public void checkLogin(String user, String pass) throws Exception {
 
         //Chamando a conexão com o Azure
         ConnectionDatabase config = new ConnectionDatabase();
         JdbcTemplate con = new JdbcTemplate(config.getDatasource());
 
+        Log log = new Log();
+        
         //Buscando se o login e senha fornecidos existem
         List<String> select = con.query("SELECT * FROM UsuarioEstacao where "
                 + "emailUsuarioEstacao = '" + user + "' and "
@@ -343,6 +343,7 @@ public class Monitoracao {
         //Caso exista
         if (select.size() > 0) {
             System.out.println("Bem vindo");
+            log.Login(user);
             LOGINVALIDO = true;
         } else { //Caso não exista dê erro e gere um log
             System.out.println("USUÁRIO E/OU SENHA INVÁLIDO(S)");
@@ -445,47 +446,56 @@ public class Monitoracao {
 
     }
 
-    public void manutencao(Integer cod) {
+    public void manutencao(Integer cod) throws Exception {
 
         //Chamando a conexão com o Azure
         ConnectionDatabase config = new ConnectionDatabase();
         JdbcTemplate con = new JdbcTemplate(config.getDatasource());
 
+        Alertas alert = new Alertas();
+        Log log = new Log();
+
         if (cod == 1) {
             String update = "UPDATE TERMINAL set statusTerminal = 'Operante'"
                     + "where idTerminal = " + IDTERMINAL + ";";
             con.update(update);
+
+            alert.retornouOperacao(IDTERMINAL);
+            log.statusOperante(IDTERMINAL);
         } else {
             String update = "UPDATE TERMINAL set statusTerminal = 'Manutencao'"
                     + "where idTerminal = " + IDTERMINAL + ";";
             con.update(update);
+
+            alert.iniciouManutencao(IDTERMINAL);
+            log.statusManutencao(IDTERMINAL);
         }
     }
-    
-        public void inserindoMonitoracao() throws Exception {
+
+    public void inserindoMonitoracao() throws Exception {
         //Chamando a conexão com o Azure
         ConnectionDatabase config = new ConnectionDatabase();
         JdbcTemplate con = new JdbcTemplate(config.getDatasource());
 
         //Loop de inserts da Monitoracao
 //        while (true) {
-            String cpu = usoCpu();
-            String ram = usoRam();
-            String disco = usoDisco();
-            String datetime = dataHora();
-            String insert = "INSERT INTO Monitoracao (memoriaMonitoracao,"
-                    + "cpuMonitoracao,discoMonitoracao,dataHoraMonitoracao,"
-                    + "fkTerminal) values (" + ram + ","
-                    + cpu + "," + disco + ",'" + datetime + "',"
-                    + IDTERMINAL + ");";
+        String cpu = usoCpu();
+        String ram = usoRam();
+        String disco = usoDisco();
+        String datetime = dataHora();
+        String insert = "INSERT INTO Monitoracao (memoriaMonitoracao,"
+                + "cpuMonitoracao,discoMonitoracao,dataHoraMonitoracao,"
+                + "fkTerminal) values (" + ram + ","
+                + cpu + "," + disco + ",'" + datetime + "',"
+                + IDTERMINAL + ");";
 
-            System.out.println("------------------------------");
-            System.out.println("CPU:        " + cpu);
-            System.out.println("RAM:        " + ram);
-            System.out.println("DISCO:      " + disco);
-            System.out.println("DATETIME:   " + datetime);
-            System.out.println("FKTERMINAL: " + IDTERMINAL);
-            con.update(insert);
+        System.out.println("------------------------------");
+        System.out.println("CPU:        " + cpu);
+        System.out.println("RAM:        " + ram);
+        System.out.println("DISCO:      " + disco);
+        System.out.println("DATETIME:   " + datetime);
+        System.out.println("FKTERMINAL: " + IDTERMINAL);
+        con.update(insert);
 //            Util.sleep(5000);
 //        }
     }
