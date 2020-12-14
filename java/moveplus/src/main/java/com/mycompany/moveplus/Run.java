@@ -44,8 +44,14 @@ public class Run {
         
         //Verificando configuração do terminal
         mpo.checkConfig();
-
+        
+        mpo.exibirInfo();
+        
+        System.out.println("----------PROCESSOS----------");
+        mpo.processos();
+        
         //Loop de inserts da Monitoracao
+        System.out.println("--------------------");
         while (true) {
             String cpu = mpo.usoCpu();
             String ram = mpo.usoRam();

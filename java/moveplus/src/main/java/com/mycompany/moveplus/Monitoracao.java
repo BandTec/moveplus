@@ -50,7 +50,7 @@ public class Monitoracao {
     Boolean IDVALIDO;
     Boolean IDCONFIGVALIDO;
     Boolean LOGINVALIDO;
-
+    
     Timer tempo;
     //Criando uma nova classe de infos do Sistema
     SystemInfo si = new SystemInfo();
@@ -73,6 +73,16 @@ public class Monitoracao {
             }
         });
         timer.start();
+    }
+    
+    public void exibirInfo() {
+        System.out.println("----------INFORMAÇÕES DO SISTEMA----------");
+        System.out.println(os);
+        System.out.println(hal);
+        System.out.println(cpu);
+        System.out.println(memoria);
+        System.out.println("----------INFORMAÇÕES DO DISCO----------");
+        System.out.println(dadosDisco);
     }
 
     //Pegando dados de uso de memória RAM

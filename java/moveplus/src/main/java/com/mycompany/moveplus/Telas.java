@@ -1123,7 +1123,11 @@ public class Telas extends javax.swing.JFrame {
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
         String user = txtLogin1.getText();
         String pass = txtSenha1.getText();
-        mp.checkLogin(user, pass);
+        try {
+            mp.checkLogin(user,pass);
+        } catch (Exception ex) {
+            Logger.getLogger(Telas.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         if (mp.LOGINVALIDO) {
             switchPanels(jpnlD);

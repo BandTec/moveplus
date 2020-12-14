@@ -1,0 +1,50 @@
+
+14/12/2020 - 10:11:4 -USUARIO LOGADO
+Detalhes:
+User: luis.sousa@cptm.gov.sp
+------------------------
+
+14/12/2020 - 10:12:53 - USO DE CPU SUPERIOR A 90%
+Detalhes:
+CPU: 23.04
+------------------------
+
+14/12/2020 - 10:12:58 -USO DE RAM SUPERIOR A 90%
+Detalhes:
+RAM: 62.61
+------------------------
+
+14/12/2020 - 10:13:46 -USUARIO LOGADO
+Detalhes:
+User: luis.sousa@cptm.gov.sp
+------------------------
+
+14/12/2020 - 10:15:27 -USUARIO LOGADO
+Detalhes:
+User: luis.sousa@cptm.gov.sp
+------------------------
+
+14/12/2020 - 10:29:24 -USUARIO LOGADO
+Detalhes:
+User: luis.sousa@cptm.gov.sp
+------------------------
+
+14/12/2020 - 10:30:25 - STATUS DO TERMINAL MUDOU
+Detalhes:
+ID: 1 Status: Manutencao
+------------------------
+
+14/12/2020 - 10:31:15 - STATUS DO TERMINAL MUDOU
+Detalhes:
+ID: 1 Status: Operante
+------------------------
+
+14/12/2020 - 10:31:39 - USO DE CPU SUPERIOR A 90%
+Detalhes:
+CPU: 21.60
+------------------------
+
+14/12/2020 - 10:31:43 -USO DE RAM SUPERIOR A 90%
+Detalhes:
+RAM: 73.78
+------------------------
