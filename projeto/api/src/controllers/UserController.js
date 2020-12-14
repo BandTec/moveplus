@@ -81,6 +81,27 @@ const Usuario = {
       });
   },
 
+  async cadMaquina(request, response) {
+    const { nome, series, estacao } = request.body;
+    connection
+      .conectar()
+      .then(() => {
+        return connection.sql
+          .query(
+            `insert into Terminal(nomeTerminal, seriesNumberTerminal, fkEstacao) values ('${nome}','${series}',${estacao})`,
+          )
+          .then((result) => {
+            response.send(result.recordset);
+          });
+      })
+      .catch((error) => {
+        console.log('ERRO' + error);
+      })
+      .finally(() => {
+        connection.sql.close();
+      });
+  },
+
   async update(request, response) {
     const { email, credencial, senha, oldEmail } = request.body;
     console.log(request.body);
@@ -111,6 +132,17 @@ const Usuario = {
       if (error) throw error;
       response.send(result);
     });*/
+  },
+
+  async getTerminais(request, response) {
+    const { id } = request.params;
+    const sql = `SELECT * FROM Terminal WHERE fkEstacao = ${id}`;
+    connection.conectar().then(() => {
+      return connection.sql.query(sql).then((result) => {
+        console.log(result);
+        response.send(result.recordset);
+      });
+    });
   },
 };
 

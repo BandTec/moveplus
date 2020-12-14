@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login MovePlus</title>
+  <link rel="sortcut icon" href="../Login/img/favicon.png" type="image/x-icon" />
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./css/style.css" />
+</head>
+
+<body>
+  <div class="container-background">
+    <section class="container-flex">
+      <div class="flex">
+        <div class="txt">
+          <div>
+            <div class="logo arrow">
+              <a href="../../site-institucional/index.html"><img src="./img/New Project.png" alt="" /></a>
+            </div>
+            <h1>
+              Ja é cliente da <br />
+              MovePlus?
+            </h1>
+            <p>
+              Preencha suas informações <br />
+              para realizar o login.
+            </p>
+          </div>
+          <!-- <div>
+              <h1>Ja é cliente da <br> MovePlus?</h1>
+              <p>Preencha suas informações <br> ao lado para realizar o login.</p>
+            </div> -->
+        </div>
+        <div class="login-content">
+          <div class="js-formContent mamaco">
+            <div class="animation" id="anima">
+              <svg class="spinner" width="65px" height="65px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+                <circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
+              </svg>
+            </div>
+
+            <div class="logo-link">
+              <div class="logo">
+                <img src="./img/favicon.png" alt="" />
+              </div>
+              <div class="link-cad">
+                <a href="#">Não tem conta? <br />
+                  Cadastre-se</a>
+                <a href="#" style="display: none">Voltar para o <br />
+                  formulário de login</a>
+              </div>
+            </div>
+
+            <div action="" class="animation-form form" id="login">
+              <div>
+                <h3>Login</h3>
+              </div>
+
+              <div class="form-group" style="margin: 0;">
+                <input type="text" class="form-control" placeholder="" id="email" />
+                <label for="email">Email ou Usuário</label>
+              </div>
+
+              <div class="form-group" style="margin: 0;">
+                <input type="password" placeholder="" id="senha" class="form-control" />
+                <label for="">Senha</label>
+              </div>
+
+              <a href="">Esqueceu a senha?</a>
+              <div class="styleBtn">
+                <div class="animacao"></div>
+                <button id="btn">Entrar</button>
+              </div>
+            </div>
+
+            <div action="" class="animation-form form" id="cadastro">
+              <div>
+                <h3>Cadastro</h3>
+                <p>
+                  Preencha seus dados abaixo para realizar o cadastro por
+                  estação.
+                </p>
+              </div>
+              <div class="form-group">
+                <input type="email" class="form-control" placeholder="" id="emailCad" required />
+                <label for="email">Email ou Usuário</label>
+                <div class="msgValidation" id="emailValida">
+                  <p><i class="fas fa-exclamation-circle"></i> Digite um email válido</p>
+                </div>
+              </div>
+              <div class="form-group">
+                <input type="number" class="form-control" placeholder="" id="credencialCad" pattern="[0-9]+$" min="1" max="10" required />
+                <label for="email">Credenciais</label>
+                <div class="msgValidation" id="credencialValida">
+                  <p><i class="fas fa-exclamation-circle"></i> Digite uma credêncial válida</p>
+                </div>
+              </div>
+
+              <div class="form-group" style="height: 59px;">
+                <select name="" id="selectStation" class="form-control">
+                  <option value="">Selecione a estação</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <input type="password" placeholder="" id="senhaCad" class="form-control" />
+                <label for="">Senha</label>
+                <div class="msgValidation" id="senhaValida">
+                  <p><i class="fas fa-exclamation-circle"></i> Senhas não coincidem</p>
+                </div>
+              </div>
+              <div class="form-group">
+                <input type="password" placeholder="" id="confirmarSenhaCad" class="form-control" />
+                <label for="">Confirmar Senha</label>
+                <div class="msgValidation" id="confirmaSenhaValida">
+                  <p><i class="fas fa-exclamation-circle"></i> Senhas não coincidem</p>
+                </div>
+              </div>
+              <div class="styleBtn">
+                <div class="animacao"></div>
+                <button id="cadastrar">Cadastrar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <footer class="copy">
+        <div class="contentFooter">
+          <div>
+            <h4>© MovePlus 2020</h4>
+          </div>
+          <div>
+            <h4>Todos os direitos reservados.</h4>
+          </div>
+        </div>
+      </footer>
+    </section>
+  </div>
+</body>
+<script src="./script.js"></script>
+
+</html>
+<script src="https://kit.fontawesome.com/a076d05399.js"></script>
+<script>
+  function activeCad() {
+    const link = document.querySelector(".link-cad a");
+    const formLogin = document.querySelector("#login");
+    const formSignUp = document.querySelector("#cadastro");
+    const animationContent = document.querySelector(".js-formContent");
+    formSignUp.classList.add("ativo");
+    animationContent.classList.remove("testezin");
+
+    link.addEventListener("click", ({ target }) => {
+      if (formLogin.classList.contains("ativo")) {
+        formLogin.classList.remove("ativo");
+        animationContent.classList.toggle("testezin");
+        formSignUp.classList.add("ativo");
+        target.innerHTML = "Não tem conta? <br> Cadastre-se";
+      } else {
+        animationContent.classList.toggle("testezin");
+        formLogin.classList.add("ativo");
+        formSignUp.classList.remove("ativo");
+        target.innerText = "Voltar";
+      }
+    });
+  }
+  activeCad();
+
+  (function () {
+    const campoEmail = document.querySelector("#email");
+    const campoSenha = document.querySelector("#senha");
+    const colorButton = document.querySelector(".animacao");
+
+    campoEmail.addEventListener("keyup", () => {
+      animationBtn();
+    });
+
+    campoSenha.addEventListener("keyup", () => {
+      animationBtn();
+    });
+
+    function animationBtn() {
+      if (campoEmail.value.length > 13 && campoSenha.value.length > 3) {
+        colorButton.classList.add("colorBtn");
+      } else {
+        colorButton.classList.remove("colorBtn");
+      }
+    }
+  })();
+
+  const activeInput = document.querySelectorAll("input");
+  const active = document.querySelectorAll("label");
+
+  function labelInput(index) {
+    active[index].classList.add("activeInput");
+  }
+
+  activeInput.forEach((item, index) => {
+    item.addEventListener("keyup", () => {
+      labelInput(index);
+    });
+  });
+
+  // if(activeInput.value.length === 0 || activeInput.value.length > 0){
+  //     active.classList.add("activeInput");
+  // } else {
+  //     active.classList.remove("activeInput");
+  // }
+
+  function logar() {
+    const campoEmail = document.querySelector("#email");
+    const campoSenha = document.querySelector("#senha");
+    const form = document.querySelector("#login");
+    const btnEnviar = document.querySelector("#btn");
+
+    btnEnviar.addEventListener("click", () => {
+      login(campoEmail.value, campoSenha.value);
+    });
+  }
+  logar();
+
+  function cadastrar() {
+    const emailCadastro = document.querySelector("#emailCad");
+    const credencialCadastro = document.querySelector("#credencialCad");
+    const senhaCadastro = document.querySelector("#senhaCad");
+    const btnCadastrar = document.querySelector("#cadastrar");
+    const stations = document.getElementById('selectStation');
+
+    btnCadastrar.addEventListener("click", () => {
+      createUser(
+        emailCadastro.value,
+        credencialCadastro.value,
+        senhaCadastro.value,
+        stations.value
+      );
+    });
+  }
+
+  function animationLogin() {
+    const form = document.querySelector("#login");
+    const logo = document.querySelector(".logo-link");
+    const animation = document.querySelector("svg");
+    const btnEnviar = document.querySelector("#btn");
+
+    function teste() {
+      form.classList.add("none");
+      logo.classList.add("none");
+      animation.style.display = "block";
+    }
+
+    btnEnviar.addEventListener("click", () => {
+      teste();
+    });
+  }
+  animationLogin();
+
+
+  const email = document.getElementById("emailCad");
+  const msgEmail = document.getElementById("emailValida");
+  const credencial = document.getElementById("credencialCad");
+  const msgCredencial = document.getElementById("credencialValida");
+  const senha = document.getElementById("senhaCad");
+  const msgSenha = document.getElementById("senhaValida");
+  const confirmaSenha = document.getElementById("confirmarSenhaCad");
+  const msgConfirmaSenha = document.getElementById("confirmaSenhaValida");
+  const btnCadastra = document.getElementById("cadastrar");
+
+  let vCredencial = false;
+  let vEmail = false;
+  let vSenha = false;
+
+  function validaEmail() {
+    if (email.value.length >= 3 && email.value.length < 99 && email.value.indexOf('@') >= 0 && email.value.indexOf('.') >= 0) {
+      msgEmail.classList.remove("ativaValidation");
+      vEmail = true;
+    } else {
+      msgEmail.classList.add("ativaValidation");
+      vEmail = false;
+    }
+  }
+
+  function validaCredencial() {
+    if (credencial.value.length == 10) {
+      msgCredencial.classList.remove("ativaValidation");
+      vCredencial = true;
+    } else {
+      msgCredencial.classList.add("ativaValidation");
+      vCredencial = false;
+    }
+  }
+
+  function validaSenha() {
+    if (senha.value == confirmaSenha.value) {
+      msgSenha.classList.remove("ativaValidation");
+      msgConfirmaSenha.classList.remove("ativaValidation");
+      vSenha = true;
+    } else {
+      msgSenha.classList.add("ativaValidation");
+      msgConfirmaSenha.classList.add("ativaValidation");
+      vSenha = false;
+    }
+  }
+
+  email.addEventListener("keyup", () => {
+    validaEmail();
+  });
+
+  credencial.addEventListener("keyup", () => {
+    validaCredencial();
+  });
+
+  confirmaSenha.addEventListener("keyup", () => {
+    validaSenha();
+  });
+
+  btnCadastra.addEventListener("click", () => {
+    if (vEmail && vCredencial && vSenha) {
+      cadastrar();
+
+    } else {
+      alert("Informações inválidas");
+    }
+  });
+
+</script>
+
+<script>
+  fetch('http://localhost:3333/station').then(response => {
+    if (response.ok) {
+      console.log(response);
+      response.json().then(res => {
+        console.log(res);
+        const stations = document.getElementById('selectStation');
+        res.map((station) => {
+          stations.innerHTML += `<option value="${station.idEstacao}">${station.nomeEstacao}</option>`;
+        })
+      })
+    }
+  })
+</script>

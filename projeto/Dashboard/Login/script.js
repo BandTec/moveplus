@@ -1,6 +1,6 @@
-function createUser(email, credencial, senha) {
+function createUser(email, credencial, senha, estacao) {
   const ajax = new XMLHttpRequest();
-  const params = `email=${email}&credencial=${credencial}&senha=${senha}`;
+  const params = `email=${email}&credencial=${credencial}&senha=${senha}&estacao=${estacao}`;
   ajax.open('POST', 'http://localhost:3333/users', true);
   ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
   ajax.onreadystatechange = function () {
@@ -9,6 +9,27 @@ function createUser(email, credencial, senha) {
       alert('cadastrado com sucesso');
       window.location.reload();
     }
+    // else {
+    //   alert('Preencha todos os campos');
+    // }
+  };
+
+  ajax.send(params);
+}
+
+function cadMaquina(nome, series, estacao) {
+  const ajax = new XMLHttpRequest();
+  const params = `nome=${nome}&series=${series}&estacao=${user.estacao}`;
+  console.log(params);
+  ajax.open('POST', 'http://localhost:3333/cadMaquina', true);
+  ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+  ajax.onreadystatechange = function () {
+    if (ajax.status === 200 && ajax.readyState === 4) {
+      const response = ajax.responseText;
+      alert('cadastrado com sucesso');
+      window.location.reload();
+    }
+    console.log(ajax.status);
     // else {
     //   alert('Preencha todos os campos');
     // }

@@ -7,11 +7,15 @@ const app = express();
 
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
-routes.get('/teste', function(request, response) {
-    response.json({
-        msg: 'ok'
-    })
+routes.get('/teste', function (request, response) {
+  response.json({
+    msg: 'ok',
+  });
 });
+
+app.use('/', express.static(__dirname + '/public/site-institucional'));
+
+app.use('/moveplus', express.static(__dirname + '/public/Dashboard'));
 
 app.use(routes);
 
