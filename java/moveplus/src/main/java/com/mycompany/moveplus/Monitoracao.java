@@ -6,6 +6,8 @@
 package com.mycompany.moveplus;
 
 import static java.awt.SystemColor.text;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 import org.json.JSONObject;
 import java.util.List;
@@ -22,7 +24,11 @@ import oshi.software.os.OperatingSystem;
 import oshi.hardware.NetworkIF;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Pattern;
+import javax.swing.Timer;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import oshi.util.FormatUtil;
@@ -44,6 +50,8 @@ public class Monitoracao {
     Boolean IDVALIDO;
     Boolean IDCONFIGVALIDO;
     Boolean LOGINVALIDO;
+    
+    Timer tempo;
     //Criando uma nova classe de infos do Sistema
     SystemInfo si = new SystemInfo();
     OperatingSystem os = si.getOperatingSystem(); //pegando infos do OS do sistema
@@ -54,6 +62,21 @@ public class Monitoracao {
     long[] oldTricks = cpu.getSystemCpuLoadTicks(); //Uso de CPU
     List<NetworkIF> rede = hal.getNetworkIFs();
 
+    
+    void timerInsert() {
+        Timer timer = new Timer(10000, new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    inserindoMonitoracao();
+                } catch (Exception ex) {
+                    Logger.getLogger(Monitoracao.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
+        timer.start();
+    }
+    
+    
     //Pegando dados de uso de memória RAM
     public String usoRam() throws Exception {
         Alertas alert = new Alertas();
@@ -437,5 +460,33 @@ public class Monitoracao {
                     + "where idTerminal = " + IDTERMINAL + ";";
             con.update(update);
         }
+    }
+    
+        public void inserindoMonitoracao() throws Exception {
+        //Chamando a conexão com o Azure
+        ConnectionDatabase config = new ConnectionDatabase();
+        JdbcTemplate con = new JdbcTemplate(config.getDatasource());
+
+        //Loop de inserts da Monitoracao
+//        while (true) {
+            String cpu = usoCpu();
+            String ram = usoRam();
+            String disco = usoDisco();
+            String datetime = dataHora();
+            String insert = "INSERT INTO Monitoracao (memoriaMonitoracao,"
+                    + "cpuMonitoracao,discoMonitoracao,dataHoraMonitoracao,"
+                    + "fkTerminal) values (" + ram + ","
+                    + cpu + "," + disco + ",'" + datetime + "',"
+                    + IDTERMINAL + ");";
+
+            System.out.println("------------------------------");
+            System.out.println("CPU:        " + cpu);
+            System.out.println("RAM:        " + ram);
+            System.out.println("DISCO:      " + disco);
+            System.out.println("DATETIME:   " + datetime);
+            System.out.println("FKTERMINAL: " + IDTERMINAL);
+            con.update(insert);
+//            Util.sleep(5000);
+//        }
     }
 }

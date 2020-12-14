@@ -25,6 +25,7 @@ import oshi.hardware.HWDiskStore;
 import oshi.hardware.HardwareAbstractionLayer;
 import oshi.software.os.OSProcess;
 import oshi.software.os.OperatingSystem;
+import oshi.util.Util;
 
 public class Telas extends javax.swing.JFrame {
 
@@ -54,7 +55,7 @@ public class Telas extends javax.swing.JFrame {
     }
 
     void executarProcessos() {
-        Timer timer = new Timer(300, new ActionListener() {
+        Timer timer = new Timer(1000, new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 alterarTabela();
             }
@@ -100,13 +101,16 @@ public class Telas extends javax.swing.JFrame {
         jTable1.getTableHeader().setDefaultRenderer(new PintarCabecalho());
     }
 //----
+    Boolean check = false;
 
     public void startMenu() throws Exception {
 
-            lblprocessador.setText(mp.catchCpu());
-            lblSO.setText(mp.catchSO());
-            lblMemoria.setText(mp.catchRam() + "GB");
-            lblDisco.setText(mp.catchDiskSize() + "GB");
+        lblprocessador.setText(mp.catchCpu());
+        lblSO.setText(mp.catchSO());
+        lblMemoria.setText(mp.catchRam() + "GB");
+        lblDisco.setText(mp.catchDiskSize() + "GB");
+        check = true;
+        rodar();
 
     }
 //----
@@ -1119,11 +1123,10 @@ public class Telas extends javax.swing.JFrame {
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
         String user = txtLogin1.getText();
         String pass = txtSenha1.getText();
-        mp.checkLogin(user,pass);
-       
+        mp.checkLogin(user, pass);
+
         if (mp.LOGINVALIDO) {
             switchPanels(jpnlD);
-//            btnCadastrar.setVisible(true);
         } else {
             lblResult.setText("Login Inválido!");
         }
@@ -1264,6 +1267,14 @@ public class Telas extends javax.swing.JFrame {
             new Telas().setVisible(true);
         });
     }
+
+    public void rodar() throws Exception {
+        if (check) {
+            mp.timerInsert();
+
+        }
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private keeptoo.KButton btnCPU;
     private keeptoo.KButton btnCadastrar;
