@@ -270,7 +270,7 @@
                 console.log(res);
                 const terminais = document.getElementById('listTerminais');
                 res.map((term) => {
-                    terminais.innerHTML += `<div>${term.nomeTerminal}${term.statusTerminal}</div>`;
+                    terminais.innerHTML += `<div>${term.nomeTerminal}<div style="margin-top:5px">Status: ${term.statusTerminal}</div></div>`;
                 })
             })
         }

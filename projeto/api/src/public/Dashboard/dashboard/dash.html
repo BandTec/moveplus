@@ -29,11 +29,7 @@
                             <h3>
                                 Notificações
                             </h3>
-                            <p>
-                                Sem novas Notificações
-                            </p>
-                        </span>
-                        <img src="./img/icon-notification2.png" alt="" style="margin: 5px 10px 0 0; width: 37px;">
+                            if(response.ok)
                     </div>
 
                     <div class="profile-menu" id="btnMobileProf">
@@ -184,6 +180,19 @@
                     <h3>Dashboard</h3>
                     <p>Olá, bem vindo de volta !</p>
                 </div>
+                <div class="graficosmetrica" style="display: grid; grid-template-columns: repeat(2, 1fr);
+                margin: 10px; gap: 10px; padding: 60px; box-sizing: border-box;">
+                    <div>
+                        <canvas class="myPieChart" id="graphMetrica1" style="height: 100%; width: 100%; margin: 0; padding: 0;">
+
+                        </canvas>
+                    </div>
+                    <div>
+                        <canvas class="line-chart-disco" id="graphMetrica2" style="height: 100%; width: 100%; margin: 0; padding: 0;">
+
+                        </canvas>
+                    </div>
+                </div>
                 <div class="cards-dash">
                     <div class="card">
                         <div>
@@ -192,7 +201,7 @@
                             </div>
                             <div class="text-card">
                                 <h3>Total de maquinas</h3>
-                                <p>10</p>
+                                <p id="total"></p>
                             </div>
                         </div>
                     </div>
@@ -203,7 +212,7 @@
                             </div>
                             <div class="text-card">
                                 <h3>Maquinas Ativas</h3>
-                                <p>9</p>
+                                <p id="ativo"></p>
                             </div>
                         </div>
                     </div>
@@ -214,7 +223,7 @@
                             </div>
                             <div class="text-card">
                                 <h3>Maquinas inativas</h3>
-                                <p>1</p>
+                                <p id="inativo"></p>
                             </div>
                         </div>
                     </div>
@@ -276,11 +285,16 @@
 <script src="./js/helpdesk.js"></script>
 <script src="./js/menuMobile.js"></script>
 <script src="./js/popUp.js"></script>
+<script src="./js/metricas.js"></script>
 <script src="./js/graph.js"></script>
 <script src="./js/graphDisco.js"></script>
 <script src="./js/graphRam.js"></script>
 <script src="./js/exibir.js"></script>
+<script src="./js/terminaisAtivos.js"></script>
+
+
 <script>
+
 
     const user = JSON.parse(sessionStorage.user);
     const identityUser = document.querySelector("#user");
@@ -308,13 +322,13 @@
             .then(response => {
                 if (response.ok) {
                     response.json().then(res => {
-                        console.log(res);
                         res.map(term => {
                             estacao.innerHTML += `<option value="${term.idTerminal}">${term.nomeTerminal}</option>`;
                         })
                         obterDados();
                         obterDados1();
                         obterDados2();
+                        metrica1();
                     })
                 }
             })
@@ -329,6 +343,10 @@
     window.onload = function () {
         getTerminais();
     };
+
+
 </script>
+
+
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>

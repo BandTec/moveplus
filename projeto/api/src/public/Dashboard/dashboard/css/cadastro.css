@@ -119,6 +119,11 @@
     margin-top: 10px;
   }
 
+  .flex-profile .flex .cards-profile .cards > div {
+    display: flex;
+    flex-direction: column;
+  }
+
   .flex-profile .flex .cards-profile .card {
     margin: 5px 5px;
     flex-wrap: wrap;

@@ -144,6 +144,61 @@ const Usuario = {
       });
     });
   },
+
+  async getAllTerminais(request, response) {
+    connection
+      .conectar()
+      .then(() => {
+        return connection.sql.query('SELECT * FROM Terminal').then((result) => {
+          response.send(result);
+        });
+      })
+      .catch((error) => {
+        console.log('ERRO' + error);
+      })
+      .finally(() => {
+        connection.sql.close();
+      });
+    //response.send("XABRAU")
+  },
+
+  async getActiveTerminals(request, response) {
+    connection
+      .conectar()
+      .then(() => {
+        return connection.sql
+          .query(`SELECT * FROM Terminal WHERE statusTerminal = 'Operante'`)
+          .then((result) => {
+            response.send(result);
+          });
+      })
+      .catch((error) => {
+        console.log('ERRO' + error);
+      })
+      .finally(() => {
+        connection.sql.close();
+      });
+    //response.send("XABRAU")
+  },
+
+  async getInactiveTerminals(request, response) {
+    connection
+      .conectar()
+      .then(() => {
+        return connection.sql
+          .query(`SELECT * FROM Terminal WHERE statusTerminal = 'Inoperante'`)
+          .then((result) => {
+            response.send(result);
+          });
+      })
+      .catch((error) => {
+        console.log('ERRO' + error);
+      })
+      .finally(() => {
+        connection.sql.close();
+      });
+    //response.send("XABRAU")
+  },
 };
 
 module.exports = Usuario;

@@ -102,6 +102,27 @@ const Leitura = {
         });
     });
   },
+
+  async metrica1(request, response) {
+    const sql =
+      "SELECT [dbo].[calcularErros](1) as 'alerta1', [dbo].[calcularErros](2) as 'alerta2', [dbo].[calcularErros](3) as 'alerta3', [dbo].[calcularErros](8) as 'alerta8', [dbo].[calcularErros](9) as 'alerta9'";
+
+    connection
+      .conectar()
+      .then(() => {
+        return connection.sql
+          .query(sql)
+          .then((result) => {
+            response.send(result.recordsets[0]);
+          })
+          .catch((erro) => {
+            console.log(erro);
+          });
+      })
+      .catch((erro) => {
+        console.log(erro);
+      });
+  },
 };
 
 module.exports = Leitura;

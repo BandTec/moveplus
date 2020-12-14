@@ -62,11 +62,11 @@ function configurarGrafico1() {
         bottom: 30,
       },
     },
-    title: {
-      display: true,
-      text: '8,0 GB',
-      left: 0,
-    },
+    // title: {
+    //   display: true,
+    //   text: '8,0 GB',
+    //   left: 0,
+    // },
   };
 
   return config;
